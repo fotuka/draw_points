@@ -3,9 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+class Grid():
 
-
-class grid():
     def create(self, xdots=0, ydots=0):
         self.xdots = np.array([], float)
         self.ydots = np.array([], float)
@@ -25,7 +24,10 @@ class grid():
             for j in np.arange(0, x + 1, xgap):  # j=x
                 self.ydots = np.append(self.ydots, [i])  # y
                 self.xdots = np.append(self.xdots, [j])  # x
-class slope_grid():
+
+
+class SlopeGrid():
+
     def create(self):
         self.xdots = np.array([], float)
         self.ydots = np.array([], float)
@@ -49,7 +51,10 @@ class slope_grid():
                 if pop == 1:
                     j = j + xgap * 0.5
                 self.xdots = np.append(self.xdots, [j])  # x
-class snow():
+
+
+class Snow():
+
     def create(self):
         print("Введите радиус")
         r = 200
@@ -61,7 +66,10 @@ class snow():
             for j in np.arange(d, r, d):
                 self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(45 * k))) + (j * math.cos(math.radians(45 * k)))])
                 self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(45 * k))) - (j * math.sin(math.radians(45 * k)))])
-class snow_advanced():
+
+
+class SnowAdvanced():
+
     def create(self):
         print("Введите радиус")
         r = 200
@@ -85,6 +93,7 @@ class snow_advanced():
                         self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(22.5 * k))) - (j * math.sin(math.radians(22.5 * k)))])
                 pop = -1
 
+
 def rotate(degree, xdots, ydots):
     x = np.array([], float)
     y = np.array([], float)
@@ -95,6 +104,7 @@ def rotate(degree, xdots, ydots):
     carozzera.xdots = x
     carozzera.ydots = y
 
+
 def display(x, y, xmin=0, xmax=0, ymin=0, ymax=0):
     plt.scatter([x], [y])
     if (xmin or xmax or ymin or ymax) != 0:
@@ -102,10 +112,12 @@ def display(x, y, xmin=0, xmax=0, ymin=0, ymax=0):
         plt.ylim([ymin, ymax])
     plt.show()
 
+
 def export(xdots, ydots):
     np.savetxt('x.txt', xdots)
     np.savetxt('y.txt', ydots)
     np.savetxt('x,y.txt', (np.stack([xdots, ydots], axis = 1 )))
+
 
 carozzera = grid()
 carozzera.create()
