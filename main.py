@@ -118,6 +118,6 @@ carozzera.create()
 print(carozzera.xdots)
 print(carozzera.ydots)
 rotate(10,carozzera.xdots,carozzera.ydots)
-display(carozzera.xdots,carozzera.ydots,-200,200,-200,200)
+display(carozzera.xdots,carozzera.ydots)
 export(carozzera.xdots,carozzera.ydots)
 
