@@ -5,17 +5,13 @@ import matplotlib.pyplot as plt
 
 class Grid():
 
-    def create(self, xdots=0, ydots=0):
+    def create(self):
         self.xdots = np.array([], float)
         self.ydots = np.array([], float)
-        print("Введите длину")  # x
-        x = int(input())
-        print("Введите высоту")  # y
-        y = int(input())
-        print("Введите кол-во вертикальных перекладин")
-        xline = int(input())
-        print("Введите кол-во горизонтальных перекладин")
-        yline = int(input())
+        x = int_input_variable("Введите длину")
+        y = int_input_variable("Введите высоту")
+        xline = int_input_variable("Введите кол-во вертикальных перекладин")
+        yline = int_input_variable("Введите кол-во горизонтальных перекладин")
         xgap = float((x / (xline + 1)))  # расстояние между перекладинами по вертикали
         ygap = float((y / (yline + 1)))  # расстояние между перекладинами по горизонтали
         print("ar", xgap)
@@ -31,14 +27,10 @@ class SlopeGrid():
     def create(self):
         self.xdots = np.array([], float)
         self.ydots = np.array([], float)
-        print("Введите длину")  # x
-        x = int(input())
-        print("Введите высоту")  # y
-        y = int(input())
-        print("Введите кол-во вертикальных перекладин")
-        xline = int(input())
-        print("Введите кол-во горизонтальных перекладин")
-        yline = int(input())
+        x = int_input_variable("Введите длину")
+        y = int_input_variable("Введите высоту")
+        xline = int_input_variable("Введите кол-во вертикальных перекладин")
+        yline = int_input_variable("Введите кол-во горизонтальных перекладин")
         xgap = float((x / (xline + 1)))  # расстояние между перекладинами по вертикали
         ygap = float((y / (yline + 1)))  # расстояние между перекладинами по горизонтали
         print("ar", xgap)
@@ -56,10 +48,8 @@ class SlopeGrid():
 class Snow():
 
     def create(self):
-        print("Введите радиус")
-        r = 200
-        print("Расстояние между точками")
-        d = 40
+        r = int_input_variable("Введите радиус")
+        d = int_input_variable("Введите Расстояние между точками")
         self.xdots = np.array([0], float)  # x
         self.ydots = np.array([0], float)  # y
         for k in range(0, 8):
@@ -71,10 +61,8 @@ class Snow():
 class SnowAdvanced():
 
     def create(self):
-        print("Введите радиус")
-        r = 200
-        print("Расстояние между точками")
-        d = 40
+        r = int_input_variable("Введите радиус")
+        d = int_input_variable("Введите Расстояние между точками")
         self.xdots = np.array([0], float)  # x
         self.ydots = np.array([0], float)  # y
         pop = -1
@@ -119,7 +107,13 @@ def export(xdots, ydots):
     np.savetxt('x,y.txt', (np.stack([xdots, ydots], axis = 1 )))
 
 
-carozzera = grid()
+def int_input_variable(text):
+    print(text)
+    variable = int(input())
+    return variable
+
+
+carozzera = Grid()
 carozzera.create()
 print(carozzera.xdots)
 print(carozzera.ydots)
