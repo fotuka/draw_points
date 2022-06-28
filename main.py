@@ -1,6 +1,9 @@
+from setuptools import setup
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+
+
 
 
 class Grid():
@@ -46,12 +49,14 @@ class Snow():
     def create(self):
         radius = int_input_variable("Введите радиус")
         gap = int_input_variable("Введите Расстояние между точками")
+        lines = int_input_variable("Введите кол-во лучей")
+        angle = 360 / lines
         self.xdots = np.array([0], float)  # x
         self.ydots = np.array([0], float)  # y
-        for k in range(0, 8):
+        for k in range(0, lines):
             for j in np.arange(gap, radius, gap):
-                self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(45 * k))) + (j * math.cos(math.radians(45 * k)))])
-                self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(45 * k))) - (j * math.sin(math.radians(45 * k)))])
+                self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(angle * k))) + (j * math.cos(math.radians(angle * k)))])
+                self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(angle * k))) - (j * math.sin(math.radians(angle * k)))])
 
 
 class SnowAdvanced():
@@ -59,22 +64,24 @@ class SnowAdvanced():
     def create(self):
         radius = int_input_variable("Введите радиус")
         gap = int_input_variable("Введите Расстояние между точками")
+        lines = int_input_variable("Введите кол-во лучей")
+        angle = 360 / lines
         self.xdots = np.array([0], float)  # x
         self.ydots = np.array([0], float)  # y
         pop = -1
         ror = 1
-        for k in range(0, 8):
+        for k in range(0, lines):
             for j in np.arange(gap, radius, gap):
-                self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(45 * k))) + (j * math.cos(math.radians(45 * k)))])
-                self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(45 * k))) - (j * math.sin(math.radians(45 * k)))])
-        for k in range(0, 16):
+                self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(angle * k))) + (j * math.cos(math.radians(angle * k)))])
+                self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(angle * k))) - (j * math.sin(math.radians(angle * k)))])
+        for k in range(0, lines * 2):
             ror = ror * -1
             if ror == 1:
-                for j in np.arange(gap*0.5, radius, gap*0.5):
+                for j in np.arange(gap * 0.5, radius, gap * 0.5):
                     pop = pop * -1
                     if pop == 1:
-                        self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(22.5 * k))) + (j * math.cos(math.radians(22.5 * k)))])
-                        self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(22.5 * k))) - (j * math.sin(math.radians(22.5 * k)))])
+                        self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(angle * 0.5 * k))) + (j * math.cos(math.radians(angle * 0.5 * k)))])
+                        self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(angle * 0.5 * k))) - (j * math.sin(math.radians(angle * 0.5 * k)))])
                 pop = -1
 
 
@@ -85,8 +92,8 @@ def rotate(degree, xdots, ydots):
         x = np.append(x, [(xdots[i] * math.cos(math.radians(degree))) - (ydots[i] * math.sin(math.radians(degree)))])
     for i in range(len(ydots)):
         y = np.append(y, [(xdots[i] * math.sin(math.radians(degree))) + (ydots[i] * math.cos(math.radians(degree)))])
-    carozzera.xdots = x
-    carozzera.ydots = y
+    # carozzera.xdots = x
+    # carozzera.ydots = y
 
 
 def display(x, y, xmin=0, xmax=0, ymin=0, ymax=0):
@@ -109,11 +116,6 @@ def int_input_variable(text):
     return variable
 
 
-carozzera = Grid()
-carozzera.create()
-print(carozzera.xdots)
-print(carozzera.ydots)
-rotate(10,carozzera.xdots,carozzera.ydots)
-display(carozzera.xdots,carozzera.ydots)
-export(carozzera.xdots,carozzera.ydots)
-
+test = Snow()
+test.create()
+display(test.xdots,test.ydots,-20,20,-20,20)
