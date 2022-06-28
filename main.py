@@ -44,12 +44,12 @@ class SlopeGrid():
 class Snow():
 
     def create(self):
-        r = int_input_variable("Введите радиус")
-        d = int_input_variable("Введите Расстояние между точками")
+        radius = int_input_variable("Введите радиус")
+        gap = int_input_variable("Введите Расстояние между точками")
         self.xdots = np.array([0], float)  # x
         self.ydots = np.array([0], float)  # y
         for k in range(0, 8):
-            for j in np.arange(d, r, d):
+            for j in np.arange(gap, radius, gap):
                 self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(45 * k))) + (j * math.cos(math.radians(45 * k)))])
                 self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(45 * k))) - (j * math.sin(math.radians(45 * k)))])
 
@@ -57,20 +57,20 @@ class Snow():
 class SnowAdvanced():
 
     def create(self):
-        r = int_input_variable("Введите радиус")
-        d = int_input_variable("Введите Расстояние между точками")
+        radius = int_input_variable("Введите радиус")
+        gap = int_input_variable("Введите Расстояние между точками")
         self.xdots = np.array([0], float)  # x
         self.ydots = np.array([0], float)  # y
         pop = -1
         ror = 1
         for k in range(0, 8):
-            for j in np.arange(d, r, d):
+            for j in np.arange(gap, radius, gap):
                 self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(45 * k))) + (j * math.cos(math.radians(45 * k)))])
                 self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(45 * k))) - (j * math.sin(math.radians(45 * k)))])
         for k in range(0, 16):
             ror = ror * -1
             if ror == 1:
-                for j in np.arange(d*0.5, r, d*0.5):
+                for j in np.arange(gap*0.5, radius, gap*0.5):
                     pop = pop * -1
                     if pop == 1:
                         self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(22.5 * k))) + (j * math.cos(math.radians(22.5 * k)))])
