@@ -15,10 +15,10 @@ class Grid():
         y = int_input_variable("Введите высоту")
         xline = int_input_variable("Введите кол-во вертикальных перекладин")
         yline = int_input_variable("Введите кол-во горизонтальных перекладин")
-        xgap = (x / (xline + 1))  # расстояние между перекладинами по вертикали
-        ygap = (y / (yline + 1))  # расстояние между перекладинами по горизонтали
-        for i in np.arange(0, y + 1, ygap):  # i=y
-            for j in np.arange(0, x + 1, xgap):  # j=x
+        xgap = (x / (xline - 1))  # расстояние между перекладинами по вертикали
+        ygap = (y / (yline - 1))  # расстояние между перекладинами по горизонтали
+        for i in np.arange(0, y + ygap, ygap):  # i=y
+            for j in np.arange(0, x + ygap, xgap):  # j=x
                 self.ydots = np.append(self.ydots, [i])  # y
                 self.xdots = np.append(self.xdots, [j])  # x
 
@@ -32,16 +32,17 @@ class SlopeGrid():
         y = int_input_variable("Введите высоту")
         xline = int_input_variable("Введите кол-во вертикальных перекладин")
         yline = int_input_variable("Введите кол-во горизонтальных перекладин")
-        xgap = (x / (xline + 1))  # расстояние между перекладинами по вертикали
-        ygap = (y / (yline + 1))  # расстояние между перекладинами по горизонтали
-        pop = -1
-        for i in np.arange(0, y + 1, ygap):  # i=y
-            pop = pop * -1
-            for j in np.arange(0, x + 1, xgap):  # j=x
-                self.ydots = np.append(self.ydots, [i])  # y
-                if pop == 1:
-                    j = j + xgap * 0.5
-                self.xdots = np.append(self.xdots, [j])  # x
+        xgap = (x / (xline - 1))  # расстояние между перекладинами по вертикали
+        ygap = (y / (yline - 1))  # расстояние между перекладинами по горизонтали
+        k = 0   # сделать как в классе Snow и SnowAdvanced не получилось, там целые числа и они деляется хорошо,
+        for i in np.arange(0, y + ygap, ygap):  # i=y а тут дробные и при делении после запятой белиберда возникает и
+            k += 1 # четность через шаг не получается отслеживать, поэтому оставил тут счетчик
+            for j in np.arange(0, x + ygap, xgap):  # j=x может быть можно как то по другому реализовать но я не придумал
+                self.ydots = np.append(self.ydots, [i])  # y  но я не придумал
+                if k % 2 == 0:
+                    self.xdots = np.append(self.xdots, [j + xgap * 0.5])  # x
+                else:
+                    self.xdots = np.append(self.xdots, [j])  # x
 
 
 class Snow():
@@ -68,21 +69,16 @@ class SnowAdvanced():
         angle = 360 / lines
         self.xdots = np.array([0], float)  # x
         self.ydots = np.array([0], float)  # y
-        pop = -1
-        ror = 1
         for k in range(0, lines):
             for j in np.arange(gap, radius, gap):
                 self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(angle * k))) + (j * math.cos(math.radians(angle * k)))])
                 self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(angle * k))) - (j * math.sin(math.radians(angle * k)))])
         for k in range(0, lines * 2):
-            ror = ror * -1
-            if ror == 1:
+            if k % 2 != 0:
                 for j in np.arange(gap * 0.5, radius, gap * 0.5):
-                    pop = pop * -1
-                    if pop == 1:
+                    if j % gap * 0.5 != 0:
                         self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(angle * 0.5 * k))) + (j * math.cos(math.radians(angle * 0.5 * k)))])
                         self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(angle * 0.5 * k))) - (j * math.sin(math.radians(angle * 0.5 * k)))])
-                pop = -1
 
 
 def rotate(degree, xdots, ydots):
@@ -116,6 +112,6 @@ def int_input_variable(text):
     return variable
 
 
-test = Snow()
+test = Grid()
 test.create()
-display(test.xdots,test.ydots,-20,20,-20,20)
+display(test.xdots,test.ydots,-1,20,-1,20)
