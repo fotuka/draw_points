@@ -1,21 +1,8 @@
-from setuptools import setup
 import math
 import numpy as np
 import matplotlib.pyplot as plt
 
 
-
-
-# setup(
-#     name='snek',
-#     entry_points={
-#         'console_scripts': [
-#             'test = Grid()',
-#             'test.create()',
-#             'display(test.xdots,test.ydots,-1,20,-1,20)',
-#         ],
-#     }
-# )
 
 
 class Grid():
@@ -34,7 +21,6 @@ class Grid():
                 self.xy[kx, 0] = j
                 self.xy[kx, 1] = i
                 kx += 1
-        print(self.xy)
 
 
 class GridSlope():
@@ -58,7 +44,6 @@ class GridSlope():
                 else:
                     self.xy[kx, 0] = j  # x
                 kx += 1
-        print(self.xy)
 
 
 class Snow():
@@ -108,15 +93,12 @@ class SnowAdvanced():
                         self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(angle * 0.5 * k))) - (j * math.sin(math.radians(angle * 0.5 * k)))])
 
 
-def rotate(degree, xdots, ydots):
-    x = np.array([], float)
-    y = np.array([], float)
-    for i in range(len(xdots)):
-        x = np.append(x, [(xdots[i] * math.cos(math.radians(degree))) - (ydots[i] * math.sin(math.radians(degree)))])
-    for i in range(len(ydots)):
-        y = np.append(y, [(xdots[i] * math.sin(math.radians(degree))) + (ydots[i] * math.cos(math.radians(degree)))])
-    # carozzera.xdots = x
-    # carozzera.ydots = y
+def rotate(degree, xy):
+    for i in range(len(xy)):
+        xy[i, 0] = (xy[i, 0] * math.cos(math.radians(degree))) - (xy[i, 1] * math.sin(math.radians(degree)))
+    for i in range(len(xy)):
+        xy[i, 1] = (xy[i, 0] * math.sin(math.radians(degree))) + (xy[i, 1] * math.cos(math.radians(degree)))
+    return xy
 
 
 def display(x, y, xmin=0, xmax=0, ymin=0, ymax=0):
@@ -127,10 +109,9 @@ def display(x, y, xmin=0, xmax=0, ymin=0, ymax=0):
     plt.show()
 
 
-def export(xdots, ydots):
-    np.savetxt('x.txt', xdots)
-    np.savetxt('y.txt', ydots)
-    np.savetxt('x,y.txt', (np.stack([xdots, ydots], axis = 1 )))
+def export(xy):
+    np.savetxt('x.txt', xy)
+    return True
 
 
 def int_input_variable(text):
@@ -140,7 +121,7 @@ def int_input_variable(text):
 
 
 def main():
-    test = Snow()
+    test = Grid()
     test.create()
     display(test.xdots,test.ydots)
 
