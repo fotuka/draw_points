@@ -139,6 +139,11 @@ def int_input_variable(text):
     return variable
 
 
-test = Snow()
-test.create()
-display(test.xdots,test.ydots)
+def main():
+    test = Snow()
+    test.create()
+    display(test.xdots,test.ydots)
+
+
+if __name__ == '__main__':
+    main()
