@@ -6,43 +6,59 @@ import matplotlib.pyplot as plt
 
 
 
+# setup(
+#     name='snek',
+#     entry_points={
+#         'console_scripts': [
+#             'test = Grid()',
+#             'test.create()',
+#             'display(test.xdots,test.ydots,-1,20,-1,20)',
+#         ],
+#     }
+# )
+
+
 class Grid():
 
     def create(self):
-        self.xdots = np.array([], float)
-        self.ydots = np.array([], float)
         x = int_input_variable("Введите длину")
         y = int_input_variable("Введите высоту")
         xline = int_input_variable("Введите кол-во вертикальных перекладин")
         yline = int_input_variable("Введите кол-во горизонтальных перекладин")
-        xgap = (x / (xline - 1))  # расстояние между перекладинами по вертикали
-        ygap = (y / (yline - 1))  # расстояние между перекладинами по горизонтали
-        for i in np.arange(0, y + ygap, ygap):  # i=y
-            for j in np.arange(0, x + ygap, xgap):  # j=x
-                self.ydots = np.append(self.ydots, [i])  # y
-                self.xdots = np.append(self.xdots, [j])  # x
+        self.xy = np.zeros([xline * yline, 2], float)
+        xgap = (x / (xline))  # расстояние между перекладинами по вертикали
+        ygap = (y / (yline))  # расстояние между перекладинами по горизонтали
+        kx = 0
+        for i in np.arange(0, y, ygap):  # i=y
+            for j in np.arange(0, x, xgap):  # j=x
+                self.xy[kx, 0] = j
+                self.xy[kx, 1] = i
+                kx += 1
+        print(self.xy)
 
 
-class SlopeGrid():
+class GridSlope():
 
     def create(self):
-        self.xdots = np.array([], float)
-        self.ydots = np.array([], float)
         x = int_input_variable("Введите длину")
         y = int_input_variable("Введите высоту")
         xline = int_input_variable("Введите кол-во вертикальных перекладин")
         yline = int_input_variable("Введите кол-во горизонтальных перекладин")
+        self.xy = np.zeros([xline * yline, 2], float)
         xgap = (x / (xline - 1))  # расстояние между перекладинами по вертикали
         ygap = (y / (yline - 1))  # расстояние между перекладинами по горизонтали
-        k = 0   # сделать как в классе Snow и SnowAdvanced не получилось, там целые числа и они деляется хорошо,
-        for i in np.arange(0, y + ygap, ygap):  # i=y а тут дробные и при делении после запятой белиберда возникает и
-            k += 1 # четность через шаг не получается отслеживать, поэтому оставил тут счетчик
-            for j in np.arange(0, x + ygap, xgap):  # j=x может быть можно как то по другому реализовать но я не придумал
-                self.ydots = np.append(self.ydots, [i])  # y  но я не придумал
+        k = 0
+        kx = 0
+        for i in np.arange(0, y + ygap, ygap):
+            k += 1
+            for j in np.arange(0, x + ygap, xgap):
+                self.xy[kx, 1] = i  # y
                 if k % 2 == 0:
-                    self.xdots = np.append(self.xdots, [j + xgap * 0.5])  # x
+                    self.xy[kx, 0] = j + xgap * 0.5  # x
                 else:
-                    self.xdots = np.append(self.xdots, [j])  # x
+                    self.xy[kx, 0] = j  # x
+                kx += 1
+        print(self.xy)
 
 
 class Snow():
@@ -54,10 +70,21 @@ class Snow():
         angle = 360 / lines
         self.xdots = np.array([0], float)  # x
         self.ydots = np.array([0], float)  # y
+        self.xy = np.zeros([lines * ( radius // gap  ) + 1, 2], float)
+        kx = 0
         for k in range(0, lines):
-            for j in np.arange(gap, radius, gap):
+            for j in np.arange(gap, radius + gap, gap):
                 self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(angle * k))) + (j * math.cos(math.radians(angle * k)))])
                 self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(angle * k))) - (j * math.sin(math.radians(angle * k)))])
+                self.xy[kx, 0] = j * math.cos(math.radians(angle * k))
+                self.xy[kx, 1] = 0 - j * math.sin(math.radians(angle * k))
+                kx += 1
+        print(np.shape(self.xy))
+        print(np.shape(self.xdots))
+        print(np.shape(self.ydots))
+        print(self.xy)
+        print(self.xdots)
+        print(self.ydots)
 
 
 class SnowAdvanced():
@@ -112,6 +139,6 @@ def int_input_variable(text):
     return variable
 
 
-test = Grid()
+test = Snow()
 test.create()
-display(test.xdots,test.ydots,-1,20,-1,20)
+display(test.xdots,test.ydots)
