@@ -101,8 +101,9 @@ def rotate(degree, xy):
     return xy
 
 
-def display(x, y, xmin=0, xmax=0, ymin=0, ymax=0):
-    plt.scatter([x], [y])
+def display(xy, xmin=0, xmax=0, ymin=0, ymax=0):
+    x, y = np.split(xy, 2, axis=1)
+    plt.scatter(x,y)
     if (xmin or xmax or ymin or ymax) != 0:
         plt.xlim([xmin, xmax])
         plt.ylim([ymin, ymax])
@@ -123,7 +124,7 @@ def int_input_variable(text):
 def main():
     test = Grid()
     test.create()
-    display(test.xdots,test.ydots)
+    display(test.xy)
 
 
 if __name__ == '__main__':
