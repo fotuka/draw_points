@@ -26,23 +26,23 @@ class Grid:
 class GridSlope:
 
     def create(self):
-        x = int_input_variable("Введите длину ")
-        y = int_input_variable("Введите высоту ")
-        xline = int_input_variable("Введите кол-во вертикальных перекладин ")
-        yline = int_input_variable("Введите кол-во горизонтальных перекладин ")
-        self.xy = np.zeros([xline * yline, 2], float)
-        xgap = x / (xline - 1)  # расстояние между перекладинами по вертикали
-        ygap = y / (yline - 1)  # расстояние между перекладинами по горизонтали
+        lenght = int_input_variable("Введите длину ")
+        height = int_input_variable("Введите высоту ")
+        xline_amount = int_input_variable("Введите кол-во вертикальных перекладин ")
+        yline_amount = int_input_variable("Введите кол-во горизонтальных перекладин ")
+        self.xy = np.zeros([xline_amount * yline_amount, 2], float)
+        xgap = lenght / (xline_amount - 1)  # расстояние между перекладинами по вертикали
+        ygap = height / (yline_amount - 1)  # расстояние между перекладинами по горизонтали
         k = 0
         index = 0
-        for i in np.arange(0, y + ygap, ygap):
+        for y in np.arange(0, height + ygap, ygap):
             k += 1
-            for j in np.arange(0, x + ygap, xgap):
-                self.xy[index, 1] = i  # y
+            for x in np.arange(0, lenght + ygap, xgap):
+                self.xy[index, 1] = y
                 if k % 2 == 0:
-                    self.xy[index, 0] = j + xgap * 0.5  # x
+                    self.xy[index, 0] = x + xgap * 0.5
                 else:
-                    self.xy[index, 0] = j  # x
+                    self.xy[index, 0] = x
                 index += 1
 
 
