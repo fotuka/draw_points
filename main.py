@@ -105,8 +105,8 @@ def display(xy):
     plt.show()
 
 
-def export(xy):
-    np.savetxt('xy.txt', xy)
+def export(dots_massive):
+    np.savetxt('xy.txt', dots_massive)
 
 
 def int_input_variable(text):
