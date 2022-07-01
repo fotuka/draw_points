@@ -56,10 +56,10 @@ class Snow:
         angle = 360 / lines
         self.xy = np.zeros([lines * dots_amount + 1, 2], float)
         index = 1
-        for k in range(0, lines):
-            for j in np.arange(gap, radius + gap, gap):
-                self.xy[index, 1] = j * math.cos(math.radians(angle * k))
-                self.xy[index, 0] = 0 - j * math.sin(math.radians(angle * k))
+        for line in range(0, lines):
+            for value in np.arange(gap, radius + gap, gap):
+                self.xy[index, 1] = value * math.cos(math.radians(angle * line))
+                self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * line))
                 index += 1
 
 
@@ -73,16 +73,16 @@ class SnowAdvanced:
         gap = radius / dots_amount
         self.xy = np.zeros([lines * 2 * dots_amount + 1, 2], float)
         index = 1
-        for k in np.arange(0, lines * 2, 1):
-            if k % 2 == 0:
-                for j in np.arange(gap, radius + gap, gap):
-                    self.xy[index, 1] = j * math.cos(math.radians(angle * k/2))
-                    self.xy[index, 0] = 0 - j * math.sin(math.radians(angle * k/2))
+        for line in np.arange(0, lines * 2, 1):
+            if line % 2 == 0:
+                for value in np.arange(gap, radius + gap, gap):
+                    self.xy[index, 1] = value * math.cos(math.radians(angle * line/2))
+                    self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * line/2))
                     index += 1
-            if k % 2 != 0:
-                for j in np.arange(gap * 0.5, radius + gap, gap):
-                    self.xy[index, 1] = j * math.cos(math.radians(angle * 0.5 * k))
-                    self.xy[index, 0] = 0 - j * math.sin(math.radians(angle * 0.5 * k))
+            if line % 2 != 0:
+                for value in np.arange(gap * 0.5, radius, gap):
+                    self.xy[index, 1] = value * math.cos(math.radians(angle * 0.5 * line))
+                    self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * 0.5 * line))
                     index += 1
 
 
