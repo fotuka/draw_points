@@ -8,18 +8,18 @@ import matplotlib.pyplot as plt
 class Grid:
 
     def create(self):
-        x = int_input_variable("Введите длину ")
-        y = int_input_variable("Введите высоту ")
-        xline = int_input_variable("Введите кол-во вертикальных перекладин ")
-        yline = int_input_variable("Введите кол-во горизонтальных перекладин ")
-        self.xy = np.zeros([xline * yline, 2], float)
-        xgap = x / xline  # расстояние между перекладинами по вертикали
-        ygap = y / yline  # расстояние между перекладинами по горизонтали
+        length = int_input_variable("Введите длину ")
+        height = int_input_variable("Введите высоту ")
+        xline_amount = int_input_variable("Введите кол-во вертикальных перекладин ")
+        yline_amount = int_input_variable("Введите кол-во горизонтальных перекладин ")
+        self.xy = np.zeros([xline_amount * yline_amount, 2], float)
+        xgap = length / xline_amount  # расстояние между перекладинами по вертикали
+        ygap = height / yline_amount  # расстояние между перекладинами по горизонтали
         index = 0
-        for i in np.arange(0, y, ygap):  # i=y
-            for j in np.arange(0, x, xgap):  # j=x
-                self.xy[index, 0] = j
-                self.xy[index, 1] = i
+        for y in np.arange(0, height, ygap):
+            for x in np.arange(0, length, xgap):
+                self.xy[index, 0] = x
+                self.xy[index, 1] = y
                 index += 1
 
 
