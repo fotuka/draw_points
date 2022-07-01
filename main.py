@@ -106,7 +106,7 @@ def display(xy):
 
 
 def export(xy):
-    np.savetxt('x.txt', xy)
+    np.savetxt('xy.txt', xy)
 
 
 def int_input_variable(text):
