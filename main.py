@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 
-class Grid():
+class Grid:
 
     def create(self):
         x = int_input_variable("Введите длину ")
@@ -23,7 +23,7 @@ class Grid():
                 index += 1
 
 
-class GridSlope():
+class GridSlope:
 
     def create(self):
         x = int_input_variable("Введите длину ")
@@ -46,7 +46,7 @@ class GridSlope():
                 index += 1
 
 
-class Snow():
+class Snow:
 
     def create(self):
         radius = int_input_variable("Введите радиус ")
@@ -62,7 +62,7 @@ class Snow():
                 index += 1
 
 
-class SnowAdvanced():
+class SnowAdvanced:
 
     def create(self):
         radius = int_input_variable("Введите радиус ")
