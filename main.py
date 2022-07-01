@@ -107,8 +107,7 @@ def export(xy):
 
 
 def int_input_variable(text):
-    print(text)
-    variable = int(input())
+    variable = int(input(text))
     return variable
 
 
