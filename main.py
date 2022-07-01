@@ -88,7 +88,6 @@ class SnowAdvanced():
 def rotate(degree, xy):
     for i in range(len(xy)):
         xy[i, 0] = (xy[i, 0] * math.cos(math.radians(degree))) - (xy[i, 1] * math.sin(math.radians(degree)))
-    for i in range(len(xy)):
         xy[i, 1] = (xy[i, 0] * math.sin(math.radians(degree))) + (xy[i, 1] * math.cos(math.radians(degree)))
     return xy
 
@@ -114,8 +113,9 @@ def int_input_variable(text):
 
 
 def main():
-    test = SnowAdvanced()
+    test = GridSlope()
     test.create()
+    test.xy = rotate(15, test.xy)
     display(test.xy, -10, 10, -10, 10)
 
 
