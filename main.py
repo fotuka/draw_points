@@ -15,12 +15,12 @@ class Grid():
         self.xy = np.zeros([xline * yline, 2], float)
         xgap = x / xline  # расстояние между перекладинами по вертикали
         ygap = y / yline  # расстояние между перекладинами по горизонтали
-        kx = 0
+        index = 0
         for i in np.arange(0, y, ygap):  # i=y
             for j in np.arange(0, x, xgap):  # j=x
-                self.xy[kx, 0] = j
-                self.xy[kx, 1] = i
-                kx += 1
+                self.xy[index, 0] = j
+                self.xy[index, 1] = i
+                index += 1
 
 
 class GridSlope():
@@ -34,16 +34,16 @@ class GridSlope():
         xgap = x / (xline - 1)  # расстояние между перекладинами по вертикали
         ygap = y / (yline - 1)  # расстояние между перекладинами по горизонтали
         k = 0
-        kx = 0
+        index = 0
         for i in np.arange(0, y + ygap, ygap):
             k += 1
             for j in np.arange(0, x + ygap, xgap):
-                self.xy[kx, 1] = i  # y
+                self.xy[index, 1] = i  # y
                 if k % 2 == 0:
-                    self.xy[kx, 0] = j + xgap * 0.5  # x
+                    self.xy[index, 0] = j + xgap * 0.5  # x
                 else:
-                    self.xy[kx, 0] = j  # x
-                kx += 1
+                    self.xy[index, 0] = j  # x
+                index += 1
 
 
 class Snow():
@@ -54,12 +54,12 @@ class Snow():
         lines = int_input_variable("Введите кол-во лучей ")
         angle = 360 / lines
         self.xy = np.zeros([lines * ( radius // gap  ) + 1, 2], float)
-        kx = 1
+        index = 1
         for k in range(0, lines):
             for j in np.arange(gap, radius + 0.001, gap):
-                self.xy[kx, 0] = j * math.cos(math.radians(angle * k))
-                self.xy[kx, 1] = 0 - j * math.sin(math.radians(angle * k))
-                kx += 1
+                self.xy[index, 0] = j * math.cos(math.radians(angle * k))
+                self.xy[index, 1] = 0 - j * math.sin(math.radians(angle * k))
+                index += 1
 
 
 class SnowAdvanced():
