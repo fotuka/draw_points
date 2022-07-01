@@ -8,10 +8,10 @@ import matplotlib.pyplot as plt
 class Grid():
 
     def create(self):
-        x = int_input_variable("Введите длину")
-        y = int_input_variable("Введите высоту")
-        xline = int_input_variable("Введите кол-во вертикальных перекладин")
-        yline = int_input_variable("Введите кол-во горизонтальных перекладин")
+        x = int_input_variable("Введите длину ")
+        y = int_input_variable("Введите высоту ")
+        xline = int_input_variable("Введите кол-во вертикальных перекладин ")
+        yline = int_input_variable("Введите кол-во горизонтальных перекладин ")
         self.xy = np.zeros([xline * yline, 2], float)
         xgap = x / xline  # расстояние между перекладинами по вертикали
         ygap = y / yline  # расстояние между перекладинами по горизонтали
@@ -26,10 +26,10 @@ class Grid():
 class GridSlope():
 
     def create(self):
-        x = int_input_variable("Введите длину")
-        y = int_input_variable("Введите высоту")
-        xline = int_input_variable("Введите кол-во вертикальных перекладин")
-        yline = int_input_variable("Введите кол-во горизонтальных перекладин")
+        x = int_input_variable("Введите длину ")
+        y = int_input_variable("Введите высоту ")
+        xline = int_input_variable("Введите кол-во вертикальных перекладин ")
+        yline = int_input_variable("Введите кол-во горизонтальных перекладин ")
         self.xy = np.zeros([xline * yline, 2], float)
         xgap = x / (xline - 1)  # расстояние между перекладинами по вертикали
         ygap = y / (yline - 1)  # расстояние между перекладинами по горизонтали
@@ -49,9 +49,9 @@ class GridSlope():
 class Snow():
 
     def create(self):
-        radius = int_input_variable("Введите радиус")
-        gap = int_input_variable("Введите Расстояние между точками")
-        lines = int_input_variable("Введите кол-во лучей")
+        radius = int_input_variable("Введите радиус ")
+        gap = int_input_variable("Введите Расстояние между точками ")
+        lines = int_input_variable("Введите кол-во лучей ")
         angle = 360 / lines
         self.xy = np.zeros([lines * ( radius // gap  ) + 1, 2], float)
         kx = 1
@@ -65,9 +65,9 @@ class Snow():
 class SnowAdvanced():
 
     def create(self):
-        radius = int_input_variable("Введите радиус")
-        gap = int_input_variable("Введите Расстояние между точками")
-        lines = int_input_variable("Введите кол-во лучей")
+        radius = int_input_variable("Введите радиус ")
+        gap = int_input_variable("Введите Расстояние между точками ")
+        lines = int_input_variable("Введите кол-во лучей ")
         angle = 360 / lines
         self.xy = np.zeros([lines * 2 * ( radius // gap  ) + 1, 2], float)
         kx = 0
