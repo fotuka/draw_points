@@ -109,11 +109,6 @@ def export(dots_massive):
     np.savetxt('xy.txt', dots_massive)
 
 
-def int_input_variable(text):
-    variable = int(input(text))
-    return variable
-
-
 def main():
     test = GridSlope(10, 5, 3, 2)
     test.create()
