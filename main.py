@@ -92,12 +92,9 @@ def rotate(degree, xy):
     return xy
 
 
-def display(xy, xmin=0, xmax=0, ymin=0, ymax=0):
+def display(xy):
     x, y = np.split(xy, 2, axis=1)
     plt.scatter(x,y)
-    if (xmin or xmax or ymin or ymax) != 0:
-        plt.xlim([xmin, xmax])
-        plt.ylim([ymin, ymax])
     plt.show()
 
 
@@ -113,7 +110,7 @@ def int_input_variable(text):
 def main():
     test = SnowAdvanced()
     test.create()
-    display(test.xy, -10, 10, -10, 10)
+    display(test.xy)
 
 
 if __name__ == '__main__':
