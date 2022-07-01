@@ -72,15 +72,15 @@ class SnowAdvanced:
         angle = 360 / lines
         gap = radius / dots_amount
         self.xy = np.zeros([lines * 2 * dots_amount + 1, 2], float)
-        index = 0
+        index = 1
         for k in np.arange(0, lines * 2, 1):
             if k % 2 == 0:
-                for j in np.arange(gap, radius + 0.0001, gap):
+                for j in np.arange(gap, radius + gap, gap):
                     self.xy[index, 1] = j * math.cos(math.radians(angle * k/2))
                     self.xy[index, 0] = 0 - j * math.sin(math.radians(angle * k/2))
                     index += 1
             if k % 2 != 0:
-                for j in np.arange(gap * 0.5, radius + 0.0001, gap):
+                for j in np.arange(gap * 0.5, radius + gap, gap):
                     self.xy[index, 1] = j * math.cos(math.radians(angle * 0.5 * k))
                     self.xy[index, 0] = 0 - j * math.sin(math.radians(angle * 0.5 * k))
                     index += 1
