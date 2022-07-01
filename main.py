@@ -69,26 +69,27 @@ class Snow:
 
 class SnowAdvanced:
 
+    def __init__(self, radius, dots_amount, lines):
+        self.radius = radius
+        self.dots_amount = dots_amount
+        self.lines = lines
+        self.xy = np.zeros([lines * dots_amount + 1, 2], float)
+
     def create(self):
-        radius = int_input_variable("Введите радиус ")
-        dots_amount = int_input_variable("Введите количество точек ")
-        lines = int_input_variable("Введите количество лучей ")
-        angle = 360 / lines
-        gap = radius / dots_amount
-        self.xy = np.zeros([lines * 2 * dots_amount + 1, 2], float)
+        angle = 360 / self.lines
+        gap = self.radius / self.dots_amount
         index = 1
-        for line in np.arange(0, lines * 2, 1):
+        for line in np.arange(0, self.lines * 2, 1):
             if line % 2 == 0:
-                for value in np.arange(gap, radius + gap, gap):
+                for value in np.arange(gap, self.radius + gap, gap):
                     self.xy[index, 1] = value * math.cos(math.radians(angle * line/2))
                     self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * line/2))
                     index += 1
             if line % 2 != 0:
-                for value in np.arange(gap * 0.5, radius, gap):
+                for value in np.arange(gap * 0.5, self.radius, gap):
                     self.xy[index, 1] = value * math.cos(math.radians(angle * 0.5 * line))
                     self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * 0.5 * line))
                     index += 1
-
 
 
 def rotate(degree, xy):
@@ -100,7 +101,7 @@ def rotate(degree, xy):
 
 def display(xy):
     x, y = np.split(xy, 2, axis=1)
-    plt.scatter(x,y)
+    plt.scatter(x, y)
     plt.show()
 
 
