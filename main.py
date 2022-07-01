@@ -70,19 +70,19 @@ class SnowAdvanced():
         lines = int_input_variable("Введите кол-во лучей ")
         angle = 360 / lines
         self.xy = np.zeros([lines * 2 * ( radius // gap  ) + 1, 2], float)
-        kx = 0
-        for k in range(0, lines):
-            for j in np.arange(gap, radius + 0.0001, gap):
-                self.xy[kx, 0] = j * math.cos(math.radians(angle * k))
-                self.xy[kx, 1] = 0 - j * math.sin(math.radians(angle * k))
-                kx += 1
-        for k in range(0, lines * 2):
+        index = 0
+        for k in np.arange(0, lines * 2, 1):
+            if k % 2 == 0:
+                for j in np.arange(gap, radius + 0.0001, gap):
+                    self.xy[index, 1] = j * math.cos(math.radians(angle * k/2))
+                    self.xy[index, 0] = 0 - j * math.sin(math.radians(angle * k/2))
+                    index += 1
             if k % 2 != 0:
-                for j in np.arange(gap * 0.5, radius + 0.0001, gap * 0.5):
-                    if j % gap * 0.5 != 0:
-                        self.xy[kx, 0] = j * math.cos(math.radians(angle * 0.5 * k))
-                        self.xy[kx, 1] = 0 - j * math.sin(math.radians(angle * 0.5 * k))
-                        kx += 1
+                for j in np.arange(gap * 0.5, radius + 0.0001, gap):
+                    self.xy[index, 1] = j * math.cos(math.radians(angle * 0.5 * k))
+                    self.xy[index, 0] = 0 - j * math.sin(math.radians(angle * 0.5 * k))
+                    index += 1
+
 
 
 def rotate(degree, xy):
@@ -112,9 +112,8 @@ def int_input_variable(text):
 
 
 def main():
-    test = GridSlope()
+    test = SnowAdvanced()
     test.create()
-    test.xy = rotate(15, test.xy)
     display(test.xy, -10, 10, -10, 10)
 
 
