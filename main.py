@@ -67,10 +67,11 @@ class SnowAdvanced:
 
     def create(self):
         radius = int_input_variable("Введите радиус ")
-        gap = int_input_variable("Введите Расстояние между точками ")
-        lines = int_input_variable("Введите кол-во лучей ")
+        dots_amount = int_input_variable("Введите количество точек ")
+        lines = int_input_variable("Введите количество лучей ")
         angle = 360 / lines
-        self.xy = np.zeros([lines * 2 * ( radius // gap  ) + 1, 2], float)
+        gap = radius / dots_amount
+        self.xy = np.zeros([lines * 2 * dots_amount + 1, 2], float)
         index = 0
         for k in np.arange(0, lines * 2, 1):
             if k % 2 == 0:
@@ -109,7 +110,7 @@ def int_input_variable(text):
 
 
 def main():
-    test = Snow()
+    test = SnowAdvanced()
     test.create()
     display(test.xy)
 
