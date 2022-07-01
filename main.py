@@ -103,7 +103,6 @@ def display(xy, xmin=0, xmax=0, ymin=0, ymax=0):
 
 def export(xy):
     np.savetxt('x.txt', xy)
-    return True
 
 
 def int_input_variable(text):
