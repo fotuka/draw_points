@@ -50,16 +50,18 @@ class GridSlope:
 
 class Snow:
 
-    def create(self):
-        radius = int_input_variable("Введите радиус ")
-        dots_amount = int_input_variable("Введите количество точек ")
-        lines = int_input_variable("Введите количество лучей ")
-        gap = radius / dots_amount
-        angle = 360 / lines
+    def __init__(self, radius, dots_amount, lines):
+        self.radius = radius
+        self.dots_amount = dots_amount
+        self.lines = lines
         self.xy = np.zeros([lines * dots_amount + 1, 2], float)
+
+    def create(self):
+        gap = self.radius / self.dots_amount
+        angle = 360 / self.lines
         index = 1
-        for line in range(0, lines):
-            for value in np.arange(gap, radius + gap, gap):
+        for line in range(0, self.lines):
+            for value in np.arange(gap, self.radius + gap, gap):
                 self.xy[index, 1] = value * math.cos(math.radians(angle * line))
                 self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * line))
                 index += 1
