@@ -88,9 +88,9 @@ class SnowAdvanced:
 
 
 def rotate(degree, xy):
-    for i in range(len(xy)):
-        xy[i, 0] = (xy[i, 0] * math.cos(math.radians(degree))) - (xy[i, 1] * math.sin(math.radians(degree)))
-        xy[i, 1] = (xy[i, 0] * math.sin(math.radians(degree))) + (xy[i, 1] * math.cos(math.radians(degree)))
+    for index in range(len(xy)):
+        xy[index, 0] = (xy[index, 0] * math.cos(math.radians(degree))) - (xy[index, 1] * math.sin(math.radians(degree)))
+        xy[index, 1] = (xy[index, 0] * math.sin(math.radians(degree))) + (xy[index, 1] * math.cos(math.radians(degree)))
     return xy
 
 
