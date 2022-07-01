@@ -13,8 +13,8 @@ class Grid():
         xline = int_input_variable("Введите кол-во вертикальных перекладин")
         yline = int_input_variable("Введите кол-во горизонтальных перекладин")
         self.xy = np.zeros([xline * yline, 2], float)
-        xgap = (x / (xline))  # расстояние между перекладинами по вертикали
-        ygap = (y / (yline))  # расстояние между перекладинами по горизонтали
+        xgap = x / xline  # расстояние между перекладинами по вертикали
+        ygap = y / yline  # расстояние между перекладинами по горизонтали
         kx = 0
         for i in np.arange(0, y, ygap):  # i=y
             for j in np.arange(0, x, xgap):  # j=x
@@ -31,8 +31,8 @@ class GridSlope():
         xline = int_input_variable("Введите кол-во вертикальных перекладин")
         yline = int_input_variable("Введите кол-во горизонтальных перекладин")
         self.xy = np.zeros([xline * yline, 2], float)
-        xgap = (x / (xline - 1))  # расстояние между перекладинами по вертикали
-        ygap = (y / (yline - 1))  # расстояние между перекладинами по горизонтали
+        xgap = x / (xline - 1)  # расстояние между перекладинами по вертикали
+        ygap = y / (yline - 1)  # расстояние между перекладинами по горизонтали
         k = 0
         kx = 0
         for i in np.arange(0, y + ygap, ygap):
