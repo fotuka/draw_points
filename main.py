@@ -50,17 +50,17 @@ class GridSlope:
 
 class Snow:
 
-    def __init__(self, radius, dots_amount, lines):
+    def __init__(self, radius, dots_amount, lines_amount):
         self.radius = radius
         self.dots_amount = dots_amount
-        self.lines = lines
-        self.xy = np.zeros([lines * dots_amount + 1, 2], float)
+        self.lines_amount = lines_amount
+        self.xy = np.zeros([lines_amount * dots_amount + 1, 2], float)
 
     def create(self):
         gap = self.radius / self.dots_amount
-        angle = 360 / self.lines
+        angle = 360 / self.lines_amount
         index = 1
-        for line in range(0, self.lines):
+        for line in range(0, self.lines_amount):
             for value in np.arange(gap, self.radius + gap, gap):
                 self.xy[index, 1] = value * math.cos(math.radians(angle * line))
                 self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * line))
@@ -69,17 +69,17 @@ class Snow:
 
 class SnowAdvanced:
 
-    def __init__(self, radius, dots_amount, lines):
+    def __init__(self, radius, dots_amount, lines_amount):
         self.radius = radius
         self.dots_amount = dots_amount
-        self.lines = lines
-        self.xy = np.zeros([lines * dots_amount + 1, 2], float)
+        self.lines_amount = lines_amount
+        self.xy = np.zeros([lines_amount * dots_amount + 1, 2], float)
 
     def create(self):
-        angle = 360 / self.lines
+        angle = 360 / self.lines_amount
         gap = self.radius / self.dots_amount
         index = 1
-        for line in np.arange(0, self.lines * 2, 1):
+        for line in np.arange(0, self.lines_amount * 2, 1):
             if line % 2 == 0:
                 for value in np.arange(gap, self.radius + gap, gap):
                     self.xy[index, 1] = value * math.cos(math.radians(angle * line/2))
