@@ -3,115 +3,120 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+full_angle = 360
 
-class matrix:
-    class grid():
-        def create(self, xdots=0, ydots=0):
-            self.xdots = np.array([], float)
-            self.ydots = np.array([], float)
-            print("Введите длину")  # x
-            x = int(input())
-            print("Введите высоту")  # y
-            y = int(input())
-            print("Введите кол-во вертикальных перекладин")
-            xline = int(input())
-            print("Введите кол-во горизонтальных перекладин")
-            yline = int(input())
-            xgap = float((x / (xline + 1)))  # расстояние между перекладинами по вертикали
-            ygap = float((y / (yline + 1)))  # расстояние между перекладинами по горизонтали
-            print("ar", xgap)
-            print("br", ygap)
-            for i in np.arange(0, y + 1, ygap):  # i=y
-                for j in np.arange(0, x + 1, xgap):  # j=x
-                    self.ydots = np.append(self.ydots, [i])  # y
-                    self.xdots = np.append(self.xdots, [j])  # x
-    class slope_grid():
-        def create(self):
-            self.xdots = np.array([], float)
-            self.ydots = np.array([], float)
-            print("Введите длину")  # x
-            x = int(input())
-            print("Введите высоту")  # y
-            y = int(input())
-            print("Введите кол-во вертикальных перекладин")
-            xline = int(input())
-            print("Введите кол-во горизонтальных перекладин")
-            yline = int(input())
-            xgap = float((x / (xline + 1)))  # расстояние между перекладинами по вертикали
-            ygap = float((y / (yline + 1)))  # расстояние между перекладинами по горизонтали
-            print("ar", xgap)
-            print("br", ygap)
-            pop = -1
-            for i in np.arange(0, y + 1, ygap):  # i=y
-                pop = pop * -1
-                for j in np.arange(0, x + 1, xgap):  # j=x
-                    self.ydots = np.append(self.ydots, [i])  # y
-                    if pop == 1:
-                        j = j + xgap * 0.5
-                    self.xdots = np.append(self.xdots, [j])  # x
-    class snow():
-        def create(self):
-            print("Введите радиус")
-            r = 200
-            print("Расстояние между точками")
-            d = 40
-            self.xdots = np.array([0], float)  # x
-            self.ydots = np.array([0], float)  # y
-            for k in range(0, 8):
-                for j in np.arange(d, r, d):
-                    self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(45 * k))) + (j * math.cos(math.radians(45 * k)))])
-                    self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(45 * k))) - (j * math.sin(math.radians(45 * k)))])
-    class snow_advanced():
-        def create(self):
-            print("Введите радиус")
-            r = 200
-            print("Расстояние между точками")
-            d = 40
-            self.xdots = np.array([0], float)  # x
-            self.ydots = np.array([0], float)  # y
-            pop = -1
-            ror = 1
-            for k in range(0, 8):
-                for j in np.arange(d, r, d):
-                    self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(45 * k))) + (j * math.cos(math.radians(45 * k)))])
-                    self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(45 * k))) - (j * math.sin(math.radians(45 * k)))])
-            for k in range(0, 16):
-                ror = ror * -1
-                if ror == 1:
-                    for j in np.arange(d*0.5, r, d*0.5):
-                        pop = pop * -1
-                        if pop == 1:
-                            self.ydots = np.append(self.ydots, [(0 * math.sin(math.radians(22.5 * k))) + (j * math.cos(math.radians(22.5 * k)))])
-                            self.xdots = np.append(self.xdots, [(0 * math.cos(math.radians(22.5 * k))) - (j * math.sin(math.radians(22.5 * k)))])
-                    pop = -1
 
-def rotate(degree, xdots, ydots):
-    x = np.array([], float)
-    y = np.array([], float)
-    for i in range(len(xdots)):
-        x = np.append(x, [(xdots[i] * math.cos(math.radians(degree))) - (ydots[i] * math.sin(math.radians(degree)))])
-    for i in range(len(ydots)):
-        y = np.append(y, [(xdots[i] * math.sin(math.radians(degree))) + (ydots[i] * math.cos(math.radians(degree)))])
-    carozzera.xdots = x
-    carozzera.ydots = y
+class Grid:
 
-def display(x, y, xmin=0, xmax=0, ymin=0, ymax=0):
-    plt.scatter([x], [y])
-    if (xmin or xmax or ymin or ymax) != 0:
-        plt.xlim([xmin, xmax])
-        plt.ylim([ymin, ymax])
+    def __init__(self, length, height, xline_amount, yline_amount):
+        self.length = length
+        self.height = height
+        self.xline_amount = xline_amount
+        self.yline_amount = yline_amount
+        self.xy = np.zeros([self.xline_amount * self.yline_amount, 2], float)
+
+    def create(self):
+        xgap = self.length / self.xline_amount  # расстояние между перекладинами по вертикали
+        ygap = self.height / self.yline_amount  # расстояние между перекладинами по горизонтали
+        index = 0
+        for y in np.arange(0, self.height, ygap):
+            for x in np.arange(0, self.length, xgap):
+                self.xy[index, 0] = x
+                self.xy[index, 1] = y
+                index += 1
+
+
+class GridSlope:
+
+    def __init__(self, length, height, xline_amount, yline_amount):
+        self.length = length
+        self.height = height
+        self.xline_amount = xline_amount
+        self.yline_amount = yline_amount
+        self.xy = np.zeros([self.xline_amount * self.yline_amount, 2], float)
+
+    def create(self):
+        xgap = self.length / (self.xline_amount - 1)  # расстояние между перекладинами по вертикали
+        ygap = self.height / (self.yline_amount - 1)  # расстояние между перекладинами по горизонтали
+        k = 0
+        index = 0
+        for y in np.arange(0, self.height + ygap, ygap):
+            k += 1
+            for x in np.arange(0, self.length + ygap, xgap):
+                self.xy[index, 1] = y
+                if k % 2 == 0:
+                    self.xy[index, 0] = x + xgap * 0.5
+                else:
+                    self.xy[index, 0] = x
+                index += 1
+
+
+class Snow:
+
+    def __init__(self, radius, dots_amount, lines_amount):
+        self.radius = radius
+        self.dots_amount = dots_amount
+        self.lines_amount = lines_amount
+        self.xy = np.zeros([lines_amount * dots_amount + 1, 2], float)
+
+    def create(self):
+        gap = self.radius / self.dots_amount
+        angle = full_angle / self.lines_amount
+        index = 1
+        for line in range(0, self.lines_amount):
+            for value in np.arange(gap, self.radius + gap, gap):
+                self.xy[index, 1] = value * math.cos(math.radians(angle * line))
+                self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * line))
+                index += 1
+
+
+class SnowAdvanced:
+
+    def __init__(self, radius, dots_amount, lines_amount):
+        self.radius = radius
+        self.dots_amount = dots_amount
+        self.lines_amount = lines_amount
+        self.xy = np.zeros([lines_amount * dots_amount + 1, 2], float)
+
+    def create(self):
+        angle = full_angle / self.lines_amount
+        gap = self.radius / self.dots_amount
+        index = -5
+        for line in range(0, self.lines_amount * 2, 1):
+            if line % 2 == 0:
+                for value in range(gap, self.radius + gap, gap):
+                    self.xy[index, 1] = value * math.cos(math.radians(angle * line/2))
+                    self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * line/2))
+                    index += 1
+            else:
+                for value in np.arange(gap * 0.5, self.radius, gap):
+                    self.xy[index, 1] = value * math.cos(math.radians(angle * 0.5 * line))
+                    self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * 0.5 * line))
+                    index += 1
+
+
+def rotate(degree, xy):
+    for index in range(len(xy)):
+        xy[index, 0] = (xy[index, 0] * math.cos(math.radians(degree))) - (xy[index, 1] * math.sin(math.radians(degree)))
+        xy[index, 1] = (xy[index, 0] * math.sin(math.radians(degree))) + (xy[index, 1] * math.cos(math.radians(degree)))
+    return xy
+
+
+def display(xy):
+    x, y = np.split(xy, 2, axis=1)
+    plt.scatter(x, y)
     plt.show()
 
-def export(xdots, ydots):
-    np.savetxt('x.txt', xdots)
-    np.savetxt('y.txt', ydots)
-    np.savetxt('x,y.txt', (np.stack([xdots, ydots], axis = 1 )))
 
-carozzera = matrix.grid()
-carozzera.create()
-print(carozzera.xdots)
-print(carozzera.ydots)
-rotate(10,carozzera.xdots,carozzera.ydots)
-display(carozzera.xdots,carozzera.ydots,-200,200,-200,200)
-export(carozzera.xdots,carozzera.ydots)
+def export(dots_massive):
+    np.savetxt('xy.txt', dots_massive)
 
+
+def main():
+    test = SnowAdvanced(10, 2, 3)
+    test.create()
+    display(test.xy)
+
+
+if __name__ == '__main__':
+    main()
