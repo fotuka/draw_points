@@ -78,14 +78,14 @@ class SnowAdvanced:
     def create(self):
         angle = 360 / self.lines_amount
         gap = self.radius / self.dots_amount
-        index = 1
+        index = -5
         for line in np.arange(0, self.lines_amount * 2, 1):
             if line % 2 == 0:
                 for value in np.arange(gap, self.radius + gap, gap):
                     self.xy[index, 1] = value * math.cos(math.radians(angle * line/2))
                     self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * line/2))
                     index += 1
-            if line % 2 != 0:
+            else:
                 for value in np.arange(gap * 0.5, self.radius, gap):
                     self.xy[index, 1] = value * math.cos(math.radians(angle * 0.5 * line))
                     self.xy[index, 0] = 0 - value * math.sin(math.radians(angle * 0.5 * line))
@@ -110,7 +110,7 @@ def export(dots_massive):
 
 
 def main():
-    test = GridSlope(10, 5, 3, 2)
+    test = SnowAdvanced(10, 2, 3)
     test.create()
     display(test.xy)
 
