@@ -3,6 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+full_angle = 360
+
+
 class Grid:
 
     def __init__(self, length, height, xline_amount, yline_amount):
@@ -58,7 +61,7 @@ class Snow:
 
     def create(self):
         gap = self.radius / self.dots_amount
-        angle = 360 / self.lines_amount
+        angle = full_angle / self.lines_amount
         index = 1
         for line in range(0, self.lines_amount):
             for value in np.arange(gap, self.radius + gap, gap):
@@ -76,7 +79,7 @@ class SnowAdvanced:
         self.xy = np.zeros([lines_amount * dots_amount + 1, 2], float)
 
     def create(self):
-        angle = 360 / self.lines_amount
+        angle = full_angle / self.lines_amount
         gap = self.radius / self.dots_amount
         index = -5
         for line in range(0, self.lines_amount * 2, 1):
