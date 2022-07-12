@@ -95,25 +95,27 @@ class Snow(Circle):
 class SnowAdvanced(Circle):
 
     def create(self):
+        self.xy = np.zeros([self.lines_amount * self.dots_amount * 2 + 1, 2], float)
         index = 1
-        for line in range(0, self.lines_amount * 2, 1):
+        for line in range(0, self.lines_amount * 2):
             if line % 2 == 0:
                 for value in np.arange(self.gap, self.radius + self.gap, self.gap):
                     self.xy[index, 1] = value * math.cos(math.radians(self.angle * line / 2))
                     self.xy[index, 0] = 0 - value * math.sin(math.radians(self.angle * line / 2))
-                index += 1
+                    index += 1
             if line % 2 != 0:
                 for value in np.arange(self.gap * 0.5, self.radius, self.gap):
                     self.xy[index, 1] = value * math.cos(math.radians(self.angle * 0.5 * line))
                     self.xy[index, 0] = 0 - value * math.sin(math.radians(self.angle * 0.5 * line))
-                index += 1
+                    index += 1
 
 
 def main():
-    test = SnowAdvanced(10, 3, 4)
+    test = SnowAdvanced(10, 3, 6)
     test.create()
     test.display()
     test.rotate(0)
+    test.export()
 
 
 if __name__ == '__main__':
