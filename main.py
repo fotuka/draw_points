@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 full_angle = 360
 
 
+
 class Grid:
 
     def __init__(self, length, height, xline_amount, yline_amount):
