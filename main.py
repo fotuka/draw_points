@@ -7,9 +7,8 @@ FULL_ANGLE = 360
 
 
 class Coordinates:
-
     def __init__(self):
-        self.xy = np.zeros()
+        self.xy = np.array([])
 
     def create(self):
         pass
@@ -30,8 +29,8 @@ class Coordinates:
 
 
 class Rectangle(Coordinates):
-
     def __init__(self, length, height, xline_amount, yline_amount):
+        super().__init__()
         self.length = length
         self.height = height
         self.xline_amount = xline_amount
@@ -42,7 +41,6 @@ class Rectangle(Coordinates):
 
 
 class Grid(Rectangle):
-
     def create(self):
         index = 0
         for y in np.arange(0, self.height, self.ygap):
@@ -53,7 +51,6 @@ class Grid(Rectangle):
 
 
 class GridSlope(Rectangle):
-
     def create(self):
         self.xgap = self.length / (self.xline_amount - 1)  # расстояние между перекладинами по вертикали
         self.ygap = self.height / (self.yline_amount - 1)  # расстояние между перекладинами по горизонтали
@@ -71,8 +68,8 @@ class GridSlope(Rectangle):
 
 
 class Circle(Coordinates):
-
     def __init__(self, radius, dots_amount, lines_amount):
+        super().__init__()
         self.radius = radius
         self.dots_amount = dots_amount
         self.lines_amount = lines_amount
@@ -82,7 +79,6 @@ class Circle(Coordinates):
 
 
 class Snow(Circle):
-
     def create(self):
         index = 1
         for line in range(0, self.lines_amount):
@@ -93,7 +89,6 @@ class Snow(Circle):
 
 
 class SnowAdvanced(Circle):
-
     def create(self):
         index = 1
         for line in range(0, self.lines_amount):
@@ -110,7 +105,7 @@ class SnowAdvanced(Circle):
 
 
 def main():
-    test = SnowAdvanced(10, 3, 6)
+    test = SnowAdvanced(10, 3, 12)
     test.create()
     test.display()
     test.rotate(0)
