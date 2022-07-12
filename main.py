@@ -3,11 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-full_angle = 360
+FULL_ANGLE = 360
 
 
-
-class Grid:
+class Figure:
 
     def __init__(self, length, height, xline_amount, yline_amount):
         self.length = length
@@ -15,6 +14,9 @@ class Grid:
         self.xline_amount = xline_amount
         self.yline_amount = yline_amount
         self.xy = np.zeros([self.xline_amount * self.yline_amount, 2], float)
+
+
+class Grid(Figure):
 
     def create(self):
         xgap = self.length / self.xline_amount  # расстояние между перекладинами по вертикали
@@ -27,14 +29,7 @@ class Grid:
                 index += 1
 
 
-class GridSlope:
-
-    def __init__(self, length, height, xline_amount, yline_amount):
-        self.length = length
-        self.height = height
-        self.xline_amount = xline_amount
-        self.yline_amount = yline_amount
-        self.xy = np.zeros([self.xline_amount * self.yline_amount, 2], float)
+class GridSlope(Figure):
 
     def create(self):
         xgap = self.length / (self.xline_amount - 1)  # расстояние между перекладинами по вертикали
@@ -52,7 +47,7 @@ class GridSlope:
                 index += 1
 
 
-class Snow:
+class Circle:
 
     def __init__(self, radius, dots_amount, lines_amount):
         self.radius = radius
@@ -61,8 +56,14 @@ class Snow:
         self.xy = np.zeros([lines_amount * dots_amount + 1, 2], float)
 
     def create(self):
+        pass
+
+
+class Snow(Circle):
+
+    def create(self):
         gap = self.radius / self.dots_amount
-        angle = full_angle / self.lines_amount
+        angle = FULL_ANGLE / self.lines_amount
         index = 1
         for line in range(0, self.lines_amount):
             for value in np.arange(gap, self.radius + gap, gap):
@@ -71,16 +72,10 @@ class Snow:
                 index += 1
 
 
-class SnowAdvanced:
-
-    def __init__(self, radius, dots_amount, lines_amount):
-        self.radius = radius
-        self.dots_amount = dots_amount
-        self.lines_amount = lines_amount
-        self.xy = np.zeros([lines_amount * dots_amount + 1, 2], float)
+class SnowAdvanced(Circle):
 
     def create(self):
-        angle = full_angle / self.lines_amount
+        angle = FULL_ANGLE / self.lines_amount
         gap = self.radius / self.dots_amount
         index = -5
         for line in range(0, self.lines_amount * 2, 1):
