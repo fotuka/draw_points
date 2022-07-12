@@ -40,9 +40,6 @@ class Rectangle(Coordinates):
         self.xgap = self.length / self.xline_amount  # расстояние между перекладинами по вертикали
         self.ygap = self.height / self.yline_amount  # расстояние между перекладинами по горизонтали
 
-    def create(self):
-        pass
-
 
 class Grid(Rectangle):
 
@@ -83,9 +80,6 @@ class Circle(Coordinates):
         self.gap = self.radius / self.dots_amount
         self.angle = FULL_ANGLE / self.lines_amount
 
-    def create(self):
-        pass
-
 
 class Snow(Circle):
 
@@ -105,8 +99,8 @@ class SnowAdvanced(Circle):
         for line in range(0, self.lines_amount * 2, 1):
             if line % 2 == 0:
                 for value in np.arange(self.gap, self.radius + self.gap, self.gap):
-                    self.xy[index, 1] = value * math.cos(math.radians(self.angle * line/2))
-                    self.xy[index, 0] = 0 - value * math.sin(math.radians(self.angle * line/2))
+                    self.xy[index, 1] = value * math.cos(math.radians(self.angle * line / 2))
+                    self.xy[index, 0] = 0 - value * math.sin(math.radians(self.angle * line / 2))
                 index += 1
             if line % 2 != 0:
                 for value in np.arange(self.gap * 0.5, self.radius, self.gap):
