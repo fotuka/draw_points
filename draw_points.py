@@ -69,7 +69,11 @@ class DrawPoints:
         self.first_start = None
 
         self.dlg.choose_button.clicked.connect(self.choose_menu_show)
-
+        # меню выбора штучек
+        self.dlg.choose_grid_button.clicked.connect(self.click_choose_grid)
+        self.dlg.choose_gridslope_button.clicked.connect(self.click_choose_gridslope)
+        self.dlg.choose_snow_button.clicked.connect(self.click_choose_snow)
+        self.dlg.choose_snowadvanced_button.clicked.connect(self.click_choose_snowadvanced)
 
 
 
@@ -303,6 +307,36 @@ class DrawPoints:
         self.dlg.choose_snow_button.show()
         self.dlg.choose_snowadvanced_button.show()
 
+    def clear_types_input(self):
+        self.grid_hide()
+        self.gridslope_hide()
+        self.snow_hide()
+        self.snowadvanced_hide()
+
+    def click_choose_grid(self):
+        self.choose_menu_hide()
+        self.clear_types_input()
+        self.grid_show()
+        self.dlg.openGLWidget.show()
+
+    def click_choose_gridslope(self):
+        self.choose_menu_hide()
+        self.clear_types_input()
+        self.gridslope_show()
+        self.dlg.openGLWidget.show()
+
+    def click_choose_snow(self):
+        self.choose_menu_hide()
+        self.clear_types_input()
+        self.snow_show()
+        self.dlg.openGLWidget.show()
+
+    def click_choose_snowadvanced(self):
+        self.choose_menu_hide()
+        self.clear_types_input()
+        self.snowadvanced_show()
+        self.dlg.openGLWidget.show()
+
     def run(self):
         """Run method that performs all the real work"""
 
@@ -315,9 +349,9 @@ class DrawPoints:
         self.grid_hide()
         self.gridslope_hide()
         self.snow_hide()
-        self.snowadvanced_hide()
+        self.dlg.openGLWidget.hide()
         self.choose_menu_hide()
-
+        self.snowadvanced_hide()
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
