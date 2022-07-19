@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>717</width>
-    <height>429</height>
+    <height>489</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
   <widget class="QDialogButtonBox" name="ok_cancel_button_box">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>390</y>
+     <x>270</x>
+     <y>440</y>
      <width>171</width>
      <height>32</height>
     </rect>
@@ -32,26 +32,13 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="choose_button">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>81</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Choose</string>
-   </property>
-  </widget>
   <widget class="QFrame" name="grid_frame">
    <property name="geometry">
     <rect>
-     <x>3</x>
-     <y>85</y>
-     <width>321</width>
-     <height>321</height>
+     <x>119</x>
+     <y>98</y>
+     <width>585</width>
+     <height>335</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="Grid">
@@ -139,22 +126,12 @@
     </item>
    </layout>
   </widget>
-  <widget class="QOpenGLWidget" name="openGLWidget">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>0</y>
-     <width>351</width>
-     <height>371</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="save_in">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>20</x>
      <y>20</y>
-     <width>191</width>
+     <width>621</width>
      <height>25</height>
     </rect>
    </property>
@@ -162,9 +139,9 @@
   <widget class="QLabel" name="save_in_label">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>20</x>
      <y>0</y>
-     <width>231</width>
+     <width>311</width>
      <height>20</height>
     </rect>
    </property>
@@ -175,10 +152,10 @@
   <widget class="QFrame" name="snowadvanced_frame">
    <property name="geometry">
     <rect>
-     <x>5</x>
-     <y>85</y>
-     <width>321</width>
-     <height>321</height>
+     <x>119</x>
+     <y>98</y>
+     <width>585</width>
+     <height>335</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="SnowAdvanced">
@@ -256,226 +233,12 @@
     </item>
    </layout>
   </widget>
-  <widget class="QFrame" name="choose_frame">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>120</y>
-     <width>590</width>
-     <height>230</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="choose_menu_layout">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetDefaultConstraint</enum>
-    </property>
-    <item row="1" column="4">
-     <spacer name="horizontalSpacer_5">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="3">
-     <widget class="QPushButton" name="choose_snowadvanced_button">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>snowadvanced.png</normaloff>snowadvanced.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>64</width>
-        <height>64</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="choose_snow_button">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>snow.png</normaloff>snow.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>64</width>
-        <height>64</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4">
-     <spacer name="horizontalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="3">
-     <widget class="QPushButton" name="choose_gridslope_button">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>gridslope.png</normaloff>gridslope.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>64</width>
-        <height>64</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="choose_grid_button">
-      <property name="font">
-       <font>
-        <strikeout>false</strikeout>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="mouseTracking">
-       <bool>false</bool>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>grid.png</normaloff>grid.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>64</width>
-        <height>64</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <spacer name="horizontalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="2">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="2">
-     <spacer name="horizontalSpacer_6">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-   </layout>
-   <zorder>choose_snowadvanced_button</zorder>
-   <zorder>choose_snow_button</zorder>
-   <zorder>horizontalSpacer</zorder>
-   <zorder>horizontalSpacer_2</zorder>
-   <zorder>horizontalSpacer_3</zorder>
-   <zorder>horizontalSpacer_4</zorder>
-   <zorder>horizontalSpacer_5</zorder>
-   <zorder>horizontalSpacer_6</zorder>
-   <zorder>choose_gridslope_button</zorder>
-   <zorder>choose_grid_button</zorder>
-  </widget>
-  <widget class="QGraphicsView" name="background_for_choose_menu">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>120</y>
-     <width>590</width>
-     <height>230</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(238, 238, 236);
-	border-style: outset;
-    border-width: 2px;
-    border-radius: 6px;
-    border-color: black;    
-    min-width: 10em;
-    padding: 6px;</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="system_of_coords_label">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>20</x>
      <y>40</y>
-     <width>219</width>
+     <width>291</width>
      <height>28</height>
     </rect>
    </property>
@@ -486,9 +249,9 @@
   <widget class="QgsProjectionSelectionWidget" name="system_of_coords">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>20</x>
      <y>70</y>
-     <width>231</width>
+     <width>661</width>
      <height>21</height>
     </rect>
    </property>
@@ -496,10 +259,10 @@
   <widget class="QFrame" name="gridslope_frame">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>90</y>
-     <width>321</width>
-     <height>311</height>
+     <x>127</x>
+     <y>105</y>
+     <width>570</width>
+     <height>320</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="Gridslope">
@@ -605,10 +368,10 @@
   <widget class="QFrame" name="snow_frame">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>90</y>
-     <width>321</width>
-     <height>311</height>
+     <x>127</x>
+     <y>105</y>
+     <width>575</width>
+     <height>320</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="Snow">
@@ -698,7 +461,7 @@
   <widget class="QPushButton" name="choose_path">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>650</x>
      <y>20</y>
      <width>31</width>
      <height>25</height>
@@ -708,20 +471,143 @@
     <string>...</string>
    </property>
   </widget>
-  <zorder>openGLWidget</zorder>
-  <zorder>ok_cancel_button_box</zorder>
-  <zorder>choose_button</zorder>
-  <zorder>grid_frame</zorder>
-  <zorder>save_in</zorder>
-  <zorder>save_in_label</zorder>
-  <zorder>snowadvanced_frame</zorder>
-  <zorder>system_of_coords_label</zorder>
-  <zorder>system_of_coords</zorder>
-  <zorder>gridslope_frame</zorder>
-  <zorder>snow_frame</zorder>
-  <zorder>background_for_choose_menu</zorder>
-  <zorder>choose_frame</zorder>
-  <zorder>choose_path</zorder>
+  <widget class="QPushButton" name="choose_grid_button">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>91</width>
+     <height>70</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <strikeout>false</strikeout>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>grid.png</normaloff>grid.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>64</width>
+     <height>64</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="choose_gridslope_button">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>190</y>
+     <width>91</width>
+     <height>70</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>gridslope.png</normaloff>gridslope.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>64</width>
+     <height>64</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="choose_snowadvanced_button">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>350</y>
+     <width>91</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>snowadvanced.png</normaloff>snowadvanced.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>64</width>
+     <height>64</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="choose_snow_button">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>270</y>
+     <width>91</width>
+     <height>70</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="whatsThis">
+    <string>Snow</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>snow.png</normaloff>snow.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>64</width>
+     <height>64</height>
+    </size>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>

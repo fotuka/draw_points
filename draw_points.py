@@ -29,6 +29,7 @@ from qgis.PyQt.QtWidgets import QAction, QFileDialog
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
+from .main import *
 from .draw_points_dialog import DrawPointsDialog
 import os.path
 
@@ -69,7 +70,6 @@ class DrawPoints:
         # Must be set in initGui() to survive plugin reloads
         self.first_start = None
 
-        self.dlg.choose_button.clicked.connect(self.choose_menu_show)
         # меню выбора штучек
         self.dlg.choose_grid_button.clicked.connect(self.click_choose_grid)
         self.dlg.choose_gridslope_button.clicked.connect(self.click_choose_gridslope)
@@ -310,25 +310,6 @@ class DrawPoints:
         self.dlg.snowadvanced_coords_of_center_y.show()
         self.dlg.snowadvanced_frame.show()
 
-    def choose_menu_hide(self):
-        self.dlg.openGLWidget.show()
-        self.dlg.background_for_choose_menu.hide()
-        self.dlg.choose_grid_button.hide()
-        self.dlg.choose_gridslope_button.hide()
-        self.dlg.choose_snow_button.hide()
-        self.dlg.choose_snowadvanced_button.hide()
-        self.dlg.choose_frame.hide()
-
-    def choose_menu_show(self):
-        self.dlg.openGLWidget.hide()
-        self.clear_types_input()
-        self.dlg.background_for_choose_menu.show()
-        self.dlg.choose_grid_button.show()
-        self.dlg.choose_gridslope_button.show()
-        self.dlg.choose_snow_button.show()
-        self.dlg.choose_snowadvanced_button.show()
-        self.dlg.choose_frame.show()
-
     def clear_types_input(self):
         self.grid_hide()
         self.gridslope_hide()
@@ -336,28 +317,24 @@ class DrawPoints:
         self.snowadvanced_hide()
 
     def click_choose_grid(self):
-        self.choose_menu_hide()
         self.clear_types_input()
         self.grid_show()
-        self.dlg.openGLWidget.show()
+
 
     def click_choose_gridslope(self):
-        self.choose_menu_hide()
         self.clear_types_input()
         self.gridslope_show()
-        self.dlg.openGLWidget.show()
+
 
     def click_choose_snow(self):
-        self.choose_menu_hide()
         self.clear_types_input()
         self.snow_show()
-        self.dlg.openGLWidget.show()
+
 
     def click_choose_snowadvanced(self):
-        self.choose_menu_hide()
         self.clear_types_input()
         self.snowadvanced_show()
-        self.dlg.openGLWidget.show()
+
 
     def select_output_file(self):
         filename, _filter = QFileDialog.getSaveFileName(
@@ -376,13 +353,27 @@ class DrawPoints:
         self.grid_hide()
         self.gridslope_hide()
         self.snow_hide()
-        self.choose_menu_hide()
         self.snowadvanced_hide()
-        self.dlg.openGLWidget.hide()
         result = self.dlg.exec_()
         # See if OK was pressed
+
+
         if result:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
-            pass
+            radius = self.dlg.snow_radius.value()
+            dots_amount = self.dlg.snow_dots_amount.value()
+            lines_amount = self.dlg.snow_lines_amount.value()
+            example = Snow(radius, dots_amount, lines_amount)
+            path = self.dlg.save_in.text()
+            with open('/home/geoserver/Документы/README.txt', 'w') as f:
+                f.write(str(radius))
+                f.write(' ')
+                f.write(str(dots_amount))
+                f.write(' ')
+                f.write(str(lines_amount))
+                f.write(' ')
+                f.write(path)
+                f.write(' ')
+            example.export(path)
 
