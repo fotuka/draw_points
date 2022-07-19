@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/draw_points" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
