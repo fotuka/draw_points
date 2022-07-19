@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>698</width>
-    <height>436</height>
+    <width>717</width>
+    <height>429</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,10 +35,10 @@
   <widget class="QPushButton" name="choose_button">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>51</width>
-     <height>51</height>
+     <x>10</x>
+     <y>10</y>
+     <width>81</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="text">
@@ -48,13 +48,16 @@
   <widget class="QFrame" name="grid_frame">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>100</y>
-     <width>231</width>
+     <x>3</x>
+     <y>85</y>
+     <width>321</width>
      <height>321</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="Grid">
+    <property name="spacing">
+     <number>1</number>
+    </property>
     <item>
      <widget class="QLabel" name="grid_height_label">
       <property name="text">
@@ -63,7 +66,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="grid_height"/>
+     <widget class="QDoubleSpinBox" name="grid_height"/>
     </item>
     <item>
      <widget class="QLabel" name="grid_lenght_label">
@@ -73,7 +76,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="grid_lenght"/>
+     <widget class="QDoubleSpinBox" name="grid_lenght"/>
     </item>
     <item>
      <widget class="QLabel" name="grid_vertical_lines_amount_label">
@@ -83,7 +86,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="grid_vertical_lines_amount"/>
+     <widget class="QSpinBox" name="grid_vertical_lines_amount"/>
     </item>
     <item>
      <widget class="QLabel" name="grid_horizontal_lines_amount_label">
@@ -93,27 +96,46 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="grid_horizontal_lines_amount"/>
+     <widget class="QSpinBox" name="grid_horizontal_lines_amount"/>
     </item>
     <item>
      <widget class="QLabel" name="grid_coords_of_left_bottom_corner_label">
       <property name="text">
-       <string>Координаты левого угла</string>
+       <string>Координаты левого нижнего угла</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="grid_coords_of_left_bottom_corner"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="grid_system_of_coords_label">
+     <widget class="QLabel" name="grid_coords_of_left_bottom_corner_label_x">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="text">
-       <string>Система координат</string>
+       <string>x</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QgsProjectionSelectionWidget" name="grid_system_of_coords"/>
+     <widget class="QDoubleSpinBox" name="grid_coords_of_left_bottom_corner_x"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="grid_coords_of_left_bottom_corner_label_y">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>17</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>y</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDoubleSpinBox" name="grid_coords_of_left_bottom_corner_y"/>
     </item>
    </layout>
   </widget>
@@ -130,9 +152,9 @@
   <widget class="QLineEdit" name="save_in">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>40</y>
-     <width>231</width>
+     <x>100</x>
+     <y>20</y>
+     <width>221</width>
      <height>25</height>
     </rect>
    </property>
@@ -140,8 +162,8 @@
   <widget class="QLabel" name="save_in_label">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>20</y>
+     <x>100</x>
+     <y>0</y>
      <width>231</width>
      <height>20</height>
     </rect>
@@ -150,150 +172,19 @@
     <string>Сохранить в:</string>
    </property>
   </widget>
-  <widget class="QFrame" name="gridslope_frame">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>100</y>
-     <width>231</width>
-     <height>321</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="GripSlope">
-    <item>
-     <widget class="QLabel" name="gridslope_height_label">
-      <property name="text">
-       <string>Высота</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="gridslope_height"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="gridslope_lenght_label">
-      <property name="text">
-       <string>Длина</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="gridslope_lenght"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="gridslope_vertical_lines_amount_label">
-      <property name="text">
-       <string>Кол-во вертикальных линий</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="gridslope_vertical_lines_amount"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="gridslope_horizontal_lines_amount_label">
-      <property name="text">
-       <string>Кол-во горизонтальных линий</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="gridslope_horizontal_lines_amount"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="gridslope_coords_of_left_bottom_corner_label">
-      <property name="text">
-       <string>Координаты левого угла</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="gridslope_coords_of_left_bottom_corner"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="gridslope_system_of_coords_label">
-      <property name="text">
-       <string>Система координат</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QgsProjectionSelectionWidget" name="gridslope_system_of_coords"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QFrame" name="snow_frame">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>100</y>
-     <width>231</width>
-     <height>321</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="Snow">
-    <item>
-     <widget class="QLabel" name="snow_radius_label">
-      <property name="text">
-       <string>Радиус</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="snow_radius"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="snow_lines_amount_label">
-      <property name="text">
-       <string>Кол-во линий</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="snow_lines_amount"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="snow_gap_label">
-      <property name="text">
-       <string>Расстояние между точками</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="snow_gap"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="snow_coords_of_center_label">
-      <property name="text">
-       <string>Координаты центра</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="snow_coords_of_center"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="snow_system_of_coords_label">
-      <property name="text">
-       <string>Система координат</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QgsProjectionSelectionWidget" name="snow_system_of_coords"/>
-    </item>
-   </layout>
-  </widget>
   <widget class="QFrame" name="snowadvanced_frame">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>100</y>
-     <width>231</width>
+     <x>5</x>
+     <y>85</y>
+     <width>321</width>
      <height>321</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="SnowAdvanced">
+    <property name="spacing">
+     <number>1</number>
+    </property>
     <item>
      <widget class="QLabel" name="snowadvanced_radius_label">
       <property name="text">
@@ -302,7 +193,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="snowadvanced_radius"/>
+     <widget class="QDoubleSpinBox" name="snowadvanced_radius"/>
     </item>
     <item>
      <widget class="QLabel" name="snowadvanced_lines_amount_label">
@@ -312,17 +203,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="snowadvanced_lines_amount"/>
+     <widget class="QSpinBox" name="snowadvanced_lines_amount"/>
     </item>
     <item>
-     <widget class="QLabel" name="snowadvanced_gap_label">
+     <widget class="QLabel" name="snowadvanced_dots_amount_label">
       <property name="text">
-       <string>Расстояние между точками</string>
+       <string>Кол-во точек на линии</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="snowadvanced_gap"/>
+     <widget class="QSpinBox" name="snowadvanced_dots_amount"/>
     </item>
     <item>
      <widget class="QLabel" name="snowadvanced_coords_of_center_label">
@@ -332,37 +223,46 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="snowadvanced_coords_of_center"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="snowadvanced_system_of_coords_label">
+     <widget class="QLabel" name="snowadvanced_coords_of_center_label_x">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>15</height>
+       </size>
+      </property>
       <property name="text">
-       <string>Система координат</string>
+       <string>x</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QgsProjectionSelectionWidget" name="snowadvanced_system_of_coords"/>
+     <widget class="QDoubleSpinBox" name="snowadvanced_coords_of_center_x"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="snowadvanced_coords_of_center_label_y">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>17</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>y</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDoubleSpinBox" name="snowadvanced_coords_of_center_y"/>
     </item>
    </layout>
-   <zorder>snowadvanced_system_of_coords_label</zorder>
-   <zorder>snowadvanced_system_of_coords</zorder>
-   <zorder>snowadvanced_radius_label</zorder>
-   <zorder>snowadvanced_radius</zorder>
-   <zorder>snowadvanced_lines_amount_label</zorder>
-   <zorder>snowadvanced_lines_amount</zorder>
-   <zorder>snowadvanced_gap_label</zorder>
-   <zorder>snowadvanced_gap</zorder>
-   <zorder>snowadvanced_coords_of_center_label</zorder>
-   <zorder>snowadvanced_coords_of_center</zorder>
   </widget>
   <widget class="QFrame" name="choose_frame">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>90</y>
-     <width>491</width>
-     <height>231</height>
+     <x>60</x>
+     <y>120</y>
+     <width>590</width>
+     <height>230</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="choose_menu_layout">
@@ -554,10 +454,10 @@
   <widget class="QGraphicsView" name="background_for_choose_menu">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>90</y>
-     <width>491</width>
-     <height>231</height>
+     <x>60</x>
+     <y>120</y>
+     <width>590</width>
+     <height>230</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -570,16 +470,243 @@
     padding: 6px;</string>
    </property>
   </widget>
+  <widget class="QLabel" name="system_of_coords_label">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>40</y>
+     <width>219</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Система координат:</string>
+   </property>
+  </widget>
+  <widget class="QgsProjectionSelectionWidget" name="system_of_coords">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>70</y>
+     <width>219</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QFrame" name="gridslope_frame">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>321</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="Gridslope">
+    <property name="spacing">
+     <number>1</number>
+    </property>
+    <property name="leftMargin">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>1</number>
+    </property>
+    <property name="rightMargin">
+     <number>1</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="gridslope_height_label">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>Высота</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDoubleSpinBox" name="gridslope_height"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="gridslope_lenght_label">
+      <property name="text">
+       <string>Длина</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDoubleSpinBox" name="gridslope_lenght"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="gridslope_vertical_lines_amount_label">
+      <property name="text">
+       <string>Кол-во вертикальных линий</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="gridslope_vertical_lines_amount"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="gridslope_horizontal_lines_amount_label">
+      <property name="text">
+       <string>Кол-во горизонтальных линий</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="gridslope_horizontal_lines_amount"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="gridslope_coords_of_left_bottom_corner_label">
+      <property name="text">
+       <string>Координаты левого нижнего угла</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="gridslope_coords_of_left_bottom_corner_label_x">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>15</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDoubleSpinBox" name="gridslope_coords_of_left_bottom_corner_x"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="gridslope_coords_of_left_bottom_corner_label_y">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>17</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>y</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDoubleSpinBox" name="gridslope_coords_of_left_bottom_corner_y"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QFrame" name="snow_frame">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>321</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="Snow">
+    <property name="spacing">
+     <number>1</number>
+    </property>
+    <property name="leftMargin">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>1</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="snow_radius_label">
+      <property name="text">
+       <string>Радиус</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDoubleSpinBox" name="snow_radius"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="snow_lines_amount_label">
+      <property name="text">
+       <string>Кол-во линий</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="snow_lines_amount"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="snow_dots_amount_label">
+      <property name="text">
+       <string>Кол-во точек на линии</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="snow_dots_amount"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="snow_coords_of_center_label">
+      <property name="text">
+       <string>Координаты центра</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="snow_coords_of_center_label_x">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>15</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDoubleSpinBox" name="snow_coords_of_center_x"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="snow_coords_of_center_label_y">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>17</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>y</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QDoubleSpinBox" name="snow_coords_of_center_y"/>
+    </item>
+   </layout>
+  </widget>
   <zorder>openGLWidget</zorder>
-  <zorder>background_for_choose_menu</zorder>
   <zorder>ok_cancel_button_box</zorder>
   <zorder>choose_button</zorder>
   <zorder>grid_frame</zorder>
   <zorder>save_in</zorder>
   <zorder>save_in_label</zorder>
+  <zorder>snowadvanced_frame</zorder>
+  <zorder>system_of_coords_label</zorder>
+  <zorder>system_of_coords</zorder>
   <zorder>gridslope_frame</zorder>
   <zorder>snow_frame</zorder>
-  <zorder>snowadvanced_frame</zorder>
+  <zorder>background_for_choose_menu</zorder>
   <zorder>choose_frame</zorder>
  </widget>
  <customwidgets>
