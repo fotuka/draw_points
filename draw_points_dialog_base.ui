@@ -345,6 +345,16 @@
      <widget class="QgsProjectionSelectionWidget" name="snowadvanced_system_of_coords"/>
     </item>
    </layout>
+   <zorder>snowadvanced_system_of_coords_label</zorder>
+   <zorder>snowadvanced_system_of_coords</zorder>
+   <zorder>snowadvanced_radius_label</zorder>
+   <zorder>snowadvanced_radius</zorder>
+   <zorder>snowadvanced_lines_amount_label</zorder>
+   <zorder>snowadvanced_lines_amount</zorder>
+   <zorder>snowadvanced_gap_label</zorder>
+   <zorder>snowadvanced_gap</zorder>
+   <zorder>snowadvanced_coords_of_center_label</zorder>
+   <zorder>snowadvanced_coords_of_center</zorder>
   </widget>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
@@ -359,6 +369,19 @@
     <property name="sizeConstraint">
      <enum>QLayout::SetDefaultConstraint</enum>
     </property>
+    <item row="1" column="4">
+     <spacer name="horizontalSpacer_5">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
     <item row="1" column="3">
      <widget class="QPushButton" name="choose_snowadvanced_button">
       <property name="styleSheet">
@@ -392,6 +415,19 @@
       </property>
      </widget>
     </item>
+    <item row="0" column="4">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
     <item row="0" column="1">
      <widget class="QPushButton" name="choose_grid_button">
       <property name="font">
@@ -424,32 +460,6 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="2">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="4">
-     <spacer name="horizontalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
     <item row="1" column="0">
      <spacer name="horizontalSpacer_4">
       <property name="orientation">
@@ -463,8 +473,8 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="4">
-     <spacer name="horizontalSpacer_5">
+    <item row="0" column="2">
+     <spacer name="horizontalSpacer_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -490,6 +500,16 @@
      </spacer>
     </item>
    </layout>
+   <zorder>choose_snowadvanced_button</zorder>
+   <zorder>choose_snow_button</zorder>
+   <zorder>horizontalSpacer</zorder>
+   <zorder>horizontalSpacer_2</zorder>
+   <zorder>horizontalSpacer_3</zorder>
+   <zorder>horizontalSpacer_4</zorder>
+   <zorder>horizontalSpacer_5</zorder>
+   <zorder>horizontalSpacer_6</zorder>
+   <zorder>choose_gridslope_button</zorder>
+   <zorder>choose_grid_button</zorder>
   </widget>
   <widget class="QGraphicsView" name="background_for_choose_menu">
    <property name="geometry">

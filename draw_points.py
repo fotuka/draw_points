@@ -301,6 +301,7 @@ class DrawPoints:
         self.dlg.choose_snowadvanced_button.hide()
 
     def choose_menu_show(self):
+        self.clear_types_input()
         self.dlg.background_for_choose_menu.show()
         self.dlg.choose_grid_button.show()
         self.dlg.choose_gridslope_button.show()
