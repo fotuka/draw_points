@@ -23,7 +23,8 @@
 """
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction
+from qgis.PyQt.QtWidgets import QAction, QFileDialog
+
 
 # Initialize Qt resources from file resources.py
 from .resources import *
@@ -75,7 +76,7 @@ class DrawPoints:
         self.dlg.choose_snow_button.clicked.connect(self.click_choose_snow)
         self.dlg.choose_snowadvanced_button.clicked.connect(self.click_choose_snowadvanced)
 
-
+        self.dlg.choose_path.clicked.connect(self.select_output_file)
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -357,6 +358,11 @@ class DrawPoints:
         self.clear_types_input()
         self.snowadvanced_show()
         self.dlg.openGLWidget.show()
+
+    def select_output_file(self):
+        filename, _filter = QFileDialog.getSaveFileName(
+            self.dlg, "Select   output file ", "", '*.csv')
+        self.dlg.save_in.setText(filename)
 
     def run(self):
         """Run method that performs all the real work"""
