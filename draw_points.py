@@ -183,6 +183,123 @@ class DrawPoints:
     def run(self):
         """Run method that performs all the real work"""
 
+        def grid_hide(self):
+            self.dlg.grid_height_label.hide()
+            self.dlg.grid_height.hide()
+            self.dlg.grid_lenght_label.hide()
+            self.dlg.grid_lenght.hide()
+            self.dlg.grid_vertical_lines_amount_label.hide()
+            self.dlg.grid_vertical_lines_amount.hide()
+            self.dlg.grid_horizontal_lines_amount_label.hide()
+            self.dlg.grid_horizontal_lines_amount.hide()
+            self.dlg.grid_coords_of_left_bottom_corner_label.hide()
+            self.dlg.grid_coords_of_left_bottom_corner.hide()
+            self.dlg.grid_system_of_coords_label.hide()
+            self.dlg.grid_system_of_coords.hide()
+
+        def grid_show(self):
+            self.dlg.grid_height_label.show()
+            self.dlg.grid_height.show()
+            self.dlg.grid_lenght_label.show()
+            self.dlg.grid_lenght.show()
+            self.dlg.grid_vertical_lines_amount_label.show()
+            self.dlg.grid_vertical_lines_amount.show()
+            self.dlg.grid_horizontal_lines_amount_label.show()
+            self.dlg.grid_horizontal_lines_amount.show()
+            self.dlg.grid_coords_of_left_bottom_corner_label.show()
+            self.dlg.grid_coords_of_left_bottom_corner.show()
+            self.dlg.grid_system_of_coords_label.show()
+            self.dlg.grid_system_of_coords.show()
+
+        def gridslope_hide(self):
+            self.dlg.gridslope_height_label.hide()
+            self.dlg.gridslope_height.hide()
+            self.dlg.gridslope_lenght_label.hide()
+            self.dlg.gridslope_lenght.hide()
+            self.dlg.gridslope_vertical_lines_amount_label.hide()
+            self.dlg.gridslope_vertical_lines_amount.hide()
+            self.dlg.gridslope_horizontal_lines_amount_label.hide()
+            self.dlg.gridslope_horizontal_lines_amount.hide()
+            self.dlg.gridslope_coords_of_left_bottom_corner_label.hide()
+            self.dlg.gridslope_coords_of_left_bottom_corner.hide()
+            self.dlg.gridslope_system_of_coords_label.hide()
+            self.dlg.gridslope_system_of_coords.hide()
+
+        def gridslope_show(self):
+            self.dlg.gridslope_height_label.show()
+            self.dlg.gridslope_height.show()
+            self.dlg.gridslope_lenght_label.show()
+            self.dlg.gridslope_lenght.show()
+            self.dlg.gridslope_vertical_lines_amount_label.show()
+            self.dlg.gridslope_vertical_lines_amount.show()
+            self.dlg.gridslope_horizontal_lines_amount_label.show()
+            self.dlg.gridslope_horizontal_lines_amount.show()
+            self.dlg.gridslope_coords_of_left_bottom_corner_label.show()
+            self.dlg.gridslope_coords_of_left_bottom_corner.show()
+            self.dlg.gridslope_system_of_coords_label.show()
+            self.dlg.gridslope_system_of_coords.show()
+
+        def snow_hide(self):
+            self.dlg.snow_radius_label.hide()
+            self.dlg.snow_radius.hide()
+            self.dlg.snow_lines_amount_label.hide()
+            self.dlg.snow_lines_amount.hide()
+            self.dlg.snow_gap_label.hide()
+            self.dlg.snow_gap.hide()
+            self.dlg.snow_coords_of_center_label.hide()
+            self.dlg.snow_coords_of_center.hide()
+            self.dlg.snow_system_of_coords_label.hide()
+            self.dlg.snow_system_of_coords.hide()
+
+        def snow_show(self):
+            self.dlg.snow_radius_label.show()
+            self.dlg.snow_radius.show()
+            self.dlg.snow_lines_amount_label.show()
+            self.dlg.snow_lines_amount.show()
+            self.dlg.snow_gap_label.show()
+            self.dlg.snow_gap.show()
+            self.dlg.snow_coords_of_center_label.show()
+            self.dlg.snow_coords_of_center.show()
+            self.dlg.snow_system_of_coords_label.show()
+            self.dlg.snow_system_of_coords.show()
+
+        def snowadvanced_hide(self):
+            self.dlg.snowadvanced_radius_label.hide()
+            self.dlg.snowadvanced_radius.hide()
+            self.dlg.snowadvanced_lines_amount_label.hide()
+            self.dlg.snowadvanced_lines_amount.hide()
+            self.dlg.snowadvanced_gap_label.hide()
+            self.dlg.snowadvanced_gap.hide()
+            self.dlg.snowadvanced_coords_of_center_label.hide()
+            self.dlg.snowadvanced_coords_of_center.hide()
+            self.dlg.snowadvanced_system_of_coords_label.hide()
+            self.dlg.snowadvanced_system_of_coords.hide()
+
+        def snowadvanced_show(self):
+            self.dlg.snowadvanced_radius_label.show()
+            self.dlg.snowadvanced_radius.show()
+            self.dlg.snowadvanced_lines_amount_label.show()
+            self.dlg.snowadvanced_lines_amount.show()
+            self.dlg.snowadvanced_gap_label.show()
+            self.dlg.snowadvanced_gap.show()
+            self.dlg.snowadvanced_coords_of_center_label.show()
+            self.dlg.snowadvanced_coords_of_center.show()
+            self.dlg.snowadvanced_system_of_coords_label.show()
+            self.dlg.snowadvanced_system_of_coords.show()
+
+        def choose_menu_hide(self):
+            self.dlg.background_for_choose_menu.hide()
+            self.dlg.choose_grid_button.hide()
+            self.dlg.choose_gridslope_button.hide()
+            self.dlg.choose_snow_button.hide()
+            self.dlg.choose_snowadvanced_button.hide()
+
+        def choose_menu_show(self):
+            self.dlg.background_for_choose_menu.show()
+            self.dlg.choose_grid_button.show()
+            self.dlg.choose_gridslope_button.show()
+            self.dlg.choose_snow_button.show()
+            self.dlg.choose_snowadvanced_button.show()
         # Create the dialog with elements (after translation) and keep reference
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
         if self.first_start == True:
@@ -191,6 +308,10 @@ class DrawPoints:
 
         # show the dialog
         self.dlg.show()
+        gridslope_hide(self)
+        snow_hide(self)
+        snowadvanced_hide(self)
+        choose_menu_hide(self)
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
@@ -198,3 +319,4 @@ class DrawPoints:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
             pass
+
