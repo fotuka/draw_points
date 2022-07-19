@@ -356,7 +356,7 @@
    <zorder>snowadvanced_coords_of_center_label</zorder>
    <zorder>snowadvanced_coords_of_center</zorder>
   </widget>
-  <widget class="QWidget" name="gridLayoutWidget">
+  <widget class="QFrame" name="chooseframe">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -540,7 +540,7 @@
   <zorder>verticalLayoutWidget_2</zorder>
   <zorder>verticalLayoutWidget_3</zorder>
   <zorder>verticalLayoutWidget_4</zorder>
-  <zorder>gridLayoutWidget</zorder>
+  <zorder>chooseframe</zorder>
  </widget>
  <customwidgets>
   <customwidget>

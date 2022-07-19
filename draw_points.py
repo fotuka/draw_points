@@ -307,6 +307,7 @@ class DrawPoints:
         self.dlg.choose_gridslope_button.show()
         self.dlg.choose_snow_button.show()
         self.dlg.choose_snowadvanced_button.show()
+        self.dlg.chooseframe.show()
 
     def clear_types_input(self):
         self.grid_hide()
@@ -337,6 +338,7 @@ class DrawPoints:
         self.clear_types_input()
         self.snowadvanced_show()
         self.dlg.openGLWidget.show()
+        self.dlg.chooseframe.hide()
 
     def run(self):
         """Run method that performs all the real work"""
@@ -347,6 +349,7 @@ class DrawPoints:
 
         # show the dialog
         self.dlg.show()
+
         self.grid_hide()
         self.gridslope_hide()
         self.snow_hide()
