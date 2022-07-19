@@ -302,6 +302,7 @@ class DrawPoints:
         self.dlg.snowadvanced_frame.show()
 
     def choose_menu_hide(self):
+        self.dlg.openGLWidget.show()
         self.dlg.background_for_choose_menu.hide()
         self.dlg.choose_grid_button.hide()
         self.dlg.choose_gridslope_button.hide()
@@ -310,6 +311,7 @@ class DrawPoints:
         self.dlg.choose_frame.hide()
 
     def choose_menu_show(self):
+        self.dlg.openGLWidget.hide()
         self.clear_types_input()
         self.dlg.background_for_choose_menu.show()
         self.dlg.choose_grid_button.show()
@@ -357,13 +359,12 @@ class DrawPoints:
 
         # show the dialog
         self.dlg.show()
-
         self.grid_hide()
         self.gridslope_hide()
         self.snow_hide()
-        self.dlg.openGLWidget.hide()
         self.choose_menu_hide()
         self.snowadvanced_hide()
+        self.dlg.openGLWidget.hide()
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:

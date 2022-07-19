@@ -388,7 +388,17 @@
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>SnowAdvanced</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>snowadvanced.png</normaloff>snowadvanced.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
       </property>
      </widget>
     </item>
@@ -411,7 +421,17 @@
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>Snow</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>snow.png</normaloff>snow.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
       </property>
      </widget>
     </item>
@@ -427,6 +447,26 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item row="0" column="3">
+     <widget class="QPushButton" name="choose_gridslope_button">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>gridslope.png</normaloff>gridslope.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+     </widget>
     </item>
     <item row="0" column="1">
      <widget class="QPushButton" name="choose_grid_button">
@@ -446,17 +486,17 @@
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>Grid</string>
+       <string/>
       </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QPushButton" name="choose_gridslope_button">
-      <property name="styleSheet">
-       <string notr="true"/>
+      <property name="icon">
+       <iconset>
+        <normaloff>grid.png</normaloff>grid.png</iconset>
       </property>
-      <property name="text">
-       <string>GridSlope</string>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
       </property>
      </widget>
     </item>
