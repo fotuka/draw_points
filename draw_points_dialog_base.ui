@@ -45,7 +45,7 @@
     <string>Choose</string>
    </property>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QFrame" name="grid_frame">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -150,7 +150,7 @@
     <string>Сохранить в:</string>
    </property>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_2">
+  <widget class="QFrame" name="gridslope_frame">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -222,7 +222,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_3">
+  <widget class="QFrame" name="snow_frame">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -284,7 +284,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_4">
+  <widget class="QFrame" name="snowadvanced_frame">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -356,7 +356,7 @@
    <zorder>snowadvanced_coords_of_center_label</zorder>
    <zorder>snowadvanced_coords_of_center</zorder>
   </widget>
-  <widget class="QFrame" name="chooseframe">
+  <widget class="QFrame" name="choose_frame">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -534,13 +534,13 @@
   <zorder>background_for_choose_menu</zorder>
   <zorder>ok_cancel_button_box</zorder>
   <zorder>choose_button</zorder>
-  <zorder>verticalLayoutWidget</zorder>
+  <zorder>grid_frame</zorder>
   <zorder>save_in</zorder>
   <zorder>save_in_label</zorder>
-  <zorder>verticalLayoutWidget_2</zorder>
-  <zorder>verticalLayoutWidget_3</zorder>
-  <zorder>verticalLayoutWidget_4</zorder>
-  <zorder>chooseframe</zorder>
+  <zorder>gridslope_frame</zorder>
+  <zorder>snow_frame</zorder>
+  <zorder>snowadvanced_frame</zorder>
+  <zorder>choose_frame</zorder>
  </widget>
  <customwidgets>
   <customwidget>

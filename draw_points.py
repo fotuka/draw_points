@@ -202,6 +202,7 @@ class DrawPoints:
         self.dlg.grid_coords_of_left_bottom_corner.hide()
         self.dlg.grid_system_of_coords_label.hide()
         self.dlg.grid_system_of_coords.hide()
+        self.dlg.grid_frame.hide()
 
     def grid_show(self):
         self.dlg.grid_height_label.show()
@@ -216,6 +217,7 @@ class DrawPoints:
         self.dlg.grid_coords_of_left_bottom_corner.show()
         self.dlg.grid_system_of_coords_label.show()
         self.dlg.grid_system_of_coords.show()
+        self.dlg.grid_frame.show()
 
     def gridslope_hide(self):
         self.dlg.gridslope_height_label.hide()
@@ -230,6 +232,7 @@ class DrawPoints:
         self.dlg.gridslope_coords_of_left_bottom_corner.hide()
         self.dlg.gridslope_system_of_coords_label.hide()
         self.dlg.gridslope_system_of_coords.hide()
+        self.dlg.gridslope_frame.hide()
 
     def gridslope_show(self):
         self.dlg.gridslope_height_label.show()
@@ -244,6 +247,7 @@ class DrawPoints:
         self.dlg.gridslope_coords_of_left_bottom_corner.show()
         self.dlg.gridslope_system_of_coords_label.show()
         self.dlg.gridslope_system_of_coords.show()
+        self.dlg.gridslope_frame.show()
 
     def snow_hide(self):
         self.dlg.snow_radius_label.hide()
@@ -256,6 +260,7 @@ class DrawPoints:
         self.dlg.snow_coords_of_center.hide()
         self.dlg.snow_system_of_coords_label.hide()
         self.dlg.snow_system_of_coords.hide()
+        self.dlg.snow_frame.hide()
 
     def snow_show(self):
         self.dlg.snow_radius_label.show()
@@ -268,6 +273,7 @@ class DrawPoints:
         self.dlg.snow_coords_of_center.show()
         self.dlg.snow_system_of_coords_label.show()
         self.dlg.snow_system_of_coords.show()
+        self.dlg.snow_frame.show()
 
     def snowadvanced_hide(self):
         self.dlg.snowadvanced_radius_label.hide()
@@ -280,6 +286,7 @@ class DrawPoints:
         self.dlg.snowadvanced_coords_of_center.hide()
         self.dlg.snowadvanced_system_of_coords_label.hide()
         self.dlg.snowadvanced_system_of_coords.hide()
+        self.dlg.snowadvanced_frame.hide()
 
     def snowadvanced_show(self):
         self.dlg.snowadvanced_radius_label.show()
@@ -292,6 +299,7 @@ class DrawPoints:
         self.dlg.snowadvanced_coords_of_center.show()
         self.dlg.snowadvanced_system_of_coords_label.show()
         self.dlg.snowadvanced_system_of_coords.show()
+        self.dlg.snowadvanced_frame.show()
 
     def choose_menu_hide(self):
         self.dlg.background_for_choose_menu.hide()
@@ -299,6 +307,7 @@ class DrawPoints:
         self.dlg.choose_gridslope_button.hide()
         self.dlg.choose_snow_button.hide()
         self.dlg.choose_snowadvanced_button.hide()
+        self.dlg.choose_frame.hide()
 
     def choose_menu_show(self):
         self.clear_types_input()
@@ -307,7 +316,7 @@ class DrawPoints:
         self.dlg.choose_gridslope_button.show()
         self.dlg.choose_snow_button.show()
         self.dlg.choose_snowadvanced_button.show()
-        self.dlg.chooseframe.show()
+        self.dlg.choose_frame.show()
 
     def clear_types_input(self):
         self.grid_hide()
@@ -338,7 +347,6 @@ class DrawPoints:
         self.clear_types_input()
         self.snowadvanced_show()
         self.dlg.openGLWidget.show()
-        self.dlg.chooseframe.hide()
 
     def run(self):
         """Run method that performs all the real work"""
