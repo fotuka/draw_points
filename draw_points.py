@@ -182,7 +182,6 @@ class DrawPoints:
         # will be set False in run()
         self.first_start = True
 
-
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
@@ -194,17 +193,23 @@ class DrawPoints:
     def grid_hide(self):
         self.dlg.grid_height_label.hide()
         self.dlg.grid_height.hide()
+        self.dlg.grid_height.clear()
         self.dlg.grid_lenght_label.hide()
         self.dlg.grid_lenght.hide()
+        self.dlg.grid_lenght.clear()
         self.dlg.grid_vertical_lines_amount_label.hide()
         self.dlg.grid_vertical_lines_amount.hide()
+        self.dlg.grid_vertical_lines_amount.clear()
         self.dlg.grid_horizontal_lines_amount_label.hide()
         self.dlg.grid_horizontal_lines_amount.hide()
+        self.dlg.grid_horizontal_lines_amount.clea()
         self.dlg.grid_coords_of_left_bottom_corner_label.hide()
         self.dlg.grid_coords_of_left_bottom_corner_label_x.hide()
         self.dlg.grid_coords_of_left_bottom_corner_label_y.hide()
         self.dlg.grid_coords_of_left_bottom_corner_x.hide()
+        self.dlg.grid_coords_of_left_bottom_corner_x.clear()
         self.dlg.grid_coords_of_left_bottom_corner_y.hide()
+        self.dlg.grid_coords_of_left_bottom_corner_y.clear()
         self.dlg.grid_frame.hide()
 
     def grid_show(self):
@@ -226,17 +231,23 @@ class DrawPoints:
     def gridslope_hide(self):
         self.dlg.gridslope_height_label.hide()
         self.dlg.gridslope_height.hide()
+        self.dlg.gridslope_height.clear()
         self.dlg.gridslope_lenght_label.hide()
         self.dlg.gridslope_lenght.hide()
+        self.dlg.gridslope_lenght.clear()
         self.dlg.gridslope_vertical_lines_amount_label.hide()
         self.dlg.gridslope_vertical_lines_amount.hide()
+        self.dlg.gridslope_vertical_lines_amount.clear()
         self.dlg.gridslope_horizontal_lines_amount_label.hide()
         self.dlg.gridslope_horizontal_lines_amount.hide()
+        self.dlg.gridslope_horizontal_lines_amount.clear()
         self.dlg.gridslope_coords_of_left_bottom_corner_label.hide()
         self.dlg.gridslope_coords_of_left_bottom_corner_label_x.hide()
         self.dlg.gridslope_coords_of_left_bottom_corner_label_y.hide()
         self.dlg.gridslope_coords_of_left_bottom_corner_x.hide()
+        self.dlg.gridslope_coords_of_left_bottom_corner_x.clear()
         self.dlg.gridslope_coords_of_left_bottom_corner_y.hide()
+        self.dlg.gridslope_coords_of_left_bottom_corner_y.clear()
         self.dlg.gridslope_frame.hide()
 
     def gridslope_show(self):
@@ -258,15 +269,20 @@ class DrawPoints:
     def snow_hide(self):
         self.dlg.snow_radius_label.hide()
         self.dlg.snow_radius.hide()
+        self.dlg.snow_radius.clear()
         self.dlg.snow_lines_amount_label.hide()
         self.dlg.snow_lines_amount.hide()
+        self.dlg.snow_lines_amount.clear()
         self.dlg.snow_dots_amount_label.hide()
         self.dlg.snow_dots_amount.hide()
+        self.dlg.snow_dots_amount.clear()
         self.dlg.snow_coords_of_center_label.hide()
         self.dlg.snow_coords_of_center_label_x.hide()
         self.dlg.snow_coords_of_center_label_y.hide()
         self.dlg.snow_coords_of_center_x.hide()
+        self.dlg.snow_coords_of_center_x.clear()
         self.dlg.snow_coords_of_center_y.hide()
+        self.dlg.snow_coords_of_center_y.clear()
         self.dlg.snow_frame.hide()
 
     def snow_show(self):
@@ -286,15 +302,20 @@ class DrawPoints:
     def snowadvanced_hide(self):
         self.dlg.snowadvanced_radius_label.hide()
         self.dlg.snowadvanced_radius.hide()
+        self.dlg.snowadvanced_radius.clear()
         self.dlg.snowadvanced_lines_amount_label.hide()
         self.dlg.snowadvanced_lines_amount.hide()
+        self.dlg.snowadvanced_lines_amount.clear()
         self.dlg.snowadvanced_dots_amount_label.hide()
         self.dlg.snowadvanced_dots_amount.hide()
+        self.dlg.snowadvanced_dots_amount.clear()
         self.dlg.snowadvanced_coords_of_center_label.hide()
         self.dlg.snowadvanced_coords_of_center_label_x.hide()
         self.dlg.snowadvanced_coords_of_center_label_y.hide()
         self.dlg.snowadvanced_coords_of_center_x.hide()
+        self.dlg.snowadvanced_coords_of_center_x.clear()
         self.dlg.snowadvanced_coords_of_center_y.hide()
+        self.dlg.snowadvanced_coords_of_center_y.clear()
         self.dlg.snowadvanced_frame.hide()
 
     def snowadvanced_show(self):
@@ -322,24 +343,20 @@ class DrawPoints:
         self.grid_show()
         self.choose = 'grid'
 
-
     def click_choose_gridslope(self):
         self.clear_types_input()
         self.gridslope_show()
         self.choose = 'gridslope'
-
 
     def click_choose_snow(self):
         self.clear_types_input()
         self.snow_show()
         self.choose = 'snow'
 
-
     def click_choose_snowadvanced(self):
         self.clear_types_input()
         self.snowadvanced_show()
         self.choose = 'snowadvanced'
-
 
     def select_output_file(self):
         filename, _filter = QFileDialog.getSaveFileName(
@@ -352,7 +369,6 @@ class DrawPoints:
         # Create the dialog with elements (after translation) and keep reference
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
 
-
         # show the dialog
         self.dlg.show()
         self.grid_hide()
@@ -362,41 +378,50 @@ class DrawPoints:
         result = self.dlg.exec_()
         # See if OK was pressed
 
-
         if result:
             # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-
+            # substitute with your code
             if self.choose == 'grid':
                 grid_height = self.dlg.grid_height.value()
                 grid_lenght = self.dlg.grid_lenght.value()
                 grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
                 grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
-                figure = Grid(grid_lenght,grid_height,grid_horizontal_lines_amount, grid_vertical_lines_amount)
-
+                figure = Grid(grid_lenght, grid_height, grid_horizontal_lines_amount, grid_vertical_lines_amount)
+                figure.create()
+                figure.move_x(self.dlg.grid_coords_of_left_bottom_corner_x.value)
+                figure.move_y(self.dlg.grid_coords_of_left_bottom_corner_y.value)
 
             if self.choose == 'gridslope':
                 gridslope_height = self.dlg.gridslope_height.value()
                 gridslope_lenght = self.dlg.gridslope_lenght.value()
                 gridslope_horizontal_lines_amount = self.dlg.gridslope_horizontal_lines_amount.value()
                 gridslope_vertical_lines_amount = self.dlg.gridslope_vertical_lines_amount.value()
-                figure = GridSlope(gridslope_lenght,gridslope_height,gridslope_horizontal_lines_amount, gridslope_vertical_lines_amount)
+                figure = GridSlope(gridslope_lenght, gridslope_height, gridslope_horizontal_lines_amount, gridslope_vertical_lines_amount)
+                figure.create()
+                figure.move_x(self.dlg.gridslope_coords_of_left_bottom_corner_x.value)
+                figure.move_y(self.dlg.gridslope_coords_of_left_bottom_corner_y.value)
 
             if self.choose == 'snow':
-                grid_height = self.dlg.grid_height.value()
-                grid_lenght = self.dlg.grid_lenght.value()
-                grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
-                grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
-                figure = Grid(grid_lenght,grid_height,grid_horizontal_lines_amount, grid_vertical_lines_amount)
+                snow_dots_amount = self.dlg.snow_dots_amount.value()
+                snow_lines_amount = self.dlg.snow_lines_amount.value()
+                snow_radius = self.dlg.snow_radius.value()
+                figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount)
+                figure.create()
+                figure.move_x(self.dlg.gridslope_coords_of_left_bottom_corner_x.value)
+                figure.move_y(self.dlg.gridslope_coords_of_left_bottom_corner_y.value)
 
             if self.choose == 'snowadvanced':
-                grid_height = self.dlg.grid_height.value()
-                grid_lenght = self.dlg.grid_lenght.value()
-                grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
-                grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
-                figure = Grid(grid_lenght,grid_height,grid_horizontal_lines_amount, grid_vertical_lines_amount)
+                snowadvanced_dots_amount = self.dlg.snowadvanced_dots_amount.value()
+                snowadvanced_lines_amount = self.dlg.snowadvanced_lines_amount.value()
+                snowadvanced_radius = self.dlg.snowadvanced_radius.value()
+                figure = SnowAdvanced(snowadvanced_radius, snowadvanced_dots_amount, snowadvanced_lines_amount)
+                figure.create()
+                figure.move_x(self.dlg.snowadvanced_coords_of_center_x.value)
+                figure.move_y(self.dlg.snowadvanced_coords_of_center_y.value)
 
-            figure.create()
+            rotate_degree = self.dlg.rotate.value()
+            figure.rotate(rotate_degree)
+
+
             path = self.dlg.save_in.text()
             figure.export(path)
-
