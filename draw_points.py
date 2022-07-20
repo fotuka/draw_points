@@ -65,6 +65,7 @@ class DrawPoints:
         self.actions = []
         self.menu = self.tr(u'&Draw Points')
         self.dlg = DrawPointsDialog()
+        self.choose = 'none'
 
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
@@ -319,21 +320,25 @@ class DrawPoints:
     def click_choose_grid(self):
         self.clear_types_input()
         self.grid_show()
+        self.choose = 'grid'
 
 
     def click_choose_gridslope(self):
         self.clear_types_input()
         self.gridslope_show()
+        self.choose = 'gridslope'
 
 
     def click_choose_snow(self):
         self.clear_types_input()
         self.snow_show()
+        self.choose = 'snow'
 
 
     def click_choose_snowadvanced(self):
         self.clear_types_input()
         self.snowadvanced_show()
+        self.choose = 'snowadvanced'
 
 
     def select_output_file(self):
@@ -361,19 +366,37 @@ class DrawPoints:
         if result:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
-            radius = self.dlg.snow_radius.value()
-            dots_amount = self.dlg.snow_dots_amount.value()
-            lines_amount = self.dlg.snow_lines_amount.value()
-            example = Snow(radius, dots_amount, lines_amount)
+
+            if self.choose == 'grid':
+                grid_height = self.dlg.grid_height.value()
+                grid_lenght = self.dlg.grid_lenght.value()
+                grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
+                grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
+                figure = Grid(grid_lenght,grid_height,grid_horizontal_lines_amount, grid_vertical_lines_amount)
+
+
+            if self.choose == 'gridslope':
+                gridslope_height = self.dlg.gridslope_height.value()
+                gridslope_lenght = self.dlg.gridslope_lenght.value()
+                gridslope_horizontal_lines_amount = self.dlg.gridslope_horizontal_lines_amount.value()
+                gridslope_vertical_lines_amount = self.dlg.gridslope_vertical_lines_amount.value()
+                figure = GridSlope(gridslope_lenght,gridslope_height,gridslope_horizontal_lines_amount, gridslope_vertical_lines_amount)
+
+            if self.choose == 'snow':
+                grid_height = self.dlg.grid_height.value()
+                grid_lenght = self.dlg.grid_lenght.value()
+                grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
+                grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
+                figure = Grid(grid_lenght,grid_height,grid_horizontal_lines_amount, grid_vertical_lines_amount)
+
+            if self.choose == 'snowadvanced':
+                grid_height = self.dlg.grid_height.value()
+                grid_lenght = self.dlg.grid_lenght.value()
+                grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
+                grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
+                figure = Grid(grid_lenght,grid_height,grid_horizontal_lines_amount, grid_vertical_lines_amount)
+
+            figure.create()
             path = self.dlg.save_in.text()
-            with open('/home/geoserver/Документы/README.txt', 'w') as f:
-                f.write(str(radius))
-                f.write(' ')
-                f.write(str(dots_amount))
-                f.write(' ')
-                f.write(str(lines_amount))
-                f.write(' ')
-                f.write(path)
-                f.write(' ')
-            example.export(path)
+            figure.export(path)
 
