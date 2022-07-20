@@ -24,14 +24,18 @@
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QFileDialog
-
+from qgis._core import Qgis, QgsProject
+from qgis.core import QgsVectorLayer
 
 # Initialize Qt resources from file resources.py
+from qgis.utils import iface
+
 from .resources import *
 # Import the code for the dialog
 from .main import *
 from .draw_points_dialog import DrawPointsDialog
 import os.path
+import os
 
 
 class DrawPoints:
@@ -375,6 +379,7 @@ class DrawPoints:
         self.gridslope_hide()
         self.snow_hide()
         self.snowadvanced_hide()
+        self.dlg.rotate.setValue(0)
         result = self.dlg.exec_()
         # See if OK was pressed
 
@@ -388,8 +393,8 @@ class DrawPoints:
                 grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
                 figure = Grid(grid_lenght, grid_height, grid_horizontal_lines_amount, grid_vertical_lines_amount)
                 figure.create()
-                figure.move_x(self.dlg.grid_coords_of_left_bottom_corner_x.value)
-                figure.move_y(self.dlg.grid_coords_of_left_bottom_corner_y.value)
+                figure.move_x(self.dlg.grid_coords_of_left_bottom_corner_x.value())
+                figure.move_y(self.dlg.grid_coords_of_left_bottom_corner_y.value())
 
             if self.choose == 'gridslope':
                 gridslope_height = self.dlg.gridslope_height.value()
@@ -398,8 +403,8 @@ class DrawPoints:
                 gridslope_vertical_lines_amount = self.dlg.gridslope_vertical_lines_amount.value()
                 figure = GridSlope(gridslope_lenght, gridslope_height, gridslope_horizontal_lines_amount, gridslope_vertical_lines_amount)
                 figure.create()
-                figure.move_x(self.dlg.gridslope_coords_of_left_bottom_corner_x.value)
-                figure.move_y(self.dlg.gridslope_coords_of_left_bottom_corner_y.value)
+                figure.move_x(self.dlg.gridslope_coords_of_left_bottom_corner_x.value())
+                figure.move_y(self.dlg.gridslope_coords_of_left_bottom_corner_y.value())
 
             if self.choose == 'snow':
                 snow_dots_amount = self.dlg.snow_dots_amount.value()
@@ -407,8 +412,8 @@ class DrawPoints:
                 snow_radius = self.dlg.snow_radius.value()
                 figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount)
                 figure.create()
-                figure.move_x(self.dlg.gridslope_coords_of_left_bottom_corner_x.value)
-                figure.move_y(self.dlg.gridslope_coords_of_left_bottom_corner_y.value)
+                figure.move_x(self.dlg.gridslope_coords_of_left_bottom_corner_x.value())
+                figure.move_y(self.dlg.gridslope_coords_of_left_bottom_corner_y.value())
 
             if self.choose == 'snowadvanced':
                 snowadvanced_dots_amount = self.dlg.snowadvanced_dots_amount.value()
@@ -416,12 +421,20 @@ class DrawPoints:
                 snowadvanced_radius = self.dlg.snowadvanced_radius.value()
                 figure = SnowAdvanced(snowadvanced_radius, snowadvanced_dots_amount, snowadvanced_lines_amount)
                 figure.create()
-                figure.move_x(self.dlg.snowadvanced_coords_of_center_x.value)
-                figure.move_y(self.dlg.snowadvanced_coords_of_center_y.value)
+                figure.move_x(self.dlg.snowadvanced_coords_of_center_x.value())
+                figure.move_y(self.dlg.snowadvanced_coords_of_center_y.value())
 
             rotate_degree = self.dlg.rotate.value()
             figure.rotate(rotate_degree)
-
-
             path = self.dlg.save_in.text()
-            figure.export(path)
+
+            # figure.export('/home/geoserver/xy.csv')
+
+            figure.export('/home/geoserver/xy.csv')
+            uri = "file:///home/geoserver/xy.csv?type=regexp&delimiter=%20&useHeader=No&maxFields=10000&detectTypes=yes&xField=field_1&yField=field_2&crs=EPSG:4326&spatialIndex=no&subsetIndex=no&watchFile=no&field=field_1:text&field=field_2:text"
+            lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext')
+            QgsProject.instance().addMapLayer(lyr)
+
+            self.iface.messageBar().pushMessage(
+                "Success", "создано " ,
+                level=Qgis.Success, duration=3)
