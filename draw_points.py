@@ -98,7 +98,6 @@ class DrawPoints:
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('DrawPoints', message)
 
-
     def add_action(
         self,
         icon_path,
@@ -273,13 +272,13 @@ class DrawPoints:
     def snow_hide(self):
         self.dlg.snow_radius_label.hide()
         self.dlg.snow_radius.hide()
-        self.dlg.snow_radius.setValue(0)
+        self.dlg.snow_radius.setValue(1)
         self.dlg.snow_lines_amount_label.hide()
         self.dlg.snow_lines_amount.hide()
-        self.dlg.snow_lines_amount.setValue(0)
+        self.dlg.snow_lines_amount.setValue(5)
         self.dlg.snow_dots_amount_label.hide()
         self.dlg.snow_dots_amount.hide()
-        self.dlg.snow_dots_amount.setValue(0)
+        self.dlg.snow_dots_amount.setValue(5)
         self.dlg.snow_coords_of_center_label.hide()
         self.dlg.snow_coords_of_center_label_x.hide()
         self.dlg.snow_coords_of_center_label_y.hide()
@@ -412,8 +411,8 @@ class DrawPoints:
                 snow_radius = self.dlg.snow_radius.value()
                 figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount)
                 figure.create()
-                figure.move_x(self.dlg.gridslope_coords_of_left_bottom_corner_x.value())
-                figure.move_y(self.dlg.gridslope_coords_of_left_bottom_corner_y.value())
+                figure.move_x(self.dlg.snow_coords_of_center_x.value())
+                figure.move_y(self.dlg.snow_coords_of_center_y.value())
 
             if self.choose == 'snowadvanced':
                 snowadvanced_dots_amount = self.dlg.snowadvanced_dots_amount.value()
@@ -436,5 +435,5 @@ class DrawPoints:
             QgsProject.instance().addMapLayer(lyr)
 
             self.iface.messageBar().pushMessage(
-                "Success", "создано " ,
+                "Success", "создано ",
                 level=Qgis.Success, duration=3)

@@ -106,7 +106,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="grid_coords_of_left_bottom_corner_x"/>
+     <widget class="QDoubleSpinBox" name="grid_coords_of_left_bottom_corner_x">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="grid_coords_of_left_bottom_corner_label_y">
@@ -122,7 +132,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="grid_coords_of_left_bottom_corner_y"/>
+     <widget class="QDoubleSpinBox" name="grid_coords_of_left_bottom_corner_y">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -219,7 +239,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="snowadvanced_coords_of_center_x"/>
+     <widget class="QDoubleSpinBox" name="snowadvanced_coords_of_center_x">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="snowadvanced_coords_of_center_label_y">
@@ -235,7 +265,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="snowadvanced_coords_of_center_y"/>
+     <widget class="QDoubleSpinBox" name="snowadvanced_coords_of_center_y">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -351,7 +391,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="gridslope_coords_of_left_bottom_corner_x"/>
+     <widget class="QDoubleSpinBox" name="gridslope_coords_of_left_bottom_corner_x">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="gridslope_coords_of_left_bottom_corner_label_y">
@@ -367,7 +417,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="gridslope_coords_of_left_bottom_corner_y"/>
+     <widget class="QDoubleSpinBox" name="gridslope_coords_of_left_bottom_corner_y">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -444,7 +504,20 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="snow_coords_of_center_x"/>
+     <widget class="QDoubleSpinBox" name="snow_coords_of_center_x">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999998.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="snow_coords_of_center_label_y">
@@ -460,7 +533,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="snow_coords_of_center_y"/>
+     <widget class="QDoubleSpinBox" name="snow_coords_of_center_y">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
