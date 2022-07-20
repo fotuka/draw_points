@@ -32,7 +32,7 @@ from qgis.utils import iface
 
 from .resources import *
 # Import the code for the dialog
-from .main import *
+from .calculation import *
 from .draw_points_dialog import DrawPointsDialog
 import os.path
 import os
@@ -272,13 +272,13 @@ class DrawPoints:
     def snow_hide(self):
         self.dlg.snow_radius_label.hide()
         self.dlg.snow_radius.hide()
-        self.dlg.snow_radius.setValue(1)
+        self.dlg.snow_radius.setValue(0)
         self.dlg.snow_lines_amount_label.hide()
         self.dlg.snow_lines_amount.hide()
-        self.dlg.snow_lines_amount.setValue(5)
+        self.dlg.snow_lines_amount.setValue(0)
         self.dlg.snow_dots_amount_label.hide()
         self.dlg.snow_dots_amount.hide()
-        self.dlg.snow_dots_amount.setValue(5)
+        self.dlg.snow_dots_amount.setValue(0)
         self.dlg.snow_coords_of_center_label.hide()
         self.dlg.snow_coords_of_center_label_x.hide()
         self.dlg.snow_coords_of_center_label_y.hide()
@@ -379,6 +379,8 @@ class DrawPoints:
         self.snow_hide()
         self.snowadvanced_hide()
         self.dlg.rotate.setValue(0)
+        self.dlg.save_in.setText("Укажитe путь")
+        self.dlg.check_save.setChecked(False)
         result = self.dlg.exec_()
         # See if OK was pressed
 
@@ -425,15 +427,17 @@ class DrawPoints:
 
             rotate_degree = self.dlg.rotate.value()
             figure.rotate(rotate_degree)
-            path = self.dlg.save_in.text()
-
-            # figure.export('/home/geoserver/xy.csv')
-
             figure.export('/home/geoserver/xy.csv')
-            uri = "file:///home/geoserver/xy.csv?type=regexp&delimiter=%20&useHeader=No&maxFields=10000&detectTypes=yes&xField=field_1&yField=field_2&crs=EPSG:4326&spatialIndex=no&subsetIndex=no&watchFile=no&field=field_1:text&field=field_2:text"
-            lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext')
+            uri = 'file:///home/geoserver/xy.csv?type=regexp&delimiter=%20&useHeader=No&maxFields=10000&detectTypes=yes&xField=field_1&yField=field_2&crs=EPSG:4326&spatialIndex=no&subsetIndex=no&watchFile=no&field=field_1:text&field=field_2:text'
+            lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=self.dlg.system_of_coords.crs())
             QgsProject.instance().addMapLayer(lyr)
+            with open('/home/geoserver/Документы/README.txt', 'w') as f:
+                f.write(str(self.dlg.check_save.checkState()))
+
+            if self.dlg.check_save.checkState() == 2:
+                path = self.dlg.save_in.text()
+                figure.export(path)
 
             self.iface.messageBar().pushMessage(
-                "Success", "создано ",
+                "Success",
                 level=Qgis.Success, duration=3)

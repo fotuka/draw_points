@@ -53,7 +53,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="grid_height"/>
+     <widget class="QDoubleSpinBox" name="grid_height">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="grid_lenght_label">
@@ -63,7 +73,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="grid_lenght"/>
+     <widget class="QDoubleSpinBox" name="grid_lenght">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="grid_vertical_lines_amount_label">
@@ -150,13 +170,13 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>20</y>
-     <width>621</width>
-     <height>25</height>
+     <y>30</y>
+     <width>631</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Укажите путь!</string>
+    <string>Укажитe путь</string>
    </property>
    <property name="readOnly">
     <bool>true</bool>
@@ -165,8 +185,8 @@
   <widget class="QLabel" name="save_in_label">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>0</y>
+     <x>40</x>
+     <y>5</y>
      <width>311</width>
      <height>20</height>
     </rect>
@@ -196,7 +216,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="snowadvanced_radius"/>
+     <widget class="QDoubleSpinBox" name="snowadvanced_radius">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="snowadvanced_lines_amount_label">
@@ -283,7 +313,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>42</y>
+     <y>52</y>
      <width>291</width>
      <height>28</height>
     </rect>
@@ -296,8 +326,8 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>70</y>
-     <width>571</width>
+     <y>80</y>
+     <width>581</width>
      <height>21</height>
     </rect>
    </property>
@@ -338,7 +368,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="gridslope_height"/>
+     <widget class="QDoubleSpinBox" name="gridslope_height">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="gridslope_lenght_label">
@@ -348,7 +388,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="gridslope_lenght"/>
+     <widget class="QDoubleSpinBox" name="gridslope_lenght">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="gridslope_vertical_lines_amount_label">
@@ -424,6 +474,9 @@
       <property name="minimum">
        <double>-999999999999.000000000000000</double>
       </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
       <property name="value">
        <double>0.000000000000000</double>
       </property>
@@ -461,7 +514,17 @@
      </widget>
     </item>
     <item>
-     <widget class="QDoubleSpinBox" name="snow_radius"/>
+     <widget class="QDoubleSpinBox" name="snow_radius">
+      <property name="decimals">
+       <number>8</number>
+      </property>
+      <property name="minimum">
+       <double>-999999999999.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>999999999999.000000000000000</double>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="snow_lines_amount_label">
@@ -512,7 +575,7 @@
        <double>-999999999999.000000000000000</double>
       </property>
       <property name="maximum">
-       <double>999999999998.000000000000000</double>
+       <double>999999999999.000000000000000</double>
       </property>
       <property name="singleStep">
        <double>1.000000000000000</double>
@@ -551,9 +614,9 @@
    <property name="geometry">
     <rect>
      <x>660</x>
-     <y>20</y>
+     <y>30</y>
      <width>31</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="text">
@@ -563,8 +626,8 @@
   <widget class="QPushButton" name="choose_grid_button">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>110</y>
+     <x>20</x>
+     <y>120</y>
      <width>91</width>
      <height>70</height>
     </rect>
@@ -601,8 +664,8 @@
   <widget class="QPushButton" name="choose_gridslope_button">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>190</y>
+     <x>20</x>
+     <y>200</y>
      <width>91</width>
      <height>70</height>
     </rect>
@@ -633,8 +696,8 @@
   <widget class="QPushButton" name="choose_snowadvanced_button">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>350</y>
+     <x>20</x>
+     <y>360</y>
      <width>91</width>
      <height>71</height>
     </rect>
@@ -665,8 +728,8 @@
   <widget class="QPushButton" name="choose_snow_button">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>270</y>
+     <x>20</x>
+     <y>280</y>
      <width>91</width>
      <height>70</height>
     </rect>
@@ -701,23 +764,45 @@
    <property name="geometry">
     <rect>
      <x>610</x>
-     <y>70</y>
+     <y>80</y>
      <width>81</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="decimals">
+    <number>4</number>
+   </property>
+   <property name="minimum">
+    <double>-360.000000000000000</double>
+   </property>
+   <property name="maximum">
+    <double>99.359999999999999</double>
    </property>
   </widget>
   <widget class="QLabel" name="rotate_label">
    <property name="geometry">
     <rect>
      <x>610</x>
-     <y>50</y>
+     <y>60</y>
      <width>101</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
     <string>Поворот (°)</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="check_save">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>5</y>
+     <width>16</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
