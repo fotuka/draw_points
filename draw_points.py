@@ -186,7 +186,7 @@ class DrawPoints:
         self.first_start = True
 
     def unload(self):
-        """Removes the plugin menu item and icon from QGIS GUI."""
+        """Removes the plugin menu item and icon from QGIS GUI. """
         for action in self.actions:
             self.iface.removePluginMenu(
                 self.tr(u'&Draw Points'),
