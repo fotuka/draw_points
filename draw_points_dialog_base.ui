@@ -303,7 +303,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="grid_lenght_label">
+               <widget class="QLabel" name="grid_length_label">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -316,7 +316,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QDoubleSpinBox" name="grid_lenght">
+               <widget class="QDoubleSpinBox" name="grid_length">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
