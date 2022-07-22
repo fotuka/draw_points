@@ -533,7 +533,7 @@
            <item>
             <layout class="QVBoxLayout" name="layout_coords">
              <item>
-              <widget class="QLabel" name="grid_coords_of_left_bottom_corner_label">
+              <widget class="QLabel" name="coords_label">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -546,7 +546,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="grid_coords_of_left_bottom_corner_label_x">
+              <widget class="QLabel" name="coords_x_label">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -565,7 +565,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QDoubleSpinBox" name="grid_coords_of_left_bottom_corner_x">
+              <widget class="QDoubleSpinBox" name="coords_x">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -584,7 +584,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="grid_coords_of_left_bottom_corner_label_y">
+              <widget class="QLabel" name="coords_y_label">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -603,7 +603,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QDoubleSpinBox" name="grid_coords_of_left_bottom_corner_y">
+              <widget class="QDoubleSpinBox" name="coords_y">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
