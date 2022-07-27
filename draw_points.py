@@ -193,20 +193,7 @@ class DrawPoints:
                 action)
             self.iface.removeToolBarIcon(action)
 
-    def grid_hide(self):
-        self.dlg.grid_widget.hide()
-        self.dlg.grid_height.setValue(0)
-        self.dlg.grid_length.setValue(0)
-        self.dlg.grid_vertical_lines_amount.setValue(0)
-        self.dlg.grid_horizontal_lines_amount.setValue(0)
-
-    def snow_hide(self):
-        self.dlg.snow_widget.hide()
-        self.dlg.snow_radius.setValue(0)
-        self.dlg.snow_lines_amount.setValue(0)
-        self.dlg.snow_dots_amount.setValue(0)
-
-    def clear_types_input(self):
+    def clear_all_types_input(self):
         self.dlg.snow_radius.setValue(0)
         self.dlg.snow_lines_amount.setValue(0)
         self.dlg.snow_dots_amount.setValue(0)
@@ -217,6 +204,14 @@ class DrawPoints:
         self.dlg.rotate.setValue(0)
         self.dlg.coords_x.setValue(0)
         self.dlg.coords_y.setValue(0)
+
+    def grid_hide(self):
+        self.dlg.grid_widget.hide()
+        self.clear_types_input()
+
+    def snow_hide(self):
+        self.dlg.snow_widget.hide()
+        self.clear_types_input()
 
     def click_choose_grid(self):
         self.snow_hide()
