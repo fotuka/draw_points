@@ -1,6 +1,5 @@
 import math
 import numpy as np
-# import matplotlib.pyplot as plt
 
 
 FULL_ANGLE = 360
@@ -29,14 +28,10 @@ class Coordinates:
             self.xy[index, 1] = self.xy[index, 1] + y
         return self.xy
 
-    # def display(self):
-    #     x, y = np.split(self.xy, 2, axis=1)
-    #     plt.scatter(x, y)
-    #     plt.show()
-
     def export(self, path):
         np.savetxt(path, self.xy)
         self.xy.tofile('path', sep=' ')
+
 
 class Rectangle(Coordinates):
     def __init__(self, length, height, xline_amount, yline_amount):
@@ -116,11 +111,6 @@ class SnowAdvanced(Circle):
 
 def main():
     pass
-    # test = SnowAdvanced(10, 3, 12)
-    # test.create()
-    # test.display()
-    # test.rotate(0)
-    # test.export()
 
 
 if __name__ == '__main__':
