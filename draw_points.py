@@ -254,6 +254,13 @@ class DrawPoints:
             self.dlg, "Select   output file ", "", '*.csv')
         self.dlg.save_in.setText(filename)
 
+    def hide_all(self):
+        self.grid_hide()
+        self.snow_hide()
+        self.dlg.rotate_widget.hide()
+        self.dlg.coords_widget.hide()
+        self.dlg.top_widget.hide()
+
     def run(self):
         """Run method that performs all the real work"""
 
@@ -263,11 +270,7 @@ class DrawPoints:
         # show the dialog
         self.dlg.show()
         self.clear_all_types_input()
-        self.grid_hide()
-        self.snow_hide()
-        self.dlg.rotate_widget.hide()
-        self.dlg.coords_widget.hide()
-        self.dlg.top_widget.hide()
+        self.hide_all()
         self.dlg.save_in.setText("Укажитe путь")
         result = self.dlg.exec_()
         # See if OK was pressed
