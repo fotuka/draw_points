@@ -207,50 +207,46 @@ class DrawPoints:
 
     def grid_hide(self):
         self.dlg.grid_widget.hide()
-        self.clear_types_input()
+        self.clear_all_types_input()
+
+    def grid_show(self):
+        self.snow_hide()
+        self.dlg.grid_widget.show()
+        self.dlg.rotate_widget.show()
+        self.dlg.coords_widget.show()
+        self.dlg.top_widget.show()
+        self.dlg.coords_label.setText('Координаты левого нижнего угла')
 
     def snow_hide(self):
         self.dlg.snow_widget.hide()
-        self.clear_types_input()
+        self.clear_all_types_input()
 
-    def click_choose_grid(self):
-        self.snow_hide()
-        self.dlg.grid_widget.show()
+    def snow_show(self):
+        self.grid_hide()
+        self.dlg.snow_widget.show()
         self.dlg.rotate_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
-        self.clear_types_input()
-        self.dlg.coords_label.setText('Координаты левого нижнего угла')
+        self.dlg.coords_label.setText('Координаты центра')
+
+    def click_choose_grid(self):
+        self.grid_show()
+        self.clear_all_types_input()
         self.choose = 'grid'
 
     def click_choose_gridslope(self):
-        self.snow_hide()
-        self.dlg.grid_widget.show()
-        self.dlg.rotate_widget.show()
-        self.dlg.coords_widget.show()
-        self.dlg.top_widget.show()
-        self.clear_types_input()
-        self.dlg.coords_label.setText('Координаты левого нижнего угла')
+        self.grid_show()
+        self.clear_all_types_input()
         self.choose = 'gridslope'
 
     def click_choose_snow(self):
-        self.grid_hide()
-        self.dlg.snow_widget.show()
-        self.dlg.rotate_widget.show()
-        self.dlg.coords_widget.show()
-        self.dlg.top_widget.show()
-        self.clear_types_input()
-        self.dlg.coords_label.setText('Координаты центра')
+        self.snow_show()
+        self.clear_all_types_input()
         self.choose = 'snow'
 
     def click_choose_snowadvanced(self):
-        self.grid_hide()
-        self.dlg.snow_widget.show()
-        self.dlg.rotate_widget.show()
-        self.dlg.coords_widget.show()
-        self.dlg.top_widget.show()
-        self.clear_types_input()
-        self.dlg.coords_label.setText('Координаты центра')
+        self.snow_show()
+        self.clear_all_types_input()
         self.choose = 'snowadvanced'
 
     def select_output_file(self):
@@ -266,7 +262,7 @@ class DrawPoints:
 
         # show the dialog
         self.dlg.show()
-        self.clear_types_input()
+        self.clear_all_types_input()
         self.grid_hide()
         self.snow_hide()
         self.dlg.rotate_widget.hide()
