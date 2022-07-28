@@ -328,7 +328,6 @@ class DrawPoints:
             uri = 'file:xy.csv?type=regexp&delimiter=%20&useHeader=No&maxFields=10000&detectTypes=yes&xField=field_1&yField=field_2&crs=EPSG:4326&spatialIndex=no&subsetIndex=no&watchFile=no&field=field_1:text&field=field_2:text'
             lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=self.dlg.system_of_coords.crs())
             QgsProject.instance().addMapLayer(lyr)
-            os.remove('xy.csv')
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
                 figure.export(path)
@@ -336,3 +335,4 @@ class DrawPoints:
             self.iface.messageBar().pushMessage(
                 "Success",
                 level=Qgis.Success, duration=3)
+            # os.remove('xy.csv') - не удаляется, пишет файл занят другим процессом

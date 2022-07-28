@@ -15,7 +15,7 @@ class Coordinates:
     def rotate(self, degree: 'Angle of rotation (float)') -> 'np.ndarray':
         for index in range(len(self.xy)):
             self.xy[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (self.xy[index, 1] * math.sin(math.radians(degree)))
-            self.xy[index, 1] = (self.xy[index, 1] * math.sin(math.radians(degree))) + (self.xy[index, 1] * math.cos(math.radians(degree)))
+            self.xy[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (self.xy[index, 1] * math.cos(math.radians(degree)))
         return self.xy
 
     def move_x(self, x: 'Distance (float)') -> 'Moved array along x':
