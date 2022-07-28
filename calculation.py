@@ -114,11 +114,3 @@ class SnowAdvanced(Circle):
                     self.xy[index, 1] = value * math.cos(math.radians(self.angle * line))
                     self.xy[index, 0] = 0 - value * math.sin(math.radians(self.angle * line))
                     index += 1
-
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()
