@@ -45,15 +45,15 @@ class Rectangle(Coordinates):
         self.xline_amount = xline_amount
         self.yline_amount = yline_amount
         self.xy = np.zeros([self.xline_amount * self.yline_amount, 2], float)
-        self.xgap = self.length / self.xline_amount  # gap between vertical lines
-        self.ygap = self.height / self.yline_amount  # gap between horizontal lines
+        self.xgap = self.length / (self.xline_amount - 1)  # gap between vertical lines
+        self.ygap = self.height / (self.yline_amount - 1)  # gap between horizontal lines
 
 
 class Grid(Rectangle):
     def create(self) -> 'Creating an array of points':
         index = 0
-        for y in np.arange(0, self.height, self.ygap):
-            for x in np.arange(0, self.length, self.xgap):
+        for y in np.arange(0, self.height + self.ygap, self.ygap):
+            for x in np.arange(0, self.length + self.xgap, self.xgap):
                 self.xy[index, 0] = x
                 self.xy[index, 1] = y
                 index += 1
@@ -67,7 +67,7 @@ class GridSlope(Rectangle):
         index = 0
         for y in np.arange(0, self.height + self.ygap, self.ygap):
             k += 1
-            for x in np.arange(0, self.length + self.ygap, self.xgap):
+            for x in np.arange(0, self.length + self.xgap, self.xgap):
                 self.xy[index, 1] = y
                 if k % 2 == 0:
                     self.xy[index, 0] = x + self.xgap * 0.5
