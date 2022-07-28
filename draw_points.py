@@ -277,7 +277,7 @@ class DrawPoints:
         self.dlg.show()
         self.clear_all_types_input()
         self.hide_all()
-        self.dlg.save_in.setText("Укажитe путь")
+        self.dlg.save_in.clear()
         result = self.dlg.exec_()
         # See if OK was pressed
 
