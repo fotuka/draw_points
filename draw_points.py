@@ -26,7 +26,7 @@ import os
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QFileDialog
-from qgis._core import Qgis, QgsProject
+from qgis._core import Qgis, QgsProject, QgsVectorFileWriter
 from qgis.core import QgsVectorLayer
 
 # Initialize Qt resources from file resources.py
@@ -257,7 +257,7 @@ class DrawPoints:
 
     def select_output_file(self):
         filename, _filter = QFileDialog.getSaveFileName(
-            self.dlg, "Select   output file ", "", '*.csv')
+            self.dlg, "Select   output file ", "", '*.shp')
         self.dlg.save_in.setText(filename)
 
     def hide_all(self):
@@ -322,16 +322,19 @@ class DrawPoints:
                 figure.move_x(self.dlg.coords_x.value())
                 figure.move_y(self.dlg.coords_y.value())
 
-            rotate_degree = self.dlg.rotate.value()
-            figure.rotate(rotate_degree)
+            figure.rotate(self.dlg.rotate.value())
             figure.export('xy.csv')
             uri = 'file:xy.csv?type=regexp&delimiter=%20&useHeader=No&maxFields=10000&detectTypes=yes&xField=field_1&yField=field_2&crs=EPSG:4326&spatialIndex=no&subsetIndex=no&watchFile=no&field=field_1:text&field=field_2:text'
             lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=self.dlg.system_of_coords.crs())
             QgsProject.instance().addMapLayer(lyr)
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
-                figure.export(path)
-
+                QgsVectorFileWriter.writeAsVectorFormat(lyr,
+                                                        path,
+                                                        "UTF-8",
+                                                        lyr.crs(),
+                                                        "ESRI Shapefile",
+                                                        layerOptions=['SHPT=POINT'])
             self.iface.messageBar().pushMessage(
                 "Success",
                 level=Qgis.Success, duration=3)
