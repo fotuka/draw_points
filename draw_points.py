@@ -329,7 +329,7 @@ class DrawPoints:
             lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=self.dlg.system_of_coords.crs())
             QgsProject.instance().addMapLayer(lyr)
 
-            if self.dlg.save_in.toPlainText() != 'Укажите путь':
+            if self.dlg.save_in.toPlainText() != '':
                 path = self.dlg.save_in.text()
                 figure.export(path)
 
