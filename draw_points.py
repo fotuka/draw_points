@@ -38,6 +38,12 @@ from .calculation import *
 from .draw_points_dialog import DrawPointsDialog
 
 
+NO_CONFIGURATION = None
+SIMPLE_GRID_CONFIGURATION = 'grid'
+SLOPE_GRID_CONFIGURATION = 'gridslope'
+SIMPLE_SNOW_CONFIGURATION = 'snow'
+ADVANCED_SNOW_CONFIGURATION = 'snowadvanced'
+
 class DrawPoints:
     """QGIS Plugin Implementation."""
 
@@ -232,22 +238,22 @@ class DrawPoints:
     def click_choose_grid(self):
         self.grid_show()
         self.clear_all_types_input()
-        self.choose = 'grid'
+        self.choose = SIMPLE_GRID_CONFIGURATION
 
     def click_choose_gridslope(self):
         self.grid_show()
         self.clear_all_types_input()
-        self.choose = 'gridslope'
+        self.choose = SLOPE_GRID_CONFIGURATION
 
     def click_choose_snow(self):
         self.snow_show()
         self.clear_all_types_input()
-        self.choose = 'snow'
+        self.choose = SIMPLE_SNOW_CONFIGURATION
 
     def click_choose_snowadvanced(self):
         self.snow_show()
         self.clear_all_types_input()
-        self.choose = 'snowadvanced'
+        self.choose = ADVANCED_SNOW_CONFIGURATION
 
     def select_output_file(self):
         filename, _filter = QFileDialog.getSaveFileName(
