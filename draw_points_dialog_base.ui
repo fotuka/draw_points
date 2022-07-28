@@ -316,7 +316,7 @@
                  <number>6</number>
                 </property>
                 <property name="minimum">
-                 <double>-999999999999.000000000000000</double>
+                 <double>0.000000000000000</double>
                 </property>
                 <property name="maximum">
                  <double>999999999999.000000000000000</double>
@@ -348,7 +348,7 @@
                  <number>6</number>
                 </property>
                 <property name="minimum">
-                 <double>-999999999999.000000000000000</double>
+                 <double>0.000000000000000</double>
                 </property>
                 <property name="maximum">
                  <double>999999999999.000000000000000</double>
@@ -376,6 +376,9 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximum">
+                 <number>9999</number>
+                </property>
                </widget>
               </item>
               <item>
@@ -398,6 +401,9 @@
                   <width>0</width>
                   <height>0</height>
                  </size>
+                </property>
+                <property name="maximum">
+                 <number>9999</number>
                 </property>
                </widget>
               </item>
@@ -459,7 +465,7 @@
                  <number>6</number>
                 </property>
                 <property name="minimum">
-                 <double>-999999999999.000000000000000</double>
+                 <double>0.000000000000000</double>
                 </property>
                 <property name="maximum">
                  <double>999999999999.000000000000000</double>
@@ -487,6 +493,9 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximum">
+                 <number>9999</number>
+                </property>
                </widget>
               </item>
               <item>
@@ -509,6 +518,9 @@
                   <width>0</width>
                   <height>0</height>
                  </size>
+                </property>
+                <property name="maximum">
+                 <number>9999</number>
                 </property>
                </widget>
               </item>
@@ -570,7 +582,7 @@
                  <double>-360.000000000000000</double>
                 </property>
                 <property name="maximum">
-                 <double>99.359999999999999</double>
+                 <double>360.000000000000000</double>
                 </property>
                </widget>
               </item>
