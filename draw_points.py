@@ -284,7 +284,7 @@ class DrawPoints:
         if result:
             # Do something useful here - delete the line containing pass and
             # substitute with your code
-            if self.choose == 'grid':
+            if self.choose == SIMPLE_GRID_CONFIGURATION:
                 grid_height = self.dlg.grid_height.value()
                 grid_length = self.dlg.grid_length.value()
                 grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
@@ -294,7 +294,7 @@ class DrawPoints:
                 figure.move_x(self.dlg.coords_x.value())
                 figure.move_y(self.dlg.coords_y.value())
 
-            if self.choose == 'gridslope':
+            if self.choose == SLOPE_GRID_CONFIGURATION:
                 grid_height = self.dlg.grid_height.value()
                 grid_length = self.dlg.grid_length.value()
                 grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
@@ -304,7 +304,7 @@ class DrawPoints:
                 figure.move_x(self.dlg.coords_x.value())
                 figure.move_y(self.dlg.coords_y.value())
 
-            if self.choose == 'snow':
+            if self.choose == SIMPLE_SNOW_CONFIGURATION:
                 snow_dots_amount = self.dlg.snow_dots_amount.value()
                 snow_lines_amount = self.dlg.snow_lines_amount.value()
                 snow_radius = self.dlg.snow_radius.value()
@@ -313,7 +313,7 @@ class DrawPoints:
                 figure.move_x(self.dlg.coords_x.value())
                 figure.move_y(self.dlg.coords_y.value())
 
-            if self.choose == 'snowadvanced':
+            if self.choose == ADVANCED_SNOW_CONFIGURATION:
                 snow_dots_amount = self.dlg.snow_dots_amount.value()
                 snow_lines_amount = self.dlg.snow_lines_amount.value()
                 snow_radius = self.dlg.snow_radius.value()
