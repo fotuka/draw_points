@@ -204,6 +204,7 @@ class DrawPoints:
         self.dlg.rotate.setValue(0)
         self.dlg.coords_x.setValue(0)
         self.dlg.coords_y.setValue(0)
+        self.dlg.save_in.clear()
 
     def grid_hide(self):
         self.dlg.grid_widget.hide()
@@ -261,6 +262,19 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
+    def convert_temp_layer_to_shp(self, layer, path):
+        QgsVectorFileWriter.writeAsVectorFormat(layer,
+                                                path,
+                                                "UTF-8",
+                                                layer.crs(),
+                                                "ESRI Shapefile",
+                                                layerOptions=['SHPT=POINT'])
+
+    def add_temp_layer_from_csv(self, path):
+        uri = 'file:' + path + '?type=regexp&delimiter=%20&useHeader=No&maxFields=10000&detectTypes=yes&xField=field_1&yField=field_2&crs=EPSG:4326&spatialIndex=no&subsetIndex=no&watchFile=no&field=field_1:text&field=field_2:text'
+        self.lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=self.dlg.system_of_coords.crs())
+        QgsProject.instance().addMapLayer(self.lyr)
+
     def run(self):
         """Run method that performs all the real work"""
         # Create the dialog with elements (after translation) and keep reference
@@ -269,7 +283,6 @@ class DrawPoints:
         self.dlg.show()
         self.clear_all_types_input()
         self.hide_all()
-        self.dlg.save_in.clear()
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
@@ -315,17 +328,12 @@ class DrawPoints:
 
             figure.rotate(self.dlg.rotate.value())
             figure.export('xy.csv')
-            uri = 'file:xy.csv?type=regexp&delimiter=%20&useHeader=No&maxFields=10000&detectTypes=yes&xField=field_1&yField=field_2&crs=EPSG:4326&spatialIndex=no&subsetIndex=no&watchFile=no&field=field_1:text&field=field_2:text'
-            lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=self.dlg.system_of_coords.crs())
-            QgsProject.instance().addMapLayer(lyr)
+            self.add_temp_layer_from_csv('xy.csv')
+
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
-                QgsVectorFileWriter.writeAsVectorFormat(lyr,
-                                                        path,
-                                                        "UTF-8",
-                                                        lyr.crs(),
-                                                        "ESRI Shapefile",
-                                                        layerOptions=['SHPT=POINT'])
+                self.convert_temp_layer_to_shp(self.lyr, path)
+
             self.iface.messageBar().pushMessage(
                 "Success",
                 level=Qgis.Success, duration=3)
