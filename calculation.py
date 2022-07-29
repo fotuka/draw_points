@@ -6,7 +6,7 @@ FULL_ANGLE = 360
 
 
 class Coordinates:
-    def __init__(self) -> 'Initializing array':
+    def __init__(self):
         self.xy = np.array([])
 
     def create(self) -> 'Creating an array of points':
@@ -30,7 +30,6 @@ class Coordinates:
 
     def export(self, path: 'Path to folder (str)') -> 'Saves array to folder':
         np.savetxt(path, self.xy)
-        self.xy.tofile('path', sep=' ')
 
 
 class Rectangle(Coordinates):
@@ -38,7 +37,7 @@ class Rectangle(Coordinates):
                  length: 'Length of rectangle (float)',
                  height: 'Height of rectangle (float)',
                  xline_amount: 'Amount of horizontal lines (int)',
-                 yline_amount: 'Amount of vertical lines (int)') -> 'Initializing an empty rectangle array of points':
+                 yline_amount: 'Amount of vertical lines (int)'):
         super().__init__()
         self.length = length
         self.height = height
@@ -80,7 +79,7 @@ class Circle(Coordinates):
     def __init__(self,
                  radius: ' Radius of circle (float)',
                  dots_amount: 'Amount of dots on single line (int)',
-                 lines_amount: 'Amount of lines (int)') -> 'Initializing an empty circle array of points':
+                 lines_amount: 'Amount of lines (int)'):
         super().__init__()
         self.radius = radius
         self.dots_amount = dots_amount
