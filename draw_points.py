@@ -42,7 +42,6 @@ ADVANCED_SNOW_CONFIGURATION = 'snowadvanced'
 
 
 class DrawPoints:
-    """QGIS Plugin Implementation."""
 
     def __init__(self, iface):
         """Constructor.
@@ -78,7 +77,7 @@ class DrawPoints:
         # Must be set in initGui() to survive plugin reloads
         self.first_start = None
 
-        # меню выбора штучек
+        # Menu if choose
         self.dlg.choose_grid_button.clicked.connect(self.click_choose_grid)
         self.dlg.choose_gridslope_button.clicked.connect(self.click_choose_gridslope)
         self.dlg.choose_snow_button.clicked.connect(self.click_choose_snow)
@@ -86,7 +85,6 @@ class DrawPoints:
 
         self.dlg.choose_path.clicked.connect(self.select_output_file)
 
-    # noinspection PyMethodMayBeStatic
     def tr(self, message):
         """Get the translation for a string using Qt translation API.
 
@@ -177,7 +175,6 @@ class DrawPoints:
 
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
-
         icon_path = ':/plugins/draw_points/icon.png'
         self.add_action(
             icon_path,
@@ -266,10 +263,8 @@ class DrawPoints:
 
     def run(self):
         """Run method that performs all the real work"""
-
         # Create the dialog with elements (after translation) and keep reference
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
-
         # show the dialog
         self.dlg.show()
         self.clear_all_types_input()
@@ -277,7 +272,6 @@ class DrawPoints:
         self.dlg.save_in.clear()
         result = self.dlg.exec_()
         # See if OK was pressed
-
         if result:
             # Do something useful here - delete the line containing pass and
             # substitute with your code
