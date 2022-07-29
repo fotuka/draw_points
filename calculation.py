@@ -9,35 +9,35 @@ class Coordinates:
     def __init__(self):
         self.xy = np.array([])
 
-    def create(self) -> 'Creating an array of points':
+    def create(self):
         pass
 
-    def rotate(self, degree: 'Angle of rotation (float)') -> 'np.ndarray':
+    def rotate(self, degree: float) -> 'np.ndarray':
         for index in range(len(self.xy)):
             self.xy[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (self.xy[index, 1] * math.sin(math.radians(degree)))
             self.xy[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (self.xy[index, 1] * math.cos(math.radians(degree)))
         return self.xy
 
-    def move_x(self, x: 'Distance (float)') -> 'Moved array along x':
+    def move_x(self, x: float) -> 'np.ndarray':
         for index in range(len(self.xy)):
             self.xy[index, 0] = self.xy[index, 0] + x
         return self.xy
 
-    def move_y(self, y: 'Distance (float)') -> 'Moved array along y':
+    def move_y(self, y: float) -> 'np.ndarray':
         for index in range(len(self.xy)):
             self.xy[index, 1] = self.xy[index, 1] + y
         return self.xy
 
-    def export(self, path: 'Path to folder (str)') -> 'Saves array to folder':
+    def export(self, path: str):
         np.savetxt(path, self.xy)
 
 
 class Rectangle(Coordinates):
     def __init__(self,
-                 length: 'Length of rectangle (float)',
-                 height: 'Height of rectangle (float)',
-                 xline_amount: 'Amount of horizontal lines (int)',
-                 yline_amount: 'Amount of vertical lines (int)'):
+                 length: float,
+                 height: float,
+                 xline_amount: int,
+                 yline_amount: int):
         super().__init__()
         self.length = length
         self.height = height
@@ -49,7 +49,7 @@ class Rectangle(Coordinates):
 
 
 class Grid(Rectangle):
-    def create(self) -> 'Creating an array of points':
+    def create(self):
         index = 0
         for y in np.arange(0, self.height + self.ygap, self.ygap):
             for x in np.arange(0, self.length + self.xgap, self.xgap):
@@ -59,7 +59,7 @@ class Grid(Rectangle):
 
 
 class GridSlope(Rectangle):
-    def create(self) -> 'Creating an array of points':
+    def create(self):
         self.xgap = self.length / (self.xline_amount - 1)  # gap between vertical lines
         self.ygap = self.height / (self.yline_amount - 1)  # gap between horizontal lines
         k = 0
@@ -77,9 +77,9 @@ class GridSlope(Rectangle):
 
 class Circle(Coordinates):
     def __init__(self,
-                 radius: ' Radius of circle (float)',
-                 dots_amount: 'Amount of dots on single line (int)',
-                 lines_amount: 'Amount of lines (int)'):
+                 radius: float,
+                 dots_amount: int,
+                 lines_amount: int):
         super().__init__()
         self.radius = radius
         self.dots_amount = dots_amount
@@ -90,7 +90,7 @@ class Circle(Coordinates):
 
 
 class Snow(Circle):
-    def create(self) -> 'Creating an array of points':
+    def create(self):
         index = 1
         for line in range(0, self.lines_amount):
             for value in np.arange(self.gap, self.radius + self.gap, self.gap):
@@ -100,7 +100,7 @@ class Snow(Circle):
 
 
 class SnowAdvanced(Circle):
-    def create(self) -> 'Creating an array of points':
+    def create(self):
         index = 1
         for line in range(0, self.lines_amount):
             if line % 2 == 0:
