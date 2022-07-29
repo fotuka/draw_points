@@ -82,7 +82,6 @@ class DrawPoints:
         self.dlg.choose_gridslope_button.clicked.connect(self.click_choose_gridslope)
         self.dlg.choose_snow_button.clicked.connect(self.click_choose_snow)
         self.dlg.choose_snowadvanced_button.clicked.connect(self.click_choose_snowadvanced)
-
         self.dlg.choose_path.clicked.connect(self.select_output_file)
 
     def tr(self, message):
@@ -175,6 +174,7 @@ class DrawPoints:
 
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
+
         icon_path = ':/plugins/draw_points/icon.png'
         self.add_action(
             icon_path,
