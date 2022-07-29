@@ -23,17 +23,13 @@
 """
 import os.path
 import os
+
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QFileDialog
 from qgis._core import Qgis, QgsProject, QgsVectorFileWriter
 from qgis.core import QgsVectorLayer
 
-# Initialize Qt resources from file resources.py
-from qgis.utils import iface
-
-from .resources import *
-# Import the code for the dialog
 from .calculation import *
 from .draw_points_dialog import DrawPointsDialog
 
@@ -43,6 +39,7 @@ SIMPLE_GRID_CONFIGURATION = 'grid'
 SLOPE_GRID_CONFIGURATION = 'gridslope'
 SIMPLE_SNOW_CONFIGURATION = 'snow'
 ADVANCED_SNOW_CONFIGURATION = 'snowadvanced'
+
 
 class DrawPoints:
     """QGIS Plugin Implementation."""
