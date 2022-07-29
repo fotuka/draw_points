@@ -75,7 +75,7 @@ class DrawPoints:
         self.actions = []
         self.menu = self.tr(u'&Draw Points')
         self.dlg = DrawPointsDialog()
-        self.choose = None
+        self.choose = NO_CONFIGURATION
 
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
