@@ -23,12 +23,14 @@
 """
 import os.path
 import os
+from dataclasses import dataclass
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QFileDialog
 from qgis._core import Qgis, QgsProject, QgsVectorFileWriter
 from qgis.core import QgsVectorLayer
+
 
 from .calculation import *
 from .draw_points_dialog import DrawPointsDialog
@@ -41,8 +43,37 @@ SIMPLE_SNOW_CONFIGURATION = 'snow'
 ADVANCED_SNOW_CONFIGURATION = 'snowadvanced'
 
 
-class DrawPoints:
+@dataclass
+class Info:
+    path = 'xy.csv'
+    type = 'regexp'
+    delimiter = '%20'
+    useheader = 'No'
+    maxfields = '10000'
+    detecttypes = 'yes'
+    xfield = 'field_1'
+    yfield = 'field_2'
+    crs = 'EPSG:4326'
+    spatialindex = 'no'
+    subsetindex = 'no'
+    watchfile = 'no'
+    field1 = 'field_1:text'
+    field2 = 'field_2:text'
 
+# path, type = 'regexp', delimiter = '%20', useheader = 'No', maxfields = 10000, detecttypes = 'yes',
+#             xfield = 'field_1', yfield = 'field_2', crs = 'EPSG:4326', spatialindex = 'no', subsetindex = 'no',
+#             watchfile = 'no', field = 'field_1:text', field2 = 'field_2:text'
+
+
+def get_uri():
+    uri = 'file:' + Info.path + '?type=' + Info.type + '&delimiter=' + Info.delimiter + '&useHeader=' + Info.useheader \
+          + '&maxFields=' + Info.maxfields + '&detectTypes=' + Info.detecttypes + '&xField=' + Info.xfield + '&yField=' \
+          + Info.yfield + '&crs=' + Info.crs + '&spatialIndex=' + Info.spatialindex + '&subsetIndex=' + Info.subsetindex \
+          + '&watchFile=' + Info.watchfile + '&field=' + Info.field1 + '&field=' + Info.field2
+    return uri
+
+
+class DrawPoints:
     def __init__(self, iface):
         """Constructor.
 
@@ -264,7 +295,7 @@ class DrawPoints:
 
     @staticmethod
     def add_temp_layer_from_csv(crs, path: str):
-        uri = 'file:' + path + '?type=regexp&delimiter=%20&useHeader=No&maxFields=10000&detectTypes=yes&xField=field_1&yField=field_2&crs=EPSG:4326&spatialIndex=no&subsetIndex=no&watchFile=no&field=field_1:text&field=field_2:text'
+        uri = get_uri()
         lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(lyr)
 
