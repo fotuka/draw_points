@@ -20,14 +20,16 @@ class Coordinates:
         return xy_rotated
 
     def move_x(self, x: float) -> np.ndarray:
+        xy_moved_x = self.xy
         for index in range(len(self.xy)):
-            self.xy[index, 0] = self.xy[index, 0] + x
-        return self.xy
+            xy_moved_x[index, 0] = self.xy[index, 0] + x
+        return xy_moved_x
 
     def move_y(self, y: float) -> np.ndarray:
+        xy_moved_y = self.xy
         for index in range(len(self.xy)):
-            self.xy[index, 1] = self.xy[index, 1] + y
-        return self.xy
+            xy_moved_y = self.xy[index, 1] + y
+        return xy_moved_y
 
     def export(self, path: str) -> None:
         np.savetxt(path, self.xy)

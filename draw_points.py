@@ -295,8 +295,6 @@ class DrawPoints:
                 grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
                 figure = Grid(grid_length, grid_height, grid_horizontal_lines_amount, grid_vertical_lines_amount)
                 figure.create()
-                figure.move_x(self.dlg.coords_x.value())
-                figure.move_y(self.dlg.coords_y.value())
 
             if self.choose == SLOPE_GRID_CONFIGURATION:
                 grid_height = self.dlg.grid_height.value()
@@ -305,8 +303,6 @@ class DrawPoints:
                 grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
                 figure = GridSlope(grid_length, grid_height, grid_horizontal_lines_amount, grid_vertical_lines_amount)
                 figure.create()
-                figure.move_x(self.dlg.coords_x.value())
-                figure.move_y(self.dlg.coords_y.value())
 
             if self.choose == SIMPLE_SNOW_CONFIGURATION:
                 snow_dots_amount = self.dlg.snow_dots_amount.value()
@@ -314,8 +310,6 @@ class DrawPoints:
                 snow_radius = self.dlg.snow_radius.value()
                 figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount)
                 figure.create()
-                figure.move_x(self.dlg.coords_x.value())
-                figure.move_y(self.dlg.coords_y.value())
 
             if self.choose == ADVANCED_SNOW_CONFIGURATION:
                 snow_dots_amount = self.dlg.snow_dots_amount.value()
@@ -323,11 +317,11 @@ class DrawPoints:
                 snow_radius = self.dlg.snow_radius.value()
                 figure = SnowAdvanced(snow_radius, snow_dots_amount, snow_lines_amount)
                 figure.create()
-                figure.move_x(self.dlg.coords_x.value())
-                figure.move_y(self.dlg.coords_y.value())
 
             figure.rotate(self.dlg.rotate.value())
             figure.xy = figure.rotate(self.dlg.rotate.value())
+            figure.xy = figure.move_x(self.dlg.coords_x.value())
+            figure.xy = figure.move_y(self.dlg.coords_y.value())
             figure.export('xy.csv')
             self.add_temp_layer_from_csv('xy.csv')
 
