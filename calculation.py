@@ -101,7 +101,7 @@ class SnowAdvanced(Circle):
                     self.xy[index, 1] = value * math.cos(math.radians(self.angle * line))
                     self.xy[index, 0] = 0 - value * math.sin(math.radians(self.angle * line))
                     index += 1
-            if line % 2 != 0:
+            else:
                 for value in np.arange(self.gap * 0.5, self.radius, self.gap):
                     self.xy[index, 1] = value * math.cos(math.radians(self.angle * line))
                     self.xy[index, 0] = 0 - value * math.sin(math.radians(self.angle * line))
