@@ -13,10 +13,11 @@ class Coordinates:
         pass
 
     def rotate(self, degree: float) -> np.ndarray:
+        xy_rotated = np.ndarray(shape=np.shape(self.xy), dtype=float)
         for index in range(len(self.xy)):
-            self.xy[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (self.xy[index, 1] * math.sin(math.radians(degree)))
-            self.xy[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (self.xy[index, 1] * math.cos(math.radians(degree)))
-        return self.xy
+            xy_rotated[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (self.xy[index, 1] * math.sin(math.radians(degree)))
+            xy_rotated[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (self.xy[index, 1] * math.cos(math.radians(degree)))
+        return xy_rotated
 
     def move_x(self, x: float) -> np.ndarray:
         for index in range(len(self.xy)):
