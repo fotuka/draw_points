@@ -85,7 +85,7 @@ class Circle(Coordinates):
 class Snow(Circle):
     def create(self):
         index = 1
-        for line in range(0, self.lines_amount):
+        for line in range(self.lines_amount):
             for value in np.arange(self.gap, self.radius + self.gap, self.gap):
                 self.xy[index, 1] = value * math.cos(math.radians(self.angle * line))
                 self.xy[index, 0] = 0 - value * math.sin(math.radians(self.angle * line))
@@ -95,7 +95,7 @@ class Snow(Circle):
 class SnowAdvanced(Circle):
     def create(self):
         index = 1
-        for line in range(0, self.lines_amount):
+        for line in range(self.lines_amount):
             if line % 2 == 0:
                 for value in np.arange(self.gap, self.radius + self.gap, self.gap):
                     self.xy[index, 1] = value * math.cos(math.radians(self.angle * line))
