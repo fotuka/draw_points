@@ -12,23 +12,23 @@ class Coordinates:
     def create(self):
         pass
 
-    def rotate(self, degree: float) -> 'np.ndarray':
+    def rotate(self, degree: float) -> np.ndarray:
         for index in range(len(self.xy)):
             self.xy[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (self.xy[index, 1] * math.sin(math.radians(degree)))
             self.xy[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (self.xy[index, 1] * math.cos(math.radians(degree)))
         return self.xy
 
-    def move_x(self, x: float) -> 'np.ndarray':
+    def move_x(self, x: float) -> np.ndarray:
         for index in range(len(self.xy)):
             self.xy[index, 0] = self.xy[index, 0] + x
         return self.xy
 
-    def move_y(self, y: float) -> 'np.ndarray':
+    def move_y(self, y: float) -> np.ndarray:
         for index in range(len(self.xy)):
             self.xy[index, 1] = self.xy[index, 1] + y
         return self.xy
 
-    def export(self, path: str):
+    def export(self, path: str) -> None:
         np.savetxt(path, self.xy)
 
 
