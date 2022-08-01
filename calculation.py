@@ -33,11 +33,7 @@ class Coordinates:
 
 
 class Rectangle(Coordinates):
-    def __init__(self,
-                 length: float,
-                 height: float,
-                 xline_amount: int,
-                 yline_amount: int):
+    def __init__(self, length: float, height: float, xline_amount: int, yline_amount: int):
         super().__init__()
         self.length = length
         self.height = height
@@ -76,10 +72,7 @@ class GridSlope(Rectangle):
 
 
 class Circle(Coordinates):
-    def __init__(self,
-                 radius: float,
-                 dots_amount: int,
-                 lines_amount: int):
+    def __init__(self, radius: float, dots_amount: int, lines_amount: int):
         super().__init__()
         self.radius = radius
         self.dots_amount = dots_amount
