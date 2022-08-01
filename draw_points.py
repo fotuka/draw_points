@@ -262,17 +262,15 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
-    def add_temp_layer_from_csv(self, path: str):
+    @staticmethod
+    def add_temp_layer_from_csv(crs, path: str):
         uri = 'file:' + path + '?type=regexp&delimiter=%20&useHeader=No&maxFields=10000&detectTypes=yes&xField=field_1&yField=field_2&crs=EPSG:4326&spatialIndex=no&subsetIndex=no&watchFile=no&field=field_1:text&field=field_2:text'
-        self.lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=self.dlg.system_of_coords.crs())
-        QgsProject.instance().addMapLayer(self.lyr)
+        lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=crs)
+        QgsProject.instance().addMapLayer(lyr)
 
-    def convert_temp_layer_to_shp(self, layer, path: str):
-        QgsVectorFileWriter.writeAsVectorFormat(layer,
-                                                path,
-                                                "UTF-8",
-                                                layer.crs(),
-                                                "ESRI Shapefile",
+    @staticmethod
+    def convert_temp_layer_to_shp(layer, path: str):
+        QgsVectorFileWriter.writeAsVectorFormat(layer, path, "UTF-8", layer.crs(), "ESRI Shapefile",
                                                 layerOptions=['SHPT=POINT'])
 
     def run(self):
@@ -322,7 +320,7 @@ class DrawPoints:
             figure.xy = figure.move_x(self.dlg.coords_x.value())
             figure.xy = figure.move_y(self.dlg.coords_y.value())
             figure.export('xy.csv')
-            self.add_temp_layer_from_csv('xy.csv')
+            self.add_temp_layer_from_csv(self.dlg.system_of_coords.crs(), 'xy.csv')
 
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
