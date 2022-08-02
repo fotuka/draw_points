@@ -62,13 +62,18 @@ class Info:
 
     def get_uri(path: str, crs: str, delimiter: str) -> str:
         Info.path = path
-        # Info.crs = crs
+        Info.crs = Info.cut_crs(crs)
         Info.delimiter = delimiter
         uri = 'file:' + Info.path + '?type=' + Info.type + '&delimiter=' + Info.delimiter + '&useHeader=' + Info.useheader \
               + '&maxFields=' + Info.maxfields + '&detectTypes=' + Info.detecttypes + '&xField=' + Info.xfield + '&yField=' \
             + Info.yfield + '&crs=' + Info.crs + '&spatialIndex=' + Info.spatialindex + '&subsetIndex=' + Info.subsetindex \
             + '&watchFile=' + Info.watchfile + '&field=' + Info.field1 + '&field=' + Info.field2
         return uri
+
+    def cut_crs(crs: str) -> str:
+        crs = crs.split(': ')[1]
+        crs = crs.split('>')[0]
+        return crs
 
 
 class DrawPoints:
@@ -292,8 +297,8 @@ class DrawPoints:
         self.dlg.top_widget.hide()
 
     @staticmethod
-    def add_temp_layer_from_csv(path: str, crs: str, delimiter: str):
-        uri = Info.get_uri(path, crs, delimiter)
+    def add_temp_layer_from_csv(path: str, crs, delimiter: str):
+        uri = Info.get_uri(path, str(crs), delimiter)
         lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(lyr)
 
@@ -356,6 +361,6 @@ class DrawPoints:
                 self.convert_temp_layer_to_shp(self.lyr, path)
 
             self.iface.messageBar().pushMessage(
-                "Success",
+                "success",
                 level=Qgis.Success, duration=3)
             # os.remove('xy.csv') - не удаляется, пишет файл занят другим процессом
