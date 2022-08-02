@@ -60,17 +60,15 @@ class Info:
     field1 = 'field_1:text'
     field2 = 'field_2:text'
 
-# path, type = 'regexp', delimiter = '%20', useheader = 'No', maxfields = 10000, detecttypes = 'yes',
-#             xfield = 'field_1', yfield = 'field_2', crs = 'EPSG:4326', spatialindex = 'no', subsetindex = 'no',
-#             watchfile = 'no', field = 'field_1:text', field2 = 'field_2:text'
-
-
-def get_uri():
-    uri = 'file:' + Info.path + '?type=' + Info.type + '&delimiter=' + Info.delimiter + '&useHeader=' + Info.useheader \
-          + '&maxFields=' + Info.maxfields + '&detectTypes=' + Info.detecttypes + '&xField=' + Info.xfield + '&yField=' \
-          + Info.yfield + '&crs=' + Info.crs + '&spatialIndex=' + Info.spatialindex + '&subsetIndex=' + Info.subsetindex \
-          + '&watchFile=' + Info.watchfile + '&field=' + Info.field1 + '&field=' + Info.field2
-    return uri
+    def get_uri(path: str, crs: str, delimiter: str) -> str:
+        Info.path = path
+        # Info.crs = crs
+        Info.delimiter = delimiter
+        uri = 'file:' + Info.path + '?type=' + Info.type + '&delimiter=' + Info.delimiter + '&useHeader=' + Info.useheader \
+              + '&maxFields=' + Info.maxfields + '&detectTypes=' + Info.detecttypes + '&xField=' + Info.xfield + '&yField=' \
+            + Info.yfield + '&crs=' + Info.crs + '&spatialIndex=' + Info.spatialindex + '&subsetIndex=' + Info.subsetindex \
+            + '&watchFile=' + Info.watchfile + '&field=' + Info.field1 + '&field=' + Info.field2
+        return uri
 
 
 class DrawPoints:
@@ -294,8 +292,8 @@ class DrawPoints:
         self.dlg.top_widget.hide()
 
     @staticmethod
-    def add_temp_layer_from_csv(crs, path: str):
-        uri = get_uri()
+    def add_temp_layer_from_csv(path: str, crs: str, delimiter: str):
+        uri = Info.get_uri(path, crs, delimiter)
         lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(lyr)
 
@@ -351,7 +349,7 @@ class DrawPoints:
             figure.xy = figure.move_x(self.dlg.coords_x.value())
             figure.xy = figure.move_y(self.dlg.coords_y.value())
             figure.export('xy.csv')
-            self.add_temp_layer_from_csv(self.dlg.system_of_coords.crs(), 'xy.csv')
+            self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20')
 
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
