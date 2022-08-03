@@ -117,6 +117,9 @@ class DrawPoints:
         self.dlg.choose_snow_button.clicked.connect(self.click_choose_snow)
         self.dlg.choose_snowadvanced_button.clicked.connect(self.click_choose_snowadvanced)
         self.dlg.choose_path.clicked.connect(self.select_output_file)
+        self.dlg.apply_button.clicked.connect(self.apply)
+
+        self.COUNTER = 0
 
     def tr(self, message):
         """Get the translation for a string using Qt translation API.
@@ -297,15 +300,76 @@ class DrawPoints:
         self.dlg.top_widget.hide()
 
     @staticmethod
-    def add_temp_layer_from_csv(path: str, crs, delimiter: str):
+    def add_temp_layer_from_csv(path: str, crs, delimiter: str, delete_recent: bool):
         uri = Info.get_uri(path, str(crs), delimiter)
         lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=crs)
+        if delete_recent == True:
+            QgsProject.instance().removeMapLayer('New txt')
         QgsProject.instance().addMapLayer(lyr)
 
     @staticmethod
     def convert_temp_layer_to_shp(layer, path: str):
         QgsVectorFileWriter.writeAsVectorFormat(layer, path, "UTF-8", layer.crs(), "ESRI Shapefile",
                                                 layerOptions=['SHPT=POINT'])
+
+    def create_simple_grid_configuration(self):
+        grid_height = self.dlg.grid_height.value()
+        grid_length = self.dlg.grid_length.value()
+        grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
+        grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
+        self.figure = Grid(grid_length, grid_height, grid_horizontal_lines_amount, grid_vertical_lines_amount)
+        self.figure.create()
+
+    def create_slope_grid_configuration(self):
+        grid_height = self.dlg.grid_height.value()
+        grid_length = self.dlg.grid_length.value()
+        grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
+        grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
+        self.figure = GridSlope(grid_length, grid_height, grid_horizontal_lines_amount, grid_vertical_lines_amount)
+        self.figure.create()
+
+    def create_simple_snow_configuration(self):
+        snow_dots_amount = self.dlg.snow_dots_amount.value()
+        snow_lines_amount = self.dlg.snow_lines_amount.value()
+        snow_radius = self.dlg.snow_radius.value()
+        self.figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount)
+        self.figure.create()
+
+    def create_advanced_snow_configuration(self):
+        snow_dots_amount = self.dlg.snow_dots_amount.value()
+        snow_lines_amount = self.dlg.snow_lines_amount.value()
+        snow_radius = self.dlg.snow_radius.value()
+        self.figure = SnowAdvanced(snow_radius, snow_dots_amount, snow_lines_amount)
+        self.figure.create()
+
+    def move_all(self):
+        self.figure.xy = self.figure.rotate(self.dlg.rotate.value())
+        self.figure.xy = self.figure.move_x(self.dlg.coords_x.value())
+        self.figure.xy = self.figure.move_y(self.dlg.coords_y.value())
+
+    def create_actual_configuration(self):
+        if self.choose == SIMPLE_GRID_CONFIGURATION:
+            self.create_simple_grid_configuration()
+
+        if self.choose == SLOPE_GRID_CONFIGURATION:
+            self.create_slope_grid_configuration()
+
+        if self.choose == SIMPLE_SNOW_CONFIGURATION:
+            self.create_simple_snow_configuration()
+
+        if self.choose == ADVANCED_SNOW_CONFIGURATION:
+            self.create_advanced_snow_configuration()
+
+    def apply(self):
+        self.create_actual_configuration()
+        self.move_all()
+        self.figure.export('xy.csv')
+        if self.COUNTER == 0:
+            self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20', False)
+        else:
+            self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20', True)
+        self.COUNTER += 1
+
 
     def run(self):
         """Run method that performs all the real work"""
@@ -320,41 +384,13 @@ class DrawPoints:
         if result:
             # Do something useful here - delete the line containing pass and
             # substitute with your code
-            if self.choose == SIMPLE_GRID_CONFIGURATION:
-                grid_height = self.dlg.grid_height.value()
-                grid_length = self.dlg.grid_length.value()
-                grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
-                grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
-                figure = Grid(grid_length, grid_height, grid_horizontal_lines_amount, grid_vertical_lines_amount)
-                figure.create()
-
-            if self.choose == SLOPE_GRID_CONFIGURATION:
-                grid_height = self.dlg.grid_height.value()
-                grid_length = self.dlg.grid_length.value()
-                grid_horizontal_lines_amount = self.dlg.grid_horizontal_lines_amount.value()
-                grid_vertical_lines_amount = self.dlg.grid_vertical_lines_amount.value()
-                figure = GridSlope(grid_length, grid_height, grid_horizontal_lines_amount, grid_vertical_lines_amount)
-                figure.create()
-
-            if self.choose == SIMPLE_SNOW_CONFIGURATION:
-                snow_dots_amount = self.dlg.snow_dots_amount.value()
-                snow_lines_amount = self.dlg.snow_lines_amount.value()
-                snow_radius = self.dlg.snow_radius.value()
-                figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount)
-                figure.create()
-
-            if self.choose == ADVANCED_SNOW_CONFIGURATION:
-                snow_dots_amount = self.dlg.snow_dots_amount.value()
-                snow_lines_amount = self.dlg.snow_lines_amount.value()
-                snow_radius = self.dlg.snow_radius.value()
-                figure = SnowAdvanced(snow_radius, snow_dots_amount, snow_lines_amount)
-                figure.create()
-
-            figure.xy = figure.rotate(self.dlg.rotate.value())
-            figure.xy = figure.move_x(self.dlg.coords_x.value())
-            figure.xy = figure.move_y(self.dlg.coords_y.value())
-            figure.export('xy.csv')
-            self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20')
+            self.create_actual_configuration()
+            self.move_all()
+            self.figure.export('xy.csv')
+            if self.COUNTER == 0:
+                self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20', False)
+            else:
+                self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20', True)
 
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
