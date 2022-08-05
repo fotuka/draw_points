@@ -232,6 +232,7 @@ class DrawPoints:
                 self.tr(u'&Draw Points'),
                 action)
             self.iface.removeToolBarIcon(action)
+        os.remove(self.get_temp_dir('/temp_xy.csv'))
 
     def clear_all_types_input(self):
         self.dlg.snow_radius.setValue(0)
@@ -410,4 +411,3 @@ class DrawPoints:
             self.iface.messageBar().pushMessage(
                 'Success',
                 level=Qgis.Success, duration=3)
-            # os.remove('xy.csv') - не удаляется, пишет файл занят другим процессом
