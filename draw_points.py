@@ -315,7 +315,7 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
-    def add_temp_layer_from_csv(self, path: str, crs: qgiscoordinate., delimiter: str, delete_recent: bool):
+    def add_temp_layer_from_csv(self, path: str, crs, delimiter: str, delete_recent: bool):
         uri = Info.get_uri(path, str(crs), delimiter)
         self.lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
         if delete_recent == True:
