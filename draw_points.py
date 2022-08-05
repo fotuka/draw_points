@@ -23,8 +23,8 @@
 """
 import os.path
 import os
-import getpass
 from dataclasses import dataclass
+import getpass
 from sys import platform
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
@@ -59,8 +59,8 @@ class Info:
     spatialindex = 'no'
     subsetindex = 'no'
     watchfile = 'no'
-    field1 = 'field_1:text'
-    field2 = 'field_2:text'
+    xfield_text = 'field_1:text'
+    yfield_text = 'field_2:text'
 
     def get_uri(path: str, crs: str, delimiter: str) -> str:
         Info.path = path
@@ -76,6 +76,15 @@ class Info:
         crs = crs.split(': ')[1]
         crs = crs.split('>')[0]
         return crs
+
+def get_temp_dir(self, name: str) -> str:
+     if platform == "linux" or platform == "linux2":
+         path = 'var/tmp/' + name
+     elif platform == "darwin":
+         pass
+     elif platform == "win32":
+         path = "C:/Users/" + getpass.getuser() + '/AppData/Local/Temp/' + name
+     return path
 
 
 class DrawPoints:
@@ -121,7 +130,7 @@ class DrawPoints:
         self.dlg.choose_path.clicked.connect(self.select_output_file)
         self.dlg.apply_button.clicked.connect(self.apply)
 
-        self.COUNTER = 0
+        self.counter = 0
 
     def tr(self, message):
         """Get the translation for a string using Qt translation API.
@@ -232,7 +241,7 @@ class DrawPoints:
                 self.tr(u'&Draw Points'),
                 action)
             self.iface.removeToolBarIcon(action)
-        # if self.COUNTER != 0:
+        # if self.counter != 0:
         #     osz.remove(self.get_temp_dir('/temp_xy.csv'))
 
     def clear_all_types_input(self):
@@ -365,24 +374,15 @@ class DrawPoints:
         if self.choose == ADVANCED_SNOW_CONFIGURATION:
             self.create_advanced_snow_configuration()
 
-    def get_temp_dir(self, name: str) -> str:
-        if platform == "linux" or platform == "linux2":
-            path = 'var/tmp/' + name
-        elif platform == "darwin":
-            pass
-        elif platform == "win32":
-            path = "C:/Users/" + getpass.getuser() + '/AppData/Local/Temp/' + name
-        return path
-
     def apply(self):
         self.create_actual_configuration()
         self.move_all()
         self.figure.export(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv')
-        if self.COUNTER == 0:
+        if self.counter == 0:
             self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', False)
         else:
             self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', True)
-        self.COUNTER += 1
+        self.counter += 1
 
 
     def run(self):
@@ -401,7 +401,7 @@ class DrawPoints:
             self.create_actual_configuration()
             self.move_all()
             self.figure.export(self.get_temp_dir('/temp_xy.csv'))
-            if self.COUNTER == 0:
+            if self.counter == 0:
                 self.add_temp_layer_from_csv(self.get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20', False)
             else:
                 self.add_temp_layer_from_csv(self.get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20', True)
@@ -413,4 +413,3 @@ class DrawPoints:
             self.iface.messageBar().pushMessage(
                 'Success',
                 level=Qgis.Success, duration=3)
-            #line for pull request
