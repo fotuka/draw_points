@@ -23,7 +23,9 @@
 """
 import os.path
 import os
+import getpass
 from dataclasses import dataclass
+from sys import platform
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
@@ -222,6 +224,7 @@ class DrawPoints:
         # will be set False in run()
         self.first_start = True
 
+
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
@@ -299,13 +302,12 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
-    @staticmethod
-    def add_temp_layer_from_csv(path: str, crs, delimiter: str, delete_recent: bool):
+    def add_temp_layer_from_csv(self, path: str, crs, delimiter: str, delete_recent: bool):
         uri = Info.get_uri(path, str(crs), delimiter)
-        lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=crs)
+        self.lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=crs)
         if delete_recent == True:
             QgsProject.instance().removeMapLayer('New txt')
-        QgsProject.instance().addMapLayer(lyr)
+        QgsProject.instance().addMapLayer(self.lyr)
 
     @staticmethod
     def convert_temp_layer_to_shp(layer, path: str):
@@ -360,6 +362,15 @@ class DrawPoints:
         if self.choose == ADVANCED_SNOW_CONFIGURATION:
             self.create_advanced_snow_configuration()
 
+    def get_temp_dir(self, name: str) -> str:
+        if platform == "linux" or platform == "linux2":
+            path = 'var/tmp/' + name
+        elif platform == "darwin":
+            pass
+        elif platform == "win32":
+            path = "C:/Users/" + getpass.getuser() + '/AppData/Local/Temp/' + name
+        return path
+
     def apply(self):
         self.create_actual_configuration()
         self.move_all()
@@ -386,17 +397,17 @@ class DrawPoints:
             # substitute with your code
             self.create_actual_configuration()
             self.move_all()
-            self.figure.export(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv')
+            self.figure.export(self.get_temp_dir('/temp_xy.csv'))
             if self.COUNTER == 0:
-                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', False)
+                self.add_temp_layer_from_csv(self.get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20', False)
             else:
-                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', True)
+                self.add_temp_layer_from_csv(self.get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20', True)
 
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
                 self.convert_temp_layer_to_shp(self.lyr, path)
 
             self.iface.messageBar().pushMessage(
-                "success",
+                'Success',
                 level=Qgis.Success, duration=3)
             # os.remove('xy.csv') - не удаляется, пишет файл занят другим процессом
