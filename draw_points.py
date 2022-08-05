@@ -315,13 +315,14 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
-    def add_temp_layer_from_csv(self, path: str, crs, delimiter: str, delete_recent: bool):
+    def add_temp_layer_from_csv(self, path: str, crs, delimiter: str):
         uri = Info.get_uri(path, str(crs), delimiter)
         self.lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
-        if delete_recent == True:
-            layer = QgsProject.instance().mapLayersByName(NEW_TXT)[0]
-            QgsProject.instance().removeMapLayers([layer.id()])
         QgsProject.instance().addMapLayer(self.lyr)
+
+    def del_layer(self, name: str):
+        layer = QgsProject.instance().mapLayersByName(name)[0]
+        QgsProject.instance().removeMapLayers([layer.id()])
 
     @staticmethod
     def convert_temp_layer_to_shp(layer, path: str):
@@ -381,9 +382,10 @@ class DrawPoints:
         self.move_all()
         self.figure.export(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv')
         if self.counter == 0:
-            self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', False)
+            self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20')
         else:
-            self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', True)
+            self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20')
+            self.del_layer(NEW_TXT)
         self.counter += 1
 
 
@@ -404,9 +406,10 @@ class DrawPoints:
             self.move_all()
             self.figure.export(self.get_temp_dir('/temp_xy.csv'))
             if self.counter == 0:
-                self.add_temp_layer_from_csv(self.get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20', False)
+                self.add_temp_layer_from_csv(self.get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20')
             else:
-                self.add_temp_layer_from_csv(self.get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20', True)
+                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20')
+                self.del_layer(NEW_TXT)
 
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
