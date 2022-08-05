@@ -363,11 +363,11 @@ class DrawPoints:
     def apply(self):
         self.create_actual_configuration()
         self.move_all()
-        self.figure.export('xy.csv')
+        self.figure.export(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv')
         if self.COUNTER == 0:
-            self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20', False)
+            self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', False)
         else:
-            self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20', True)
+            self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', True)
         self.COUNTER += 1
 
 
@@ -386,11 +386,11 @@ class DrawPoints:
             # substitute with your code
             self.create_actual_configuration()
             self.move_all()
-            self.figure.export('xy.csv')
+            self.figure.export(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv')
             if self.COUNTER == 0:
-                self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20', False)
+                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', False)
             else:
-                self.add_temp_layer_from_csv('xy.csv', self.dlg.system_of_coords.crs(), '%20', True)
+                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20', True)
 
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
