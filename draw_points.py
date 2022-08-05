@@ -33,10 +33,8 @@ from qgis.PyQt.QtWidgets import QAction, QFileDialog
 from qgis._core import Qgis, QgsProject, QgsVectorFileWriter
 from qgis.core import QgsVectorLayer
 
-
 from .calculation import *
 from .draw_points_dialog import DrawPointsDialog
-
 
 NO_CONFIGURATION = None
 SIMPLE_GRID_CONFIGURATION = 'grid'
@@ -65,28 +63,30 @@ class Info:
 
     def get_uri(path: str, crs: str, delimiter: str) -> str:
         Info.path = path
-        Info.crs = Info.cut_crs
+        Info.crs = Info.cut_crs(crs)
         Info.delimiter = delimiter
         uri = 'file:' + Info.path + '?type=' + Info.type + '&delimiter=' + Info.delimiter + '&useHeader=' + Info.useheader \
               + '&maxFields=' + Info.maxfields + '&detectTypes=' + Info.detecttypes + '&xField=' + Info.xfield + '&yField=' \
-            + Info.yfield + '&crs=' + Info.crs + '&spatialIndex=' + Info.spatialindex + '&subsetIndex=' + Info.subsetindex \
-            + '&watchFile=' + Info.watchfile + '&field=' + Info.field1 + '&field=' + Info.field2
+              + Info.yfield + '&crs=' + Info.crs + '&spatialIndex=' + Info.spatialindex + '&subsetIndex=' + Info.subsetindex \
+              + '&watchFile=' + Info.watchfile + '&field=' + Info.xfield_text + '&field=' + Info.yfield_text
         return uri
 
-    @property
     def cut_crs(crs: str) -> str:
-        crs = crs.split(': ')[1]
-        crs = crs.split('>')[0]
-        return crs
+        crs_cutted = crs
+        crs_cutted = crs_cutted.split(': ')[1]
+        crs_cutted = crs_cutted.split('>')[0]
+        return crs_cutted
 
-def get_temp_dir(self, name: str) -> str:
-     if platform == "linux" or platform == "linux2":
-         path = 'var/tmp/' + name
-     elif platform == "darwin":
-         pass
-     elif platform == "win32":
-         path = "C:/Users/" + getpass.getuser() + '/AppData/Local/Temp/' + name
-     return path
+
+@staticmethod
+def get_temp_dir(name: str) -> str:
+    if platform == "linux" or platform == "linux2":
+        path = 'var/tmp/' + name
+    elif platform == "darwin":
+        pass
+    elif platform == "win32":
+        path = "C:/Users/" + getpass.getuser() + '/AppData/Local/Temp/' + name
+    return path
 
 
 class DrawPoints:
@@ -149,16 +149,16 @@ class DrawPoints:
         return QCoreApplication.translate('DrawPoints', message)
 
     def add_action(
-        self,
-        icon_path,
-        text,
-        callback,
-        enabled_flag=True,
-        add_to_menu=True,
-        add_to_toolbar=True,
-        status_tip=None,
-        whats_this=None,
-        parent=None):
+            self,
+            icon_path,
+            text,
+            callback,
+            enabled_flag=True,
+            add_to_menu=True,
+            add_to_toolbar=True,
+            status_tip=None,
+            whats_this=None,
+            parent=None):
         """Add a toolbar icon to the toolbar.
 
         :param icon_path: Path to the icon for this action. Can be a resource
@@ -234,7 +234,6 @@ class DrawPoints:
 
         # will be set False in run()
         self.first_start = True
-
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -320,7 +319,8 @@ class DrawPoints:
         self.lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(self.lyr)
 
-    def del_layer(self, name: str):
+    @staticmethod
+    def del_layer(name: str):
         layer = QgsProject.instance().mapLayersByName(name)[0]
         QgsProject.instance().removeMapLayers([layer.id()])
 
@@ -380,14 +380,15 @@ class DrawPoints:
     def apply(self):
         self.create_actual_configuration()
         self.move_all()
-        self.figure.export(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv')
+        self.figure.export(get_temp_dir('/temp_xy.csv'))
         if self.counter == 0:
-            self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20')
+            self.add_temp_layer_from_csv(get_temp_dir('/temp_xy.csv'),
+                                         self.dlg.system_of_coords.crs(), '%20')
         else:
-            self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20')
+            self.add_temp_layer_from_csv(get_temp_dir('/temp_xy.csv'),
+                                         self.dlg.system_of_coords.crs(), '%20')
             self.del_layer(NEW_TXT)
         self.counter += 1
-
 
     def run(self):
         """Run method that performs all the real work"""
@@ -404,11 +405,12 @@ class DrawPoints:
             # substitute with your code
             self.create_actual_configuration()
             self.move_all()
-            self.figure.export(self.get_temp_dir('/temp_xy.csv'))
+            self.figure.export(get_temp_dir('/temp_xy.csv'))
             if self.counter == 0:
-                self.add_temp_layer_from_csv(self.get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20')
+                self.add_temp_layer_from_csv(get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20')
             else:
-                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv', self.dlg.system_of_coords.crs(), '%20')
+                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv',
+                                             self.dlg.system_of_coords.crs(), '%20')
                 self.del_layer(NEW_TXT)
 
             if self.dlg.save_in.text() != '':
