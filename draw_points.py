@@ -43,6 +43,7 @@ SIMPLE_GRID_CONFIGURATION = 'grid'
 SLOPE_GRID_CONFIGURATION = 'gridslope'
 SIMPLE_SNOW_CONFIGURATION = 'snow'
 ADVANCED_SNOW_CONFIGURATION = 'snowadvanced'
+NEW_TXT = 'New txt'
 
 
 @dataclass
@@ -64,7 +65,7 @@ class Info:
 
     def get_uri(path: str, crs: str, delimiter: str) -> str:
         Info.path = path
-        Info.crs = Info.cut_crs(crs)
+        Info.crs = Info.cut_crs
         Info.delimiter = delimiter
         uri = 'file:' + Info.path + '?type=' + Info.type + '&delimiter=' + Info.delimiter + '&useHeader=' + Info.useheader \
               + '&maxFields=' + Info.maxfields + '&detectTypes=' + Info.detecttypes + '&xField=' + Info.xfield + '&yField=' \
@@ -72,6 +73,7 @@ class Info:
             + '&watchFile=' + Info.watchfile + '&field=' + Info.field1 + '&field=' + Info.field2
         return uri
 
+    @property
     def cut_crs(crs: str) -> str:
         crs = crs.split(': ')[1]
         crs = crs.split('>')[0]
@@ -313,11 +315,11 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
-    def add_temp_layer_from_csv(self, path: str, crs, delimiter: str, delete_recent: bool):
+    def add_temp_layer_from_csv(self, path: str, crs: qgiscoordinate., delimiter: str, delete_recent: bool):
         uri = Info.get_uri(path, str(crs), delimiter)
-        self.lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=crs)
+        self.lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
         if delete_recent == True:
-            layer = QgsProject.instance().mapLayersByName('New txt')[0]
+            layer = QgsProject.instance().mapLayersByName(NEW_TXT)[0]
             QgsProject.instance().removeMapLayers([layer.id()])
         QgsProject.instance().addMapLayer(self.lyr)
 
