@@ -232,7 +232,8 @@ class DrawPoints:
                 self.tr(u'&Draw Points'),
                 action)
             self.iface.removeToolBarIcon(action)
-        os.remove(self.get_temp_dir('/temp_xy.csv'))
+        # if self.COUNTER != 0:
+        #     osz.remove(self.get_temp_dir('/temp_xy.csv'))
 
     def clear_all_types_input(self):
         self.dlg.snow_radius.setValue(0)
@@ -307,7 +308,8 @@ class DrawPoints:
         uri = Info.get_uri(path, str(crs), delimiter)
         self.lyr = QgsVectorLayer(uri, 'New txt', 'delimitedtext', crs=crs)
         if delete_recent == True:
-            QgsProject.instance().removeMapLayer('New txt')
+            layer = QgsProject.instance().mapLayersByName('New txt')[0]
+            QgsProject.instance().removeMapLayers([layer.id()])
         QgsProject.instance().addMapLayer(self.lyr)
 
     @staticmethod
