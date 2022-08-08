@@ -42,6 +42,7 @@ SLOPE_GRID_CONFIGURATION = 'gridslope'
 SIMPLE_SNOW_CONFIGURATION = 'snow'
 ADVANCED_SNOW_CONFIGURATION = 'snowadvanced'
 NEW_TXT = 'New txt'
+TEMP_XY_CSV = '/temp_xy.csv'
 
 
 @dataclass
@@ -243,7 +244,7 @@ class DrawPoints:
                 action)
             self.iface.removeToolBarIcon(action)
         # if self.counter != 0:
-        #     osz.remove(self.get_temp_dir('/temp_xy.csv'))
+        #     osz.remove(self.get_temp_dir(TEMP_XY_CSV))
 
     def clear_all_types_input(self):
         self.dlg.snow_radius.setValue(0)
@@ -380,12 +381,12 @@ class DrawPoints:
     def apply(self):
         self.create_actual_configuration()
         self.move_all()
-        self.figure.export(get_temp_dir('/temp_xy.csv'))
+        self.figure.export(get_temp_dir(TEMP_XY_CSV))
         if self.counter == 0:
-            self.add_temp_layer_from_csv(get_temp_dir('/temp_xy.csv'),
+            self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV),
                                          self.dlg.system_of_coords.crs(), '%20')
         else:
-            self.add_temp_layer_from_csv(get_temp_dir('/temp_xy.csv'),
+            self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV),
                                          self.dlg.system_of_coords.crs(), '%20')
             self.del_layer(NEW_TXT)
         self.counter += 1
@@ -405,11 +406,11 @@ class DrawPoints:
             # substitute with your code
             self.create_actual_configuration()
             self.move_all()
-            self.figure.export(get_temp_dir('/temp_xy.csv'))
+            self.figure.export(get_temp_dir(TEMP_XY_CSV))
             if self.counter == 0:
-                self.add_temp_layer_from_csv(get_temp_dir('/temp_xy.csv'), self.dlg.system_of_coords.crs(), '%20')
+                self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV), self.dlg.system_of_coords.crs(), '%20')
             else:
-                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + '/temp_xy.csv',
+                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + TEMP_XY_CSV,
                                              self.dlg.system_of_coords.crs(), '%20')
                 self.del_layer(NEW_TXT)
 
