@@ -24,8 +24,8 @@
 import os.path
 import os
 from dataclasses import dataclass
-import getpass
 from sys import platform
+import getpass
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
@@ -66,10 +66,10 @@ class Info:
         Info.path = path
         Info.crs = Info.cut_crs(crs)
         Info.delimiter = delimiter
-        uri = 'file:' + Info.path + '?type=' + Info.type + '&delimiter=' + Info.delimiter + '&useHeader=' + Info.useheader \
-              + '&maxFields=' + Info.maxfields + '&detectTypes=' + Info.detecttypes + '&xField=' + Info.xfield + '&yField=' \
-              + Info.yfield + '&crs=' + Info.crs + '&spatialIndex=' + Info.spatialindex + '&subsetIndex=' + Info.subsetindex \
-              + '&watchFile=' + Info.watchfile + '&field=' + Info.xfield_text + '&field=' + Info.yfield_text
+        uri = ('file:' + Info.path + '?type=' + Info.type + '&delimiter=' + Info.delimiter + '&useHeader=' + Info.useheader
+               + '&maxFields=' + Info.maxfields + '&detectTypes=' + Info.detecttypes + '&xField=' + Info.xfield + '&yField='
+               + Info.yfield + '&crs=' + Info.crs + '&spatialIndex=' + Info.spatialindex + '&subsetIndex=' + Info.subsetindex
+               + '&watchFile=' + Info.watchfile + '&field=' + Info.xfield_text + '&field=' + Info.yfield_text)
         return uri
 
     def cut_crs(crs: str) -> str:
@@ -79,14 +79,12 @@ class Info:
         return crs_cutted
 
 
-@staticmethod
 def get_temp_dir(name: str) -> str:
-    if platform == "linux" or platform == "linux2":
+    path = 'Your platform is invalid, try linux or windows'
+    if platform == 'linux' or platform == 'linux2':
         path = 'var/tmp/' + name
-    elif platform == "darwin":
-        pass
     elif platform == "win32":
-        path = "C:/Users/" + getpass.getuser() + '/AppData/Local/Temp/' + name
+        path = 'C:/Users/' + getpass.getuser() + '/AppData/Local/Temp/' + name
     return path
 
 
@@ -406,7 +404,7 @@ class DrawPoints:
             # substitute with your code
             self.create_actual_configuration()
             self.move_all()
-            self.figure.export(get_temp_dir(TEMP_XY_CSV))
+            self.figure.export(get_temp_dir('/temp_xy.csv'))
             if self.counter == 0:
                 self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV), self.dlg.system_of_coords.crs(), '%20')
             else:
