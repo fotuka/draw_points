@@ -43,16 +43,18 @@ class Info:
 
     def get_uri(self) -> str:
         self.cut_crs()
-        uri = ('file:' + self.path + '?type=' + self.type + '&delimiter=' + self.delimiter + '&useHeader=' + self.useheader
-               + '&maxFields=' + self.maxfields + '&detectTypes=' + self.detecttypes + '&xField=' + self.xfield + '&yField='
-               + self.yfield + '&crs=' + self.crs + '&spatialIndex=' + self.spatialindex + '&subsetIndex=' + self.subsetindex
-               + '&watchFile=' + self.watchfile + '&field=' + self.xfield_text + '&field=' + self.yfield_text)
+        uri = ('file:' + self.path + '?type=' + self.type + '&delimiter=' + self.delimiter + '&useHeader='
+               + self.useheader + '&maxFields=' + self.maxfields + '&detectTypes=' + self.detecttypes + '&xField='
+               + self.xfield + '&yField=' + self.yfield + '&crs=' + self.crs + '&spatialIndex=' + self.spatialindex
+               + '&subsetIndex=' + self.subsetindex + '&watchFile=' + self.watchfile + '&field=' + self.xfield_text
+               + '&field=' + self.yfield_text)
         return uri
 
     def cut_crs(self) -> str:
-        self.crs = self.crs.split(': ')[1]
-        self.crs = self.crs.split('>')[0]
-        return self.crs
+        crs_cutted = self.crs
+        crs_cutted = crs_cutted.split(': ')[1]
+        crs_cutted = crs_cutted.split('>')[0]
+        return crs_cutted
 
 
 def get_temp_dir(name: str) -> str:
