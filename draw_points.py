@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from sys import platform
 import getpass
 
+import qgis.core
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QFileDialog
@@ -215,7 +216,7 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
-    def add_temp_layer_from_csv(self, path: str, crs, delimiter: str):
+    def add_temp_layer_from_csv(self, path: str, crs: qgis.core.QgsCoordinateReferenceSystem, delimiter: str):
         uri = Info.get_uri(path, str(crs), delimiter)
         self.lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(self.lyr)
@@ -226,7 +227,7 @@ class DrawPoints:
         QgsProject.instance().removeMapLayers([layer.id()])
 
     @staticmethod
-    def convert_temp_layer_to_shp(layer, path: str):
+    def convert_temp_layer_to_shp(layer: qgis.core.QgsVectorLayer, path: str):
         QgsVectorFileWriter.writeAsVectorFormat(layer, path, "UTF-8", layer.crs(), "ESRI Shapefile",
                                                 layerOptions=['SHPT=POINT'])
 
@@ -298,6 +299,7 @@ class DrawPoints:
         result = self.dlg.exec_()
         if result:
             self.create_figure_and_add_layer()
+            self.counter = 0
 
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
