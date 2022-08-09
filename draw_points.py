@@ -91,7 +91,7 @@ class DrawPoints:
         self.dlg.choose_snow_button.clicked.connect(self.click_choose_snow)
         self.dlg.choose_snowadvanced_button.clicked.connect(self.click_choose_snowadvanced)
         self.dlg.choose_path.clicked.connect(self.select_output_file)
-        self.dlg.apply_button.clicked.connect(self.apply)
+        self.dlg.apply_button.clicked.connect(self.create_figure_and_add_layer)
         self.counter = 0
 
     def tr(self, message):
@@ -278,7 +278,7 @@ class DrawPoints:
         elif self.choose == ADVANCED_SNOW_CONFIGURATION:
             self.create_advanced_snow_configuration()
 
-    def apply(self):
+    def create_figure_and_add_layer(self):
         self.create_actual_configuration()
         self.move_all()
         self.figure.export(get_temp_dir(TEMP_XY_CSV))
@@ -286,9 +286,9 @@ class DrawPoints:
             self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV),
                                          self.dlg.system_of_coords.crs(), '%20')
         else:
+            self.del_layer(NEW_TXT)
             self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV),
                                          self.dlg.system_of_coords.crs(), '%20')
-            self.del_layer(NEW_TXT)
         self.counter += 1
 
     def run(self):
@@ -297,15 +297,7 @@ class DrawPoints:
         self.hide_all()
         result = self.dlg.exec_()
         if result:
-            self.create_actual_configuration()
-            self.move_all()
-            self.figure.export(get_temp_dir('/temp_xy.csv'))
-            if self.counter == 0:
-                self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV), self.dlg.system_of_coords.crs(), '%20')
-            else:
-                self.add_temp_layer_from_csv(os.path.dirname(os.path.abspath(__file__)) + TEMP_XY_CSV,
-                                             self.dlg.system_of_coords.crs(), '%20')
-                self.del_layer(NEW_TXT)
+            self.create_figure_and_add_layer()
 
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
