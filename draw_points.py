@@ -273,13 +273,10 @@ class DrawPoints:
     def create_actual_configuration(self):
         if self.choose == SIMPLE_GRID_CONFIGURATION:
             self.create_simple_grid_configuration()
-
         elif self.choose == SLOPE_GRID_CONFIGURATION:
             self.create_slope_grid_configuration()
-
         elif self.choose == SIMPLE_SNOW_CONFIGURATION:
             self.create_simple_snow_configuration()
-
         elif self.choose == ADVANCED_SNOW_CONFIGURATION:
             self.create_advanced_snow_configuration()
 
