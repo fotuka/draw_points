@@ -98,16 +98,16 @@ class DrawPoints:
         return QCoreApplication.translate('DrawPoints', message)
 
     def add_action(
-            self,
-            icon_path,
-            text,
-            callback,
-            enabled_flag=True,
-            add_to_menu=True,
-            add_to_toolbar=True,
-            status_tip=None,
-            whats_this=None,
-            parent=None):
+        self,
+        icon_path,
+        text,
+        callback,
+        enabled_flag=True,
+        add_to_menu=True,
+        add_to_toolbar=True,
+        status_tip=None,
+        whats_this=None,
+        parent=None):
         icon = QIcon(icon_path)
         action = QAction(icon, text, parent)
         action.triggered.connect(callback)
@@ -145,8 +145,6 @@ class DrawPoints:
                 self.tr(u'&Draw Points'),
                 action)
             self.iface.removeToolBarIcon(action)
-        # if self.counter != 0:
-        #     osz.remove(self.get_temp_dir(TEMP_XY_CSV))
 
     def clear_all_types_input(self):
         self.dlg.snow_radius.setValue(0)
@@ -271,13 +269,13 @@ class DrawPoints:
         if self.choose == SIMPLE_GRID_CONFIGURATION:
             self.create_simple_grid_configuration()
 
-        if self.choose == SLOPE_GRID_CONFIGURATION:
+        elif self.choose == SLOPE_GRID_CONFIGURATION:
             self.create_slope_grid_configuration()
 
-        if self.choose == SIMPLE_SNOW_CONFIGURATION:
+        elif self.choose == SIMPLE_SNOW_CONFIGURATION:
             self.create_simple_snow_configuration()
 
-        if self.choose == ADVANCED_SNOW_CONFIGURATION:
+        elif self.choose == ADVANCED_SNOW_CONFIGURATION:
             self.create_advanced_snow_configuration()
 
     def apply(self):
