@@ -9,6 +9,7 @@ from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QFileDialog
 from qgis._core import Qgis, QgsProject, QgsVectorFileWriter
 from qgis.core import QgsVectorLayer
+from qgis.core import QgsCoordinateReferenceSystem
 
 from .calculation import *
 from .draw_points_dialog import DrawPointsDialog
@@ -216,7 +217,7 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
-    def add_temp_layer_from_csv(self, path: str, crs: qgis.core.QgsCoordinateReferenceSystem, delimiter: str):
+    def add_temp_layer_from_csv(self, path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
         project = Info()
         project.crs = str(crs)
         project.delimiter = delimiter
@@ -231,7 +232,7 @@ class DrawPoints:
         QgsProject.instance().removeMapLayers([layer.id()])
 
     @staticmethod
-    def convert_temp_layer_to_shp(layer: qgis.core.QgsVectorLayer, path: str):
+    def convert_temp_layer_to_shp(layer: QgsVectorLayer, path: str):
         QgsVectorFileWriter.writeAsVectorFormat(layer, path, "UTF-8", layer.crs(), "ESRI Shapefile",
                                                 layerOptions=['SHPT=POINT'])
 
