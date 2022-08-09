@@ -1,4 +1,3 @@
-import os.path
 import os
 from dataclasses import dataclass
 from sys import platform
@@ -25,36 +24,35 @@ TEMP_XY_CSV = '/temp_xy.csv'
 
 @dataclass
 class Info:
-    path = 'xy.csv'
-    type = 'regexp'
-    delimiter = '%20'
-    useheader = 'No'
-    maxfields = '10000'
-    detecttypes = 'yes'
-    xfield = 'field_1'
-    yfield = 'field_2'
-    crs = 'EPSG:4326'
-    spatialindex = 'no'
-    subsetindex = 'no'
-    watchfile = 'no'
-    xfield_text = 'field_1:text'
-    yfield_text = 'field_2:text'
 
-    def get_uri(path: str, crs: str, delimiter: str) -> str:
-        Info.path = path
-        Info.crs = Info.cut_crs(crs)
-        Info.delimiter = delimiter
-        uri = ('file:' + Info.path + '?type=' + Info.type + '&delimiter=' + Info.delimiter + '&useHeader=' + Info.useheader
-               + '&maxFields=' + Info.maxfields + '&detectTypes=' + Info.detecttypes + '&xField=' + Info.xfield + '&yField='
-               + Info.yfield + '&crs=' + Info.crs + '&spatialIndex=' + Info.spatialindex + '&subsetIndex=' + Info.subsetindex
-               + '&watchFile=' + Info.watchfile + '&field=' + Info.xfield_text + '&field=' + Info.yfield_text)
+    def __init__(self):
+        self.path = 'xy.csv'
+        self.type = 'regexp'
+        self.delimiter = '%20'
+        self.useheader = 'No'
+        self.maxfields = '10000'
+        self.detecttypes = 'yes'
+        self.xfield = 'field_1'
+        self.yfield = 'field_2'
+        self.crs = 'EPSG:4326'
+        self.spatialindex = 'no'
+        self.subsetindex = 'no'
+        self.watchfile = 'no'
+        self.xfield_text = 'field_1:text'
+        self.yfield_text = 'field_2:text'
+
+    def get_uri(self) -> str:
+        self.cut_crs()
+        uri = ('file:' + self.path + '?type=' + self.type + '&delimiter=' + self.delimiter + '&useHeader=' + self.useheader
+               + '&maxFields=' + self.maxfields + '&detectTypes=' + self.detecttypes + '&xField=' + self.xfield + '&yField='
+               + self.yfield + '&crs=' + self.crs + '&spatialIndex=' + self.spatialindex + '&subsetIndex=' + self.subsetindex
+               + '&watchFile=' + self.watchfile + '&field=' + self.xfield_text + '&field=' + self.yfield_text)
         return uri
 
-    def cut_crs(crs: str) -> str:
-        crs_cutted = crs
-        crs_cutted = crs_cutted.split(': ')[1]
-        crs_cutted = crs_cutted.split('>')[0]
-        return crs_cutted
+    def cut_crs(self) -> str:
+        self.crs = self.crs.split(': ')[1]
+        self.crs = self.crs.split('>')[0]
+        return self.crs
 
 
 def get_temp_dir(name: str) -> str:
@@ -217,7 +215,11 @@ class DrawPoints:
         self.dlg.top_widget.hide()
 
     def add_temp_layer_from_csv(self, path: str, crs: qgis.core.QgsCoordinateReferenceSystem, delimiter: str):
-        uri = Info.get_uri(path, str(crs), delimiter)
+        project = Info()
+        project.crs = str(crs)
+        project.delimiter = delimiter
+        project.path = path
+        uri = project.get_uri()
         self.lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(self.lyr)
 
