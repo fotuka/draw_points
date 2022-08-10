@@ -64,6 +64,8 @@ def get_temp_dir(name: str) -> str:
         path = 'var/tmp/' + name
     elif platform == "win32":
         path = 'C:/Users/' + getpass.getuser() + '/AppData/Local/Temp/' + name
+    else:
+        pass
     return path
 
 
