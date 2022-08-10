@@ -51,8 +51,7 @@ class Info:
         return uri
 
     def cut_crs(self) -> str:
-        crs_cutted = self.crs
-        crs_cutted = crs_cutted.split(': ')[1]
+        crs_cutted = self.crs.split(': ')[1]
         crs_cutted = crs_cutted.split('>')[0]
         return crs_cutted
 
