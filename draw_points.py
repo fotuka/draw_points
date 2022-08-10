@@ -27,7 +27,7 @@ TEMP_XY_CSV = '/temp_xy.csv'
 class Info:
 
     def __init__(self):
-        self.path = 'xy.csv'
+        self.path: str
         self.type = 'regexp'
         self.delimiter = '%20'
         self.useheader = 'No'
@@ -35,7 +35,7 @@ class Info:
         self.detecttypes = 'yes'
         self.xfield = 'field_1'
         self.yfield = 'field_2'
-        self.crs = 'EPSG:4326'
+        self.crs: str
         self.spatialindex = 'no'
         self.subsetindex = 'no'
         self.watchfile = 'no'
@@ -45,7 +45,7 @@ class Info:
     def get_uri(self) -> str:
         self.cut_crs()
         uri = ('file:' + self.path + '?type=' + self.type + '&delimiter=' + self.delimiter + '&useHeader='
-               + self.useheader + '&maxFields=' + self.maxfields + '&detectTypes=' + self.detecttypes + '&xField='
+               + self.useheader + '&maxFields=' + str(self.maxfields) + '&detectTypes=' + self.detecttypes + '&xField='
                + self.xfield + '&yField=' + self.yfield + '&crs=' + self.crs + '&spatialIndex=' + self.spatialindex
                + '&subsetIndex=' + self.subsetindex + '&watchFile=' + self.watchfile + '&field=' + self.xfield_text
                + '&field=' + self.yfield_text)
@@ -282,6 +282,8 @@ class DrawPoints:
             self.create_simple_snow_configuration()
         elif self.choose == ADVANCED_SNOW_CONFIGURATION:
             self.create_advanced_snow_configuration()
+        else:
+            pass
 
     def create_figure_and_add_layer(self):
         self.create_actual_configuration()
