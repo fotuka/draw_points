@@ -23,19 +23,18 @@ NEW_TXT = 'New txt'
 TEMP_XY_CSV = '/temp_xy.csv'
 
 
-@dataclass
 class Info:
 
-    def __init__(self):
-        self.path: str
+    def __init__(self, delimiter: str, path: str, crs: QgsCoordinateReferenceSystem):
+        self.path = path
         self.type = 'regexp'
-        self.delimiter = '%20'
+        self.delimiter = delimiter
         self.useheader = 'No'
         self.maxfields = 10000
         self.detecttypes = 'yes'
         self.xfield = 'field_1'
         self.yfield = 'field_2'
-        self.crs: str
+        self.crs = str(crs)
         self.spatialindex = 'no'
         self.subsetindex = 'no'
         self.watchfile = 'no'
