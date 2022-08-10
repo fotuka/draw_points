@@ -92,7 +92,6 @@ class DrawPoints:
         self.dlg.choose_snowadvanced_button.clicked.connect(self.click_choose_snowadvanced)
         self.dlg.choose_path.clicked.connect(self.select_output_file)
         self.dlg.apply_button.clicked.connect(self.create_figure_and_add_layer)
-        self.counter = 0
 
     def tr(self, message):
         return QCoreApplication.translate('DrawPoints', message)
@@ -227,6 +226,12 @@ class DrawPoints:
         QgsProject.instance().removeMapLayers([layer.id()])
 
     @staticmethod
+    def find_layer(name: str):
+        layers = QgsProject.instance().mapLayersByName(name)
+        if layers:
+            return True
+
+    @staticmethod
     def convert_temp_layer_to_shp(layer: QgsVectorLayer, path: str):
         QgsVectorFileWriter.writeAsVectorFormat(layer, path, "UTF-8", layer.crs(), "ESRI Shapefile",
                                                 layerOptions=['SHPT=POINT'])
@@ -282,14 +287,10 @@ class DrawPoints:
         self.create_actual_configuration()
         self.move_all()
         self.figure.export(get_temp_dir(TEMP_XY_CSV))
-        if self.counter == 0:
-            self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV),
-                                         self.dlg.system_of_coords.crs(), '%20')
-        else:
+        if self.find_layer(NEW_TXT):
             self.del_layer(NEW_TXT)
-            self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV),
-                                         self.dlg.system_of_coords.crs(), '%20')
-        self.counter += 1
+        self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV),
+                                     self.dlg.system_of_coords.crs(), '%20')
 
     def run(self):
         self.dlg.show()
@@ -298,12 +299,9 @@ class DrawPoints:
         result = self.dlg.exec_()
         if result:
             self.create_figure_and_add_layer()
-            self.counter = 0
-
             if self.dlg.save_in.text() != '':
                 path = self.dlg.save_in.text()
                 self.convert_temp_layer_to_shp(self.lyr, path)
-
             self.iface.messageBar().pushMessage(
                 'Success',
                 level=Qgis.Success, duration=3)
