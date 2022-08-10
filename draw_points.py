@@ -218,10 +218,7 @@ class DrawPoints:
         self.dlg.top_widget.hide()
 
     def add_temp_layer_from_csv(self, path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
-        project = Info()
-        project.crs = str(crs)
-        project.delimiter = delimiter
-        project.path = path
+        project = Info(delimiter, path, crs)
         uri = project.get_uri()
         self.lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(self.lyr)
