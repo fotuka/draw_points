@@ -23,15 +23,15 @@ TEMP_XY_CSV = '/temp_xy.csv'
 
 class Info:
 
-    def __init__(self, delimiter: str, path: str, crs: QgsCoordinateReferenceSystem):
+    def __init__(self, delimiter: str, path: str, xfield: str, yfield: str, crs: QgsCoordinateReferenceSystem):
         self.path = path
         self.type = 'regexp'
         self.delimiter = delimiter
         self.useheader = 'No'
         self.maxfields = 10000
         self.detecttypes = 'yes'
-        self.xfield = 'field_1'
-        self.yfield = 'field_2'
+        self.xfield = xfield
+        self.yfield = yfield
         self.crs = str(crs)
         self.spatialindex = 'no'
         self.subsetindex = 'no'
@@ -216,7 +216,7 @@ class DrawPoints:
         self.dlg.top_widget.hide()
 
     def add_temp_layer_from_csv(self, path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
-        project = Info(delimiter, path, crs)
+        project = Info(delimiter, path, 'field_1', 'field_2', crs)
         uri = project.get_uri()
         self.lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(self.lyr)
