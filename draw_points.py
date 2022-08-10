@@ -1,9 +1,7 @@
 import os
-from dataclasses import dataclass
 from sys import platform
 import getpass
 
-import qgis.core
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QFileDialog
