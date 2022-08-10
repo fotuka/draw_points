@@ -31,7 +31,7 @@ class Info:
         self.type = 'regexp'
         self.delimiter = '%20'
         self.useheader = 'No'
-        self.maxfields = '10000'
+        self.maxfields = 10000
         self.detecttypes = 'yes'
         self.xfield = 'field_1'
         self.yfield = 'field_2'
