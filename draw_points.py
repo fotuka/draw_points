@@ -46,13 +46,12 @@ class Info:
 
 
 def get_temp_dir(name: str) -> str:
-    path = 'Your platform is unsupported, try linux or windows'
     if platform == 'linux' or platform == 'linux2':
-        path = 'var/tmp/' + name
+        os.path.join('var', 'tmp', name)
     elif platform == "win32":
-        path = 'C:/Users/' + getpass.getuser() + '/AppData/Local/Temp/' + name
+        os.path.join('C:', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
     else:
-        pass
+        path = 'Your platform is unsupported, try linux or windows'
     return path
 
 
