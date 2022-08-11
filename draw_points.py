@@ -18,7 +18,7 @@ SLOPE_GRID_CONFIGURATION = 'gridslope'
 SIMPLE_SNOW_CONFIGURATION = 'snow'
 ADVANCED_SNOW_CONFIGURATION = 'snowadvanced'
 DEFAULT_LAYER_NAME = 'ProjectPoints'
-TEMPORARY_FILE_NAME = '/temp_xy.csv'
+TEMPORARY_FILE_NAME = 'temp_xy.csv'
 
 
 class Info:
