@@ -211,14 +211,15 @@ class DrawPoints:
         QgsProject.instance().addMapLayer(lyr)
 
     @staticmethod
-    def del_layer(layer_name: str):
-        layer = QgsProject.instance().mapLayersByName(layer_name)[0]
-        QgsProject.instance().removeMapLayers([layer.id()])
-
-    @staticmethod
     def is_layer_exist(layer_name: str) -> bool:
         layers = QgsProject.instance().mapLayersByName(layer_name)
         return True if layers else False
+
+    @staticmethod
+    def del_layer(self, layer_name: str):
+        if self.is_layer_exist(layer_name):
+            layer = QgsProject.instance().mapLayersByName(layer_name)[0]
+            QgsProject.instance().removeMapLayers([layer.id()])
 
     @staticmethod
     def convert_temp_layer_to_shp(layer_name: str, path: str):
