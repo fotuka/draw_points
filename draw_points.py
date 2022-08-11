@@ -66,7 +66,6 @@ def get_temp_dir(name: str) -> str:
 
 
 class DrawPoints:
-
     def __init__(self, iface):
         self.iface = iface
         self.plugin_dir = os.path.dirname(__file__)
