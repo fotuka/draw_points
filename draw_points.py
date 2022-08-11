@@ -23,10 +23,10 @@ TEMP_XY_CSV = '/temp_xy.csv'
 
 class Info:
 
-    def __init__(self, path: str, delimiter: str,  crs: str, xfield: str, yfield: str):
+    def __init__(self, path: str, delimiter: str,  crs_authid: str, xfield: str, yfield: str):
         self.path = path
         self.delimiter = delimiter
-        self.crs = crs
+        self.crs = crs_authid
         self.xfield = xfield
         self.yfield = yfield
         self.maxfields = 10000
@@ -36,14 +36,12 @@ class Info:
         self.spatialindex = 'no'
         self.subsetindex = 'no'
         self.watchfile = 'no'
-        self.xfield_text = 'field_1:text'
-        self.yfield_text = 'field_2:text'
 
     def get_uri(self) -> str:
         uri = (f"file:{self.path}?type={self.type}&delimiter={self.delimiter}&useHeader={self.useheader}"
                f"&maxFields={str(self.maxfields)}&detectTypes={self.detecttypes}&xField={self.xfield}"
                f"&yField={self.yfield}&crs={self.crs}&spatialIndex={self.spatialindex}&subsetIndex={self.subsetindex}"
-               f"&watchFile={self.watchfile}&field={self.xfield_text}&field={self.yfield_text}")
+               f"&watchFile={self.watchfile}")
         return uri
 
 
@@ -207,23 +205,24 @@ class DrawPoints:
         self.dlg.top_widget.hide()
 
     def add_temp_layer_from_csv(self, path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
-        project = Info(path=path, delimiter=delimiter, crs=crs.authid(), xfield='field_1', yfield='field_2')
+        project = Info(path=path, delimiter=delimiter, crs_authid=crs.authid(), xfield='field_1', yfield='field_2')
         uri = project.get_uri()
-        self.lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
-        QgsProject.instance().addMapLayer(self.lyr)
+        lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
+        QgsProject.instance().addMapLayer(lyr)
 
     @staticmethod
-    def del_layer(name: str):
-        layer = QgsProject.instance().mapLayersByName(name)[0]
+    def del_layer(layer_name: str):
+        layer = QgsProject.instance().mapLayersByName(layer_name)[0]
         QgsProject.instance().removeMapLayers([layer.id()])
 
     @staticmethod
-    def is_layer_exist(name: str) -> bool:
-        layers = QgsProject.instance().mapLayersByName(name)
+    def is_layer_exist(layer_name: str) -> bool:
+        layers = QgsProject.instance().mapLayersByName(layer_name)
         return True if layers else False
 
     @staticmethod
-    def convert_temp_layer_to_shp(layer: QgsVectorLayer, path: str):
+    def convert_temp_layer_to_shp(layer_name: str, path: str):
+        layer = QgsProject.instance().mapLayersByName(layer_name)[0]
         QgsVectorFileWriter.writeAsVectorFormat(layer, path, "UTF-8", layer.crs(), "ESRI Shapefile",
                                                 layerOptions=['SHPT=POINT'])
 
@@ -292,7 +291,7 @@ class DrawPoints:
             self.create_figure_and_add_layer()
             if self.dlg.save_in.text():
                 path = self.dlg.save_in.text()
-                self.convert_temp_layer_to_shp(self.lyr, path)
+                self.convert_temp_layer_to_shp(NEW_TXT, path)
             self.iface.messageBar().pushMessage(
                 'Success',
                 level=Qgis.Success, duration=3)
