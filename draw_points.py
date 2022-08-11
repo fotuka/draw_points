@@ -17,8 +17,8 @@ SIMPLE_GRID_CONFIGURATION = 'grid'
 SLOPE_GRID_CONFIGURATION = 'gridslope'
 SIMPLE_SNOW_CONFIGURATION = 'snow'
 ADVANCED_SNOW_CONFIGURATION = 'snowadvanced'
-NEW_TXT = 'New txt'
-TEMP_XY_CSV = '/temp_xy.csv'
+DEFAULT_LAYER_NAME = 'ProjectPoints'
+TEMPORARY_FILE_NAME = '/temp_xy.csv'
 
 
 class Info:
@@ -206,7 +206,7 @@ class DrawPoints:
     def add_temp_layer_from_csv(self, path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
         project = Info(path=path, delimiter=delimiter, crs_authid=crs.authid(), xfield='field_1', yfield='field_2')
         uri = project.get_uri()
-        lyr = QgsVectorLayer(uri, NEW_TXT, 'delimitedtext', crs=crs)
+        lyr = QgsVectorLayer(uri, DEFAULT_LAYER_NAME, 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(lyr)
 
     @staticmethod
@@ -275,10 +275,10 @@ class DrawPoints:
     def create_figure_and_add_layer(self):
         self.create_actual_configuration()
         self.move_all()
-        self.figure.export(get_temp_dir(TEMP_XY_CSV))
-        if self.is_layer_exist(NEW_TXT):
-            self.del_layer(NEW_TXT)
-        self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV),
+        self.figure.export(get_temp_dir(TEMPORARY_FILE_NAME))
+        if self.is_layer_exist(DEFAULT_LAYER_NAME):
+            self.del_layer(DEFAULT_LAYER_NAME)
+        self.add_temp_layer_from_csv(get_temp_dir(TEMPORARY_FILE_NAME),
                                      self.dlg.system_of_coords.crs(), '%20')
 
     def run(self):
@@ -290,7 +290,7 @@ class DrawPoints:
             self.create_figure_and_add_layer()
             if self.dlg.save_in.text():
                 path = self.dlg.save_in.text()
-                self.convert_temp_layer_to_shp(NEW_TXT, path)
+                self.convert_temp_layer_to_shp(DEFAULT_LAYER_NAME, path)
             self.iface.messageBar().pushMessage(
                 'Success',
                 level=Qgis.Success, duration=3)
