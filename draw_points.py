@@ -23,23 +23,18 @@ TEMPORARY_FILE_NAME = 'temp_xy.csv'
 
 class Info:
 
-    def __init__(self, path: str, delimiter: str,  crs_authid: str, xfield: str, yfield: str):
+    def __init__(self, path: str, delimiter: str,  crs_authid: str):
         self.path = path
         self.delimiter = delimiter
         self.crs = crs_authid
-        self.xfield = xfield
-        self.yfield = yfield
-        self.maxfields = 10000
+        self.xfield = 'field_1'
+        self.yfield = 'field_2'
         self.type = 'regexp'
         self.useheader = 'No'
-        self.detecttypes = 'yes'
-        self.spatialindex = 'no'
-        self.subsetindex = 'no'
 
     def get_uri(self) -> str:
         uri = (f"file:{self.path}?type={self.type}&delimiter={self.delimiter}&useHeader={self.useheader}"
-               f"&maxFields={str(self.maxfields)}&detectTypes={self.detecttypes}&xField={self.xfield}"
-               f"&yField={self.yfield}&crs={self.crs}&spatialIndex={self.spatialindex}&subsetIndex={self.subsetindex}")
+               f"&xField={self.xfield}&yField={self.yfield}&crs={self.crs}")
         return uri
 
 
@@ -204,8 +199,9 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
-    def add_temp_layer_from_csv(self, path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
-        project = Info(path=path, delimiter=delimiter, crs_authid=crs.authid(), xfield='field_1', yfield='field_2')
+    @staticmethod
+    def add_temp_layer_from_csv(path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
+        project = Info(path=path, delimiter=delimiter, crs_authid=crs.authid())
         uri = project.get_uri()
         lyr = QgsVectorLayer(uri, DEFAULT_LAYER_NAME, 'delimitedtext', crs=crs)
         QgsProject.instance().addMapLayer(lyr)
