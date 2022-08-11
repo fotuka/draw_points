@@ -26,7 +26,7 @@ class Info:
     def __init__(self, path: str, delimiter: str,  crs: QgsCoordinateReferenceSystem, xfield: str, yfield: str):
         self.path = path
         self.delimiter = delimiter
-        self.crs = str(crs)
+        self.crs = crs.authid()
         self.xfield = xfield
         self.yfield = yfield
         self.maxfields = 10000
@@ -40,17 +40,11 @@ class Info:
         self.yfield_text = 'field_2:text'
 
     def get_uri(self) -> str:
-        self.cut_crs()
         uri = (f"file:{self.path}?type={self.type}&delimiter={self.delimiter}&useHeader={self.useheader}"
                f"&maxFields={str(self.maxfields)}&detectTypes={self.detecttypes}&xField={self.xfield}"
                f"&yField={self.yfield}&crs={self.crs}&spatialIndex={self.spatialindex}&subsetIndex={self.subsetindex}"
                f"&watchFile={self.watchfile}&field={self.xfield_text}&field={self.yfield_text}")
         return uri
-
-    def cut_crs(self) -> str:
-        crs_cutted = self.crs.split(': ')[1]
-        crs_cutted = crs_cutted.split('>')[0]
-        return crs_cutted
 
 
 def get_temp_dir(name: str) -> str:
