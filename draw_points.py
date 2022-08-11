@@ -44,13 +44,16 @@ class Info:
 
 
 def get_temp_dir(name: str) -> str:
-    if platform == 'linux' or platform == 'linux2':
-        path = os.path.join('var', 'tmp', name)
-    elif platform == "win32":
-        path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
-    else:
-        path = 'Your platform is unsupported, try linux or windows'
-    return path
+    try:
+        if platform == 'linux' or platform == 'linux2':
+            path = os.path.join('var', 'tmp', name)
+        elif platform == "win32":
+            path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
+        else:
+            raise ValueError('Your platform is unsupported, try linux or windows')
+        return path
+    except ValueError as err:
+        QMessageBox.information(None, "ERROR:", str(err))
 
 
 class DrawPoints:
