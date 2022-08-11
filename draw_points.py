@@ -35,21 +35,19 @@ class Info:
         self.detecttypes = 'yes'
         self.spatialindex = 'no'
         self.subsetindex = 'no'
-        self.watchfile = 'no'
 
     def get_uri(self) -> str:
         uri = (f"file:{self.path}?type={self.type}&delimiter={self.delimiter}&useHeader={self.useheader}"
                f"&maxFields={str(self.maxfields)}&detectTypes={self.detecttypes}&xField={self.xfield}"
-               f"&yField={self.yfield}&crs={self.crs}&spatialIndex={self.spatialindex}&subsetIndex={self.subsetindex}"
-               f"&watchFile={self.watchfile}")
+               f"&yField={self.yfield}&crs={self.crs}&spatialIndex={self.spatialindex}&subsetIndex={self.subsetindex}")
         return uri
 
 
 def get_temp_dir(name: str) -> str:
     if platform == 'linux' or platform == 'linux2':
-        os.path.join('var', 'tmp', name)
+        path = os.path.join('var', 'tmp', name)
     elif platform == "win32":
-        os.path.join('C:', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
+        path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
     else:
         path = 'Your platform is unsupported, try linux or windows'
     return path
