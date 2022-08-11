@@ -290,7 +290,7 @@ class DrawPoints:
         result = self.dlg.exec_()
         if result:
             self.create_figure_and_add_layer()
-            if self.dlg.save_in.text() != '':
+            if self.dlg.save_in.text():
                 path = self.dlg.save_in.text()
                 self.convert_temp_layer_to_shp(self.lyr, path)
             self.iface.messageBar().pushMessage(
