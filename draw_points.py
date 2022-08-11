@@ -279,7 +279,7 @@ class DrawPoints:
         self.move_all()
         self.figure.export(get_temp_dir(TEMPORARY_FILE_NAME))
         if self.is_layer_exist(DEFAULT_LAYER_NAME):
-            self.del_layer(DEFAULT_LAYER_NAME)
+            self.del_layer(self, DEFAULT_LAYER_NAME)
         self.add_temp_layer_from_csv(get_temp_dir(TEMPORARY_FILE_NAME),
                                      self.dlg.system_of_coords.crs(), '%20')
 
