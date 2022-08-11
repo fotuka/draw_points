@@ -41,11 +41,10 @@ class Info:
 
     def get_uri(self) -> str:
         self.cut_crs()
-        uri = ('file:' + self.path + '?type=' + self.type + '&delimiter=' + self.delimiter + '&useHeader='
-               + self.useheader + '&maxFields=' + str(self.maxfields) + '&detectTypes=' + self.detecttypes + '&xField='
-               + self.xfield + '&yField=' + self.yfield + '&crs=' + self.crs + '&spatialIndex=' + self.spatialindex
-               + '&subsetIndex=' + self.subsetindex + '&watchFile=' + self.watchfile + '&field=' + self.xfield_text
-               + '&field=' + self.yfield_text)
+        uri = (f"file:{self.path}?type={self.type}&delimiter={self.delimiter}&useHeader={self.useheader}"
+               f"&maxFields={str(self.maxfields)}&detectTypes={self.detecttypes}&xField={self.xfield}"
+               f"&yField={self.yfield}&crs={self.crs}&spatialIndex={self.spatialindex}&subsetIndex={self.subsetindex}"
+               f"&watchFile={self.watchfile}&field={self.xfield_text}&field={self.yfield_text}")
         return uri
 
     def cut_crs(self) -> str:
