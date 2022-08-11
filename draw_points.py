@@ -74,7 +74,7 @@ class DrawPoints:
         self.menu = self.tr(u'&Draw Points')
         self.dlg = DrawPointsDialog()
         self.choose = NO_CONFIGURATION
-        self.first_start = None
+        self.first_start = False
         self.dlg.choose_grid_button.clicked.connect(self.click_choose_grid)
         self.dlg.choose_gridslope_button.clicked.connect(self.click_choose_gridslope)
         self.dlg.choose_snow_button.clicked.connect(self.click_choose_snow)
