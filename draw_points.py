@@ -226,10 +226,9 @@ class DrawPoints:
         QgsProject.instance().removeMapLayers([layer.id()])
 
     @staticmethod
-    def find_layer(name: str):
+    def is_layer_exist(name: str) -> bool:
         layers = QgsProject.instance().mapLayersByName(name)
-        if layers:
-            return True
+        return True if layers else False
 
     @staticmethod
     def convert_temp_layer_to_shp(layer: QgsVectorLayer, path: str):
@@ -287,7 +286,7 @@ class DrawPoints:
         self.create_actual_configuration()
         self.move_all()
         self.figure.export(get_temp_dir(TEMP_XY_CSV))
-        if self.find_layer(NEW_TXT):
+        if self.is_layer_exist(NEW_TXT):
             self.del_layer(NEW_TXT)
         self.add_temp_layer_from_csv(get_temp_dir(TEMP_XY_CSV),
                                      self.dlg.system_of_coords.crs(), '%20')
