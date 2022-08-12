@@ -1,5 +1,4 @@
 import os
-import os.path
 from sys import platform
 import getpass
 
