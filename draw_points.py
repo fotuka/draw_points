@@ -1,4 +1,5 @@
 import os
+import os.path
 from sys import platform
 import getpass
 
@@ -8,7 +9,9 @@ from qgis.PyQt.QtWidgets import QAction, QFileDialog
 from qgis._core import Qgis, QgsProject, QgsVectorFileWriter
 from qgis.core import QgsVectorLayer
 from qgis.core import QgsCoordinateReferenceSystem
+from qgis.utils import iface
 
+from .resources import *
 from .calculation import *
 from .draw_points_dialog import DrawPointsDialog
 
