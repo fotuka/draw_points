@@ -23,12 +23,12 @@ TEMPORARY_FILE_NAME = 'temp_xy.csv'
 
 class Info:
 
-    def __init__(self, path: str, delimiter: str,  crs_authid: str):
+    def __init__(self, path: str, delimiter: str,  crs_authid: str, xfield='field_1', yfield='field_2'):
         self.path = path
         self.delimiter = delimiter
         self.crs = crs_authid
-        self.xfield = 'field_1'
-        self.yfield = 'field_2'
+        self.xfield = xfield
+        self.yfield = yfield
         self.type = 'regexp'
         self.useheader = 'No'
 
