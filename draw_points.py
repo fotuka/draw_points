@@ -39,16 +39,13 @@ class Info:
 
 
 def get_temp_dir(name: str) -> str:
-    try:
-        if platform == 'linux' or platform == 'linux2':
-            path = os.path.join('var', 'tmp', name)
-        elif platform == "win32":
-            path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
-        else:
-            raise ValueError('Your platform is unsupported, try linux or windows')
-        return path
-    except ValueError as err:
-        QMessageBox.information(None, "ERROR:", str(err))
+    if platform == 'linux' or platform == 'linux2':
+        path = os.path.join('var', 'tmp', name)
+    elif platform == "win32":
+        path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
+    else:
+        raise ValueError('Your platform is unsupported, try linux or windows')
+    return path
 
 
 class DrawPoints:
@@ -273,11 +270,17 @@ class DrawPoints:
     def create_figure_and_add_layer(self):
         self.create_actual_configuration()
         self.move_all()
-        self.figure.export(get_temp_dir(TEMPORARY_FILE_NAME))
+        try:
+            self.figure.export(get_temp_dir(TEMPORARY_FILE_NAME))
+        except ValueError as err:
+            QMessageBox.information(None, "ERROR:", str(err))
         if self.is_layer_exist(DEFAULT_LAYER_NAME):
             self.del_layer(self, DEFAULT_LAYER_NAME)
-        self.add_temp_layer_from_csv(get_temp_dir(TEMPORARY_FILE_NAME),
+        try:
+            self.add_temp_layer_from_csv(get_temp_dir(TEMPORARY_FILE_NAME),
                                      self.dlg.system_of_coords.crs(), '%20')
+        except ValueError as err:
+            QMessageBox.information(None, "ERROR:", str(err))
 
     def run(self):
         self.dlg.show()
