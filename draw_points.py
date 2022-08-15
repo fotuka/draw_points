@@ -149,7 +149,6 @@ class DrawPoints:
     def grid_show(self):
         self.snow_hide()
         self.dlg.grid_widget.show()
-        self.dlg.rotate_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
         self.dlg.coords_label.setText('Координаты левого нижнего угла')
@@ -161,7 +160,6 @@ class DrawPoints:
     def snow_show(self):
         self.grid_hide()
         self.dlg.snow_widget.show()
-        self.dlg.rotate_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
         self.dlg.coords_label.setText('Координаты центра')
@@ -194,7 +192,6 @@ class DrawPoints:
     def hide_all(self):
         self.grid_hide()
         self.snow_hide()
-        self.dlg.rotate_widget.hide()
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
 
