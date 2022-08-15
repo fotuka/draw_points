@@ -364,7 +364,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>Кол-во вертикальных линий</string>
+                 <string>Количество вертикальных линий</string>
                 </property>
                </widget>
               </item>
@@ -390,7 +390,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>Кол-во горизонтальных линий</string>
+                 <string>Количество горизонтальных линий</string>
                 </property>
                </widget>
               </item>
@@ -481,7 +481,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>Кол-во линий</string>
+                 <string>Количество линий</string>
                 </property>
                </widget>
               </item>
@@ -507,7 +507,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>Кол-во точек на линии</string>
+                 <string>Количество точек на линии</string>
                 </property>
                </widget>
               </item>
