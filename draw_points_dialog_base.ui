@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>823</width>
-    <height>596</height>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -205,7 +205,8 @@
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>grid.png</normaloff>grid.png</iconset>
+               <normaloff>grid.png</normaloff>
+               <activeoff>grid_on.png</activeoff>grid.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -237,7 +238,8 @@
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>gridslope.png</normaloff>gridslope.png</iconset>
+               <normaloff>gridslope.png</normaloff>
+               <activeoff>gridslope_on.png</activeoff>gridslope.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -272,7 +274,8 @@
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>snow.png</normaloff>snow.png</iconset>
+               <normaloff>snow.png</normaloff>
+               <activeoff>snow_on.png</activeoff>snow.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -304,7 +307,8 @@
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>snowadvanced.png</normaloff>snowadvanced.png</iconset>
+               <normaloff>snowadvanced.png</normaloff>
+               <activeoff>snowadvanced_on.png</activeoff>snowadvanced.png</iconset>
              </property>
              <property name="iconSize">
               <size>
