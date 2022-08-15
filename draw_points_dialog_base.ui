@@ -283,13 +283,13 @@
                <number>10</number>
               </property>
               <property name="topMargin">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="rightMargin">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="bottomMargin">
-               <number>1</number>
+               <number>0</number>
               </property>
               <item>
                <widget class="QLabel" name="grid_height_label">
@@ -432,13 +432,13 @@
                <number>10</number>
               </property>
               <property name="topMargin">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="rightMargin">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="bottomMargin">
-               <number>1</number>
+               <number>0</number>
               </property>
               <item>
                <widget class="QLabel" name="snow_radius_label">
@@ -539,6 +539,15 @@
               <property name="leftMargin">
                <number>10</number>
               </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
               <item>
                <widget class="QLabel" name="rotate_label">
                 <property name="minimumSize">
@@ -597,6 +606,15 @@
               </property>
               <property name="leftMargin">
                <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
               </property>
               <item>
                <widget class="QLabel" name="coords_label">
