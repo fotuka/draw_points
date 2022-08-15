@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1042</width>
-    <height>807</height>
+    <width>823</width>
+    <height>596</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,13 +17,40 @@
    <bool>false</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
    <item row="0" column="0">
-    <layout class="QVBoxLayout" name="layout_main">
+    <layout class="QVBoxLayout" name="layout_main" stretch="5,1000">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>10</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QWidget" name="top_widget" native="true">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>200</height>
+        </size>
+       </property>
        <layout class="QVBoxLayout" name="layout_top">
         <property name="spacing">
          <number>0</number>
+        </property>
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinimumSize</enum>
         </property>
         <item>
          <widget class="QLabel" name="save_in_label">
@@ -90,13 +117,56 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="layout_bottom">
+      <layout class="QVBoxLayout" name="layout_bottom" stretch="1,50,1,0">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMaximumSize</enum>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item>
         <layout class="QHBoxLayout" name="layout_menu">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMaximumSize</enum>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
-          <layout class="QVBoxLayout" name="layout_choose_buttons">
+          <layout class="QVBoxLayout" name="layout_choose_buttons" stretch="10,10,10,10">
            <property name="spacing">
-            <number>6</number>
+            <number>42</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMaximumSize</enum>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
            </property>
            <item>
             <widget class="QPushButton" name="choose_grid_button">
@@ -109,7 +179,7 @@
              <property name="maximumSize">
               <size>
                <width>80</width>
-               <height>16777215</height>
+               <height>80</height>
               </size>
              </property>
              <property name="font">
@@ -120,6 +190,9 @@
              </property>
              <property name="mouseTracking">
               <bool>false</bool>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
              </property>
              <property name="autoFillBackground">
               <bool>false</bool>
@@ -153,7 +226,7 @@
              <property name="maximumSize">
               <size>
                <width>80</width>
-               <height>16777215</height>
+               <height>80</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -185,7 +258,7 @@
              <property name="maximumSize">
               <size>
                <width>80</width>
-               <height>16777215</height>
+               <height>80</height>
               </size>
              </property>
              <property name="whatsThis">
@@ -220,7 +293,7 @@
              <property name="maximumSize">
               <size>
                <width>80</width>
-               <height>16777215</height>
+               <height>80</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -244,23 +317,16 @@
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="layout_options" stretch="0,10,10,0,0">
+          <layout class="QVBoxLayout" name="layout_options" stretch="10,10,10">
            <property name="spacing">
             <number>0</number>
            </property>
-           <item>
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMaximumSize</enum>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QWidget" name="grid_widget" native="true">
              <property name="sizePolicy">
@@ -278,6 +344,9 @@
              <layout class="QVBoxLayout" name="Grid">
               <property name="spacing">
                <number>1</number>
+              </property>
+              <property name="sizeConstraint">
+               <enum>QLayout::SetMaximumSize</enum>
               </property>
               <property name="leftMargin">
                <number>10</number>
@@ -299,6 +368,12 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>35</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Высота</string>
                 </property>
@@ -310,6 +385,12 @@
                  <size>
                   <width>0</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
                  </size>
                 </property>
                 <property name="decimals">
@@ -331,6 +412,12 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>35</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Длина</string>
                 </property>
@@ -342,6 +429,12 @@
                  <size>
                   <width>0</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
                  </size>
                 </property>
                 <property name="decimals">
@@ -363,6 +456,12 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>35</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Количество вертикальных линий</string>
                 </property>
@@ -374,6 +473,12 @@
                  <size>
                   <width>0</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
                  </size>
                 </property>
                 <property name="maximum">
@@ -389,6 +494,12 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>35</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Количество горизонтальных линий</string>
                 </property>
@@ -400,6 +511,12 @@
                  <size>
                   <width>0</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
                  </size>
                 </property>
                 <property name="maximum">
@@ -428,6 +545,9 @@
               <property name="spacing">
                <number>1</number>
               </property>
+              <property name="sizeConstraint">
+               <enum>QLayout::SetMaximumSize</enum>
+              </property>
               <property name="leftMargin">
                <number>10</number>
               </property>
@@ -448,6 +568,12 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>35</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Радиус</string>
                 </property>
@@ -459,6 +585,12 @@
                  <size>
                   <width>0</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
                  </size>
                 </property>
                 <property name="decimals">
@@ -480,6 +612,12 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>35</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Количество линий</string>
                 </property>
@@ -491,6 +629,12 @@
                  <size>
                   <width>0</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
                  </size>
                 </property>
                 <property name="maximum">
@@ -506,6 +650,12 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>35</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Количество точек на линии</string>
                 </property>
@@ -519,6 +669,12 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
+                 </size>
+                </property>
                 <property name="maximum">
                  <number>9999</number>
                 </property>
@@ -528,13 +684,13 @@
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="rotate_widget" native="true">
-             <layout class="QVBoxLayout" name="layout_rotation" stretch="0,0">
+            <widget class="QWidget" name="coords_widget" native="true">
+             <layout class="QVBoxLayout" name="layout_coords">
               <property name="spacing">
                <number>1</number>
               </property>
               <property name="sizeConstraint">
-               <enum>QLayout::SetDefaultConstraint</enum>
+               <enum>QLayout::SetMaximumSize</enum>
               </property>
               <property name="leftMargin">
                <number>10</number>
@@ -559,7 +715,7 @@
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
-                  <height>25</height>
+                  <height>35</height>
                  </size>
                 </property>
                 <property name="text">
@@ -584,6 +740,9 @@
                   <height>25</height>
                  </size>
                 </property>
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
                 <property name="decimals">
                  <number>4</number>
                 </property>
@@ -595,33 +754,18 @@
                 </property>
                </widget>
               </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QWidget" name="coords_widget" native="true">
-             <layout class="QVBoxLayout" name="layout_coords">
-              <property name="spacing">
-               <number>1</number>
-              </property>
-              <property name="leftMargin">
-               <number>10</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
               <item>
                <widget class="QLabel" name="coords_label">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>35</height>
                  </size>
                 </property>
                 <property name="text">
@@ -640,7 +784,7 @@
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
-                  <height>15</height>
+                  <height>35</height>
                  </size>
                 </property>
                 <property name="text">
@@ -654,6 +798,12 @@
                  <size>
                   <width>0</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
                  </size>
                 </property>
                 <property name="decimals">
@@ -678,7 +828,7 @@
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
-                  <height>17</height>
+                  <height>35</height>
                  </size>
                 </property>
                 <property name="text">
@@ -692,6 +842,12 @@
                  <size>
                   <width>0</width>
                   <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
                  </size>
                 </property>
                 <property name="decimals">
@@ -713,6 +869,12 @@
                   <height>0</height>
                  </size>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>35</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string>Система координат:</string>
                 </property>
@@ -726,20 +888,13 @@
                   <height>0</height>
                  </size>
                 </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
+                <property name="maximumSize">
                  <size>
-                  <width>20</width>
-                  <height>40</height>
+                  <width>16777215</width>
+                  <height>25</height>
                  </size>
                 </property>
-               </spacer>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -749,115 +904,133 @@
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="bottom_layuot">
-         <item row="1" column="0">
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="2">
-          <widget class="QPushButton" name="apply_button">
-           <property name="minimumSize">
-            <size>
-             <width>150</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>200000</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>8</pointsize>
-            </font>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="text">
-            <string>Применить</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <spacer name="horizontalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="4">
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="1" column="3">
-          <spacer name="horizontalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="3" column="0" colspan="5">
-          <widget class="QDialogButtonBox" name="ok_cancel_button_box">
-           <property name="minimumSize">
-            <size>
-             <width>400</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>5000</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="autoFillBackground">
-            <bool>false</bool>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="standardButtons">
-            <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-           </property>
-           <property name="centerButtons">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QWidget" name="bottom_widget" native="true">
+         <layout class="QGridLayout" name="bottom_layuot">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <item row="1" column="0">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="apply_button">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200000</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+             </font>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>Применить</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="4">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="3">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="0" colspan="5">
+           <widget class="QDialogButtonBox" name="ok_cancel_button_box">
+            <property name="minimumSize">
+             <size>
+              <width>400</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>5000</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="standardButtons">
+             <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+            </property>
+            <property name="centerButtons">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </item>
@@ -873,38 +1046,5 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>ok_cancel_button_box</sender>
-   <signal>accepted()</signal>
-   <receiver>DrawPointsDialogBase</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ok_cancel_button_box</sender>
-   <signal>rejected()</signal>
-   <receiver>DrawPointsDialogBase</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>20</x>
-     <y>20</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

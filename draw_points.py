@@ -151,6 +151,7 @@ class DrawPoints:
         self.dlg.grid_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
+        self.dlg.bottom_widget.show()
         self.dlg.coords_label.setText('Координаты левого нижнего угла')
 
     def snow_hide(self):
@@ -162,6 +163,7 @@ class DrawPoints:
         self.dlg.snow_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
+        self.dlg.bottom_widget.show()
         self.dlg.coords_label.setText('Координаты центра')
 
     def click_choose_grid(self):
@@ -194,6 +196,7 @@ class DrawPoints:
         self.snow_hide()
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
+        self.dlg.bottom_widget.hide()
 
     @staticmethod
     def add_temp_layer_from_csv(path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
