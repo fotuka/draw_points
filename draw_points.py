@@ -8,7 +8,9 @@ from qgis.PyQt.QtWidgets import QAction, QFileDialog
 from qgis._core import Qgis, QgsProject, QgsVectorFileWriter
 from qgis.core import QgsVectorLayer
 from qgis.core import QgsCoordinateReferenceSystem
+from qgis.utils import iface
 
+from .resources import *
 from .calculation import *
 from .draw_points_dialog import DrawPointsDialog
 
@@ -73,7 +75,7 @@ class DrawPoints:
         self.dlg.choose_snow_button.clicked.connect(self.click_choose_snow)
         self.dlg.choose_snowadvanced_button.clicked.connect(self.click_choose_snowadvanced)
         self.dlg.choose_path.clicked.connect(self.select_output_file)
-        self.dlg.apply_button.clicked.connect(self.create_figure_and_add_layer)
+        self.dlg.apply_button.clicked.connect(self.click_apply)
 
     def tr(self, message):
         return QCoreApplication.translate('DrawPoints', message)
@@ -147,9 +149,9 @@ class DrawPoints:
     def grid_show(self):
         self.snow_hide()
         self.dlg.grid_widget.show()
-        self.dlg.rotate_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
+        self.dlg.bottom_widget.show()
         self.dlg.coords_label.setText('Координаты левого нижнего угла')
 
     def snow_hide(self):
@@ -159,9 +161,9 @@ class DrawPoints:
     def snow_show(self):
         self.grid_hide()
         self.dlg.snow_widget.show()
-        self.dlg.rotate_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
+        self.dlg.bottom_widget.show()
         self.dlg.coords_label.setText('Координаты центра')
 
     def click_choose_grid(self):
@@ -192,9 +194,9 @@ class DrawPoints:
     def hide_all(self):
         self.grid_hide()
         self.snow_hide()
-        self.dlg.rotate_widget.hide()
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
+        self.dlg.bottom_widget.hide()
 
     @staticmethod
     def add_temp_layer_from_csv(path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
@@ -282,16 +284,22 @@ class DrawPoints:
         except ValueError as err:
             QMessageBox.information(None, "ERROR:", str(err))
 
+    def saving(self):
+        path = self.dlg.save_in.text()
+        self.convert_temp_layer_to_shp(DEFAULT_LAYER_NAME, path)
+        self.iface.messageBar().pushMessage(
+            f"Successfully saved in: {path}",
+            level=Qgis.Success, duration=3)
+
+    def click_apply(self):
+        self.create_figure_and_add_layer()
+        if self.dlg.save_in.text():
+            self.saving()
+        self.iface.messageBar().pushMessage(
+            'Success',
+            level=Qgis.Success, duration=3)
+
     def run(self):
         self.dlg.show()
         self.clear_all_types_input()
         self.hide_all()
-        result = self.dlg.exec_()
-        if result:
-            self.create_figure_and_add_layer()
-            if self.dlg.save_in.text():
-                path = self.dlg.save_in.text()
-                self.convert_temp_layer_to_shp(DEFAULT_LAYER_NAME, path)
-            self.iface.messageBar().pushMessage(
-                'Success',
-                level=Qgis.Success, duration=3)
