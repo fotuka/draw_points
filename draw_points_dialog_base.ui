@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>886</width>
-    <height>623</height>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -949,8 +949,8 @@
            <widget class="QPushButton" name="apply_button">
             <property name="minimumSize">
              <size>
-              <width>150</width>
-              <height>0</height>
+              <width>200</width>
+              <height>25</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -1010,34 +1010,6 @@
              </size>
             </property>
            </spacer>
-          </item>
-          <item row="3" column="0" colspan="5">
-           <widget class="QDialogButtonBox" name="ok_cancel_button_box">
-            <property name="minimumSize">
-             <size>
-              <width>400</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>5000</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="autoFillBackground">
-             <bool>false</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="standardButtons">
-             <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-            </property>
-            <property name="centerButtons">
-             <bool>true</bool>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>
