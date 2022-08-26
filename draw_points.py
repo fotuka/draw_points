@@ -272,6 +272,7 @@ class DrawPoints:
     def create_figure_and_add_layer(self):
         self.create_actual_configuration()
         self.move_all()
+        self.figure.concatenate()
         try:
             self.figure.export(get_temp_dir(TEMPORARY_FILE_NAME))
         except ValueError as err:

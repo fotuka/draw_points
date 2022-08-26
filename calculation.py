@@ -8,16 +8,42 @@ FULL_ANGLE = 360
 class Coordinates:
     def __init__(self):
         self.xy = np.array([])
+        self.xy_data = np.array([])
 
     def create(self):
         pass
 
     def rotate(self, degree: float) -> np.ndarray:
         xy_rotated = np.ndarray(shape=np.shape(self.xy), dtype=float)
-        for index in range(len(self.xy)):
-            xy_rotated[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (self.xy[index, 1] * math.sin(math.radians(degree)))
-            xy_rotated[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (self.xy[index, 1] * math.cos(math.radians(degree)))
-        return xy_rotated
+
+        if self.__class__.__name__ == 'Snow':
+            angle_that_make_no_sense = 360 / self.lines_amount
+            degree = (degree % angle_that_make_no_sense)
+
+            if degree < (angle_that_make_no_sense / 2):
+                for index in range(len(self.xy)):
+                    xy_rotated[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (
+                            self.xy[index, 1] * math.sin(math.radians(degree)))
+                    xy_rotated[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (
+                            self.xy[index, 1] * math.cos(math.radians(degree)))
+
+            if degree >= (angle_that_make_no_sense / 2):
+                degree = 0 - angle_that_make_no_sense + degree
+                for index in range(len(self.xy)):
+                    xy_rotated[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (
+                            self.xy[index, 1] * math.sin(math.radians(degree)))
+                    xy_rotated[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (
+                            self.xy[index, 1] * math.cos(math.radians(degree)))
+
+            return xy_rotated
+
+        else:
+            for index in range(len(self.xy)):
+                xy_rotated[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (
+                        self.xy[index, 1] * math.sin(math.radians(degree)))
+                xy_rotated[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (
+                        self.xy[index, 1] * math.cos(math.radians(degree)))
+            return xy_rotated
 
     def move_x(self, x: float) -> np.ndarray:
         xy_moved_x = self.xy
@@ -31,6 +57,9 @@ class Coordinates:
             xy_moved_y[index, 1] = self.xy[index, 1] + y
         return xy_moved_y
 
+    def concatenate(self):
+        self.xy = np.concatenate((self.xy, self.xy_data), axis=1)
+
     def export(self, path: str) -> None:
         np.savetxt(path, self.xy)
 
@@ -43,6 +72,7 @@ class Rectangle(Coordinates):
         self.xline_amount = xline_amount
         self.yline_amount = yline_amount
         self.xy = np.zeros([self.xline_amount * self.yline_amount, 2], float)
+        self.xy_data = np.zeros([self.xline_amount * self.yline_amount, 1], int)
         self.xgap = self.length / (self.xline_amount - 1)  # gap between vertical lines
         self.ygap = self.height / (self.yline_amount - 1)  # gap between horizontal lines
 
@@ -81,6 +111,7 @@ class Circle(Coordinates):
         self.dots_amount = dots_amount
         self.lines_amount = lines_amount
         self.xy = np.zeros([lines_amount * dots_amount + 1, 2], float)
+        self.xy_data = np.zeros([lines_amount * dots_amount + 1, 1], int)
         self.gap = self.radius / self.dots_amount
         self.angle = FULL_ANGLE / self.lines_amount
 
@@ -89,9 +120,12 @@ class Snow(Circle):
     def create(self):
         index = 1
         for line in range(self.lines_amount):
+            buffer = line + 1
             for value in np.arange(self.gap, self.radius + self.gap, self.gap):
                 self.xy[index, 1] = value * math.cos(math.radians(self.angle * line))
-                self.xy[index, 0] = 0 - value * math.sin(math.radians(self.angle * line))
+                self.xy[index, 0] = value * math.sin(math.radians(self.angle * line))
+                self.xy_data[index, 0] = buffer
+                buffer = buffer + self.lines_amount
                 index += 1
 
 
