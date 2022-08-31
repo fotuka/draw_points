@@ -80,6 +80,9 @@ class DrawPoints:
         self.dlg.choose_snowadvanced_button.clicked.connect(self.click_choose_snowadvanced)
         self.dlg.choose_path.clicked.connect(self.select_output_file)
         self.dlg.apply_button.clicked.connect(self.click_apply)
+        self.dlg.port_show_button.clicked.connect(self.click_port_button)
+        self.dlg.port_hide_button.clicked.connect(self.click_port_button)
+        self.is_port_show = False
 
     def tr(self, message):
         return QCoreApplication.translate('DrawPoints', message)
@@ -145,6 +148,10 @@ class DrawPoints:
         self.dlg.coords_x.setValue(0)
         self.dlg.coords_y.setValue(0)
         self.dlg.save_in.clear()
+        self.dlg.port_show_button.hide()
+        self.dlg.port_hide_button.hide()
+        if self.is_port_show == True:
+            self.click_port_button()
 
     def grid_hide(self):
         self.dlg.grid_widget.hide()
@@ -174,22 +181,42 @@ class DrawPoints:
         self.grid_show()
         self.clear_all_types_input()
         self.choose = SIMPLE_GRID_CONFIGURATION
+        self.dlg.port_show_button.show()
 
     def click_choose_gridslope(self):
         self.grid_show()
         self.clear_all_types_input()
         self.choose = SLOPE_GRID_CONFIGURATION
+        self.dlg.port_show_button.show()
 
     def click_choose_snow(self):
         self.snow_show()
         self.clear_all_types_input()
         self.choose = SIMPLE_SNOW_CONFIGURATION
+        self.dlg.port_show_button.show()
 
     def click_choose_snowadvanced(self):
         self.snow_show()
         self.clear_all_types_input()
         self.choose = ADVANCED_SNOW_CONFIGURATION
-
+        self.dlg.port_show_button.show()
+        
+    def click_port_button(self):     
+        
+        if self.is_port_show == True:
+            self.dlg.resize((self.dlg.size().width() - 230), self.dlg.size().height())
+            self.dlg.port_show_button.show()
+            self.dlg.port_hide_button.hide()
+            self.dlg.tableWidget.hide()
+            self.is_port_show = False            
+            
+        else:
+            self.dlg.resize((self.dlg.size().width() + 230), self.dlg.size().height())
+            self.dlg.port_show_button.hide()
+            self.dlg.port_hide_button.show()
+            self.dlg.tableWidget.show()
+            self.is_port_show = True
+        
     def select_output_file(self):
         filename, _filter = QFileDialog.getSaveFileName(
             self.dlg, "Select   output file ", "", '*.shp')
@@ -201,6 +228,7 @@ class DrawPoints:
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
         self.dlg.bottom_widget.hide()
+        self.dlg.tableWidget.hide()
 
     @staticmethod
     def add_temp_layer_from_csv(path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
@@ -301,10 +329,11 @@ class DrawPoints:
         if self.dlg.save_in.text():
             self.saving()
         self.iface.messageBar().pushMessage(
-            'Success',
+             'succes',
             level=Qgis.Success, duration=3)
 
     def run(self):
         self.dlg.show()
         self.clear_all_types_input()
         self.hide_all()
+        
