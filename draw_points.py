@@ -1,6 +1,7 @@
 import os
 from sys import platform
 import getpass
+import urllib.parse
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
@@ -40,11 +41,14 @@ class Info:
         return uri
 
 
-def get_temp_dir(name: str) -> str:
+def get_temp_dir(name: str, is_uri_encode=False) -> str:
     if platform == 'linux' or platform == 'linux2':
-        path = os.path.join('var', 'tmp', name)
+        path = os.path.join('\var', 'tmp', name)
     elif platform == "win32":
-        path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
+        if is_uri_encode == True:
+            path = os.path.join('C:/', 'Users', urllib.parse.quote_plus(getpass.getuser()), 'Appdata', 'Local', 'Temp', name)
+        else:
+            path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
     else:
         raise ValueError('Your platform is unsupported, try linux or windows')
     return path
@@ -280,7 +284,7 @@ class DrawPoints:
         if self.is_layer_exist(DEFAULT_LAYER_NAME):
             self.del_layer(self, DEFAULT_LAYER_NAME)
         try:
-            self.add_temp_layer_from_csv(get_temp_dir(TEMPORARY_FILE_NAME),
+            self.add_temp_layer_from_csv(get_temp_dir(TEMPORARY_FILE_NAME, is_uri_encode=True),
                                      self.dlg.system_of_coords.crs(), '%20')
         except ValueError as err:
             QMessageBox.information(None, "ERROR:", str(err))
