@@ -2,6 +2,8 @@ import os
 from sys import platform
 import getpass
 import urllib.parse
+import numpy as np
+
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
@@ -26,7 +28,7 @@ TEMPORARY_FILE_NAME = 'temp_xy.csv'
 
 class Info:
 
-    def __init__(self, path: str, delimiter: str,  crs_authid: str, xfield='field_1', yfield='field_2'):
+    def __init__(self, path: str, delimiter: str,  crs_authid: str, xfield='field_2', yfield='field_3'):
         self.path = path
         self.delimiter = delimiter
         self.crs = crs_authid
@@ -82,6 +84,7 @@ class DrawPoints:
         self.dlg.apply_button.clicked.connect(self.click_apply)
         self.dlg.port_show_button.clicked.connect(self.click_port_button)
         self.dlg.port_hide_button.clicked.connect(self.click_port_button)
+        self.dlg.port_spinbox.valueChanged.connect(self.watch_spinbox)
         self.is_port_show = False
 
     def tr(self, message):
@@ -136,6 +139,9 @@ class DrawPoints:
                 action)
             self.iface.removeToolBarIcon(action)
 
+    def watch_spinbox(self):
+        self.dlg.port_table.setRowCount(self.dlg.port_spinbox.value())
+
     def clear_all_types_input(self):
         self.dlg.snow_radius.setValue(0)
         self.dlg.snow_lines_amount.setValue(0)
@@ -162,7 +168,10 @@ class DrawPoints:
         self.dlg.grid_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
+        self.dlg.port_widget.show()
         self.dlg.bottom_widget.show()
+        self.dlg.rotate_widget.show()
+        self.dlg.crs_widgets.show()
         self.dlg.coords_label.setText('Координаты левого нижнего угла')
 
     def snow_hide(self):
@@ -174,7 +183,11 @@ class DrawPoints:
         self.dlg.snow_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
+        self.dlg.port_widget.show()
         self.dlg.bottom_widget.show()
+        self.dlg.coords_widget.hide()
+        self.dlg.rotate_widget.show()
+        self.dlg.crs_widgets.show()
         self.dlg.coords_label.setText('Координаты центра')
 
     def click_choose_grid(self):
@@ -200,35 +213,50 @@ class DrawPoints:
         self.clear_all_types_input()
         self.choose = ADVANCED_SNOW_CONFIGURATION
         self.dlg.port_show_button.show()
-        
-    def click_port_button(self):     
-        
+
+    def click_port_button(self):
+
         if self.is_port_show == True:
-            self.dlg.resize((self.dlg.size().width() - 230), self.dlg.size().height())
+            self.dlg.resize((self.dlg.size().width() - 248), self.dlg.size().height())
             self.dlg.port_show_button.show()
             self.dlg.port_hide_button.hide()
-            self.dlg.tableWidget.hide()
-            self.is_port_show = False            
-            
+            self.dlg.port_table.hide()
+            self.is_port_show = False
+
         else:
-            self.dlg.resize((self.dlg.size().width() + 230), self.dlg.size().height())
+            self.dlg.resize((self.dlg.size().width() + 248), self.dlg.size().height())
             self.dlg.port_show_button.hide()
             self.dlg.port_hide_button.show()
-            self.dlg.tableWidget.show()
+            self.dlg.port_table.show()
             self.is_port_show = True
-        
+
     def select_output_file(self):
         filename, _filter = QFileDialog.getSaveFileName(
             self.dlg, "Select   output file ", "", '*.shp')
         self.dlg.save_in.setText(filename)
+
+    def get_ports(self):
+        self.xy_ports = np.ndarray([self.dlg.port_table.rowCount(), 3], float)
+        for row in range(self.dlg.port_table.rowCount()):
+            item = self.dlg.port_table.item(row, 0)
+            self.xy_ports[row, 0] = float(item.text())
+            item = self.dlg.port_table.item(row, 1)
+            self.xy_ports[row, 1] = float(item.text().replace(',', '.'))
+            item = self.dlg.port_table.item(row, 2)
+            self.xy_ports[row, 2] = float(item.text().replace(',', '.'))
+        self.ports = Ports(self.dlg.port_table.rowCount(), self.xy_ports)
+
 
     def hide_all(self):
         self.grid_hide()
         self.snow_hide()
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
+        self.dlg.port_widget.hide()
         self.dlg.bottom_widget.hide()
-        self.dlg.tableWidget.hide()
+        self.dlg.port_table.hide()
+        self.dlg.rotate_widget.hide()
+        self.dlg.crs_widgets.hide()
 
     @staticmethod
     def add_temp_layer_from_csv(path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
@@ -274,20 +302,26 @@ class DrawPoints:
         snow_dots_amount = self.dlg.snow_dots_amount.value()
         snow_lines_amount = self.dlg.snow_lines_amount.value()
         snow_radius = self.dlg.snow_radius.value()
-        self.figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount)
+        self.figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount, self.dlg.port_table.rowCount())
         self.figure.create()
 
     def create_advanced_snow_configuration(self):
         snow_dots_amount = self.dlg.snow_dots_amount.value()
         snow_lines_amount = self.dlg.snow_lines_amount.value()
         snow_radius = self.dlg.snow_radius.value()
-        self.figure = SnowAdvanced(snow_radius, snow_dots_amount, snow_lines_amount)
+        self.figure = SnowAdvanced(snow_radius, snow_dots_amount, snow_lines_amount, self.dlg.port_table.rowCount())
         self.figure.create()
 
     def move_all(self):
         self.figure.xy = self.figure.rotate(self.dlg.rotate.value())
-        self.figure.xy = self.figure.move_x(self.dlg.coords_x.value())
-        self.figure.xy = self.figure.move_y(self.dlg.coords_y.value())
+        x = 0
+        y = 0
+        lenght = self.dlg.port_table.rowCount()
+        for row in range(len(self.xy_ports)):
+            x = x + self.xy_ports[row, 2]
+            y = y + self.xy_ports[row, 2]
+        self.figure.xy = self.figure.move_x(x / lenght)
+        self.figure.xy = self.figure.move_y(y / lenght)
 
     def create_actual_configuration(self):
         if self.choose == SIMPLE_GRID_CONFIGURATION:
@@ -302,9 +336,12 @@ class DrawPoints:
             pass
 
     def create_figure_and_add_layer(self):
+        self.get_ports()
         self.create_actual_configuration()
         self.move_all()
         self.figure.concatenate()
+        if self.dlg.port_table.rowCount() != 0:
+            self.figure.xy = np.concatenate((self.ports.xy_ports,self.figure.xy), axis=0)
         try:
             self.figure.export(get_temp_dir(TEMPORARY_FILE_NAME))
         except ValueError as err:
