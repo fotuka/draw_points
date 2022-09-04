@@ -322,7 +322,7 @@ class DrawPoints:
             y = 0
             lenght = self.dlg.port_table.rowCount()
             for row in range(len(self.xy_ports)):
-                x = x + self.xy_ports[row, 2]
+                x = x + self.xy_ports[row, 1]
                 y = y + self.xy_ports[row, 2]
             self.figure.xy = self.figure.move_x(x / lenght)
             self.figure.xy = self.figure.move_y(y / lenght)
