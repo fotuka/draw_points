@@ -207,12 +207,15 @@ class DrawPoints:
         self.clear_all_types_input()
         self.choose = SIMPLE_SNOW_CONFIGURATION
         self.dlg.port_show_button.show()
+        self.dlg.snow_lines_amount_label.setText('Количество линий')
+
 
     def click_choose_snowadvanced(self):
         self.snow_show()
         self.clear_all_types_input()
         self.choose = ADVANCED_SNOW_CONFIGURATION
         self.dlg.port_show_button.show()
+        self.dlg.snow_lines_amount_label.setText('Количество линий (четное)')
 
     def click_port_button(self):
 
