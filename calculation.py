@@ -58,10 +58,24 @@ class Coordinates:
         return xy_moved_y
 
     def concatenate(self):
-        self.xy = np.concatenate((self.xy, self.xy_data), axis=1)
+        self.xy = np.concatenate((self.xy_data, self.xy), axis=1)
 
     def export(self, path: str) -> None:
         np.savetxt(path, self.xy)
+
+
+class Ports(Coordinates):
+    def __init__(self, ports_amount: int, xy_ports: np.ndarray):
+        super().__init__()
+        self.ports_amount = ports_amount
+        self.xy_ports = xy_ports
+
+    # def concatenate(self, xy):
+    #     f = open('text.txt', 'w')
+    #     f.write(str(self.xy_ports))
+    #     f.write('____________________')
+    #     f.write(str(self.xy))
+    #     np.concatenate((self.xy_ports,xy), axis=0)
 
 
 class Rectangle(Coordinates):
@@ -105,22 +119,23 @@ class GridSlope(Rectangle):
 
 
 class Circle(Coordinates):
-    def __init__(self, radius: float, dots_amount: int, lines_amount: int):
+    def __init__(self, radius: float, dots_amount: int, lines_amount: int, ports_amount: int):
         super().__init__()
+        self.ports_amount = ports_amount
         self.radius = radius
         self.dots_amount = dots_amount
         self.lines_amount = lines_amount
-        self.xy = np.zeros([lines_amount * dots_amount + 1, 2], float)
-        self.xy_data = np.zeros([lines_amount * dots_amount + 1, 1], int)
+        self.xy = np.zeros([lines_amount * dots_amount, 2], float)
+        self.xy_data = np.zeros([lines_amount * dots_amount, 1], int)
         self.gap = self.radius / self.dots_amount
         self.angle = FULL_ANGLE / self.lines_amount
 
 
 class Snow(Circle):
     def create(self):
-        index = 1
+        index = 0
         for line in range(self.lines_amount):
-            buffer = line + 1
+            buffer = self.ports_amount + line + 1
             for value in np.arange(self.gap, self.radius + self.gap, self.gap):
                 self.xy[index, 1] = value * math.cos(math.radians(self.angle * line))
                 self.xy[index, 0] = value * math.sin(math.radians(self.angle * line))

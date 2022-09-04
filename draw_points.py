@@ -236,15 +236,18 @@ class DrawPoints:
         self.dlg.save_in.setText(filename)
 
     def get_ports(self):
-        self.xy_ports = np.ndarray([self.dlg.port_table.rowCount(), 3], float)
-        for row in range(self.dlg.port_table.rowCount()):
-            item = self.dlg.port_table.item(row, 0)
-            self.xy_ports[row, 0] = float(item.text())
-            item = self.dlg.port_table.item(row, 1)
-            self.xy_ports[row, 1] = float(item.text().replace(',', '.'))
-            item = self.dlg.port_table.item(row, 2)
-            self.xy_ports[row, 2] = float(item.text().replace(',', '.'))
-        self.ports = Ports(self.dlg.port_table.rowCount(), self.xy_ports)
+        if self.figure.__class__.__name__ == 'Snow' or self.figure.__class__.__name__ == 'SnowAdvanced':
+            self.xy_ports = np.ndarray([self.dlg.port_table.rowCount(), 3], float)
+            for row in range(self.dlg.port_table.rowCount()):
+                item = self.dlg.port_table.item(row, 0)
+                self.xy_ports[row, 0] = float(item.text())
+                item = self.dlg.port_table.item(row, 1)
+                self.xy_ports[row, 1] = float(item.text().replace(',', '.'))
+                item = self.dlg.port_table.item(row, 2)
+                self.xy_ports[row, 2] = float(item.text().replace(',', '.'))
+            self.ports = Ports(self.dlg.port_table.rowCount(), self.xy_ports)
+        else:
+            pass
 
 
     def hide_all(self):
@@ -314,14 +317,19 @@ class DrawPoints:
 
     def move_all(self):
         self.figure.xy = self.figure.rotate(self.dlg.rotate.value())
-        x = 0
-        y = 0
-        lenght = self.dlg.port_table.rowCount()
-        for row in range(len(self.xy_ports)):
-            x = x + self.xy_ports[row, 2]
-            y = y + self.xy_ports[row, 2]
-        self.figure.xy = self.figure.move_x(x / lenght)
-        self.figure.xy = self.figure.move_y(y / lenght)
+        if self.figure.__class__.__name__ == 'Snow' or self.figure.__class__.__name__ == 'SnowAdvanced':
+            x = 0
+            y = 0
+            lenght = self.dlg.port_table.rowCount()
+            for row in range(len(self.xy_ports)):
+                x = x + self.xy_ports[row, 2]
+                y = y + self.xy_ports[row, 2]
+            self.figure.xy = self.figure.move_x(x / lenght)
+            self.figure.xy = self.figure.move_y(y / lenght)
+        else:
+            self.figure.xy = self.figure.move_x(self.dlg.coords_x.value())
+            self.figure.xy = self.figure.move_y(self.dlg.coords_x.value())
+
 
     def create_actual_configuration(self):
         if self.choose == SIMPLE_GRID_CONFIGURATION:
@@ -336,8 +344,8 @@ class DrawPoints:
             pass
 
     def create_figure_and_add_layer(self):
-        self.get_ports()
         self.create_actual_configuration()
+        self.get_ports()
         self.move_all()
         self.figure.concatenate()
         if self.dlg.port_table.rowCount() != 0:
