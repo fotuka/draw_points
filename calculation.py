@@ -16,7 +16,7 @@ class Coordinates:
     def rotate(self, degree: float) -> np.ndarray:
         xy_rotated = np.ndarray(shape=np.shape(self.xy), dtype=float)
 
-        if self.__class__.__name__ == 'Snow':
+        if self.__class__.__name__ == 'Snow' or self.__class__.__name__ == 'SnowAdvanced':
             angle_that_make_no_sense = 360 / self.lines_amount
             degree = (degree % angle_that_make_no_sense)
 
