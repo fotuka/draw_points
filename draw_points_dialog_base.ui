@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>819</width>
-    <height>593</height>
+    <height>654</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -179,7 +179,7 @@
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>0</height>
+               <height>80</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -207,11 +207,11 @@
               <string notr="true"/>
              </property>
              <property name="text">
-              <string>grid</string>
+              <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>grid.png</normaloff>grid.png</iconset>
+              <iconset resource="resources.qrc">
+               <normaloff>:/plugins/draw_points/grid.png</normaloff>:/plugins/draw_points/grid.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -226,7 +226,7 @@
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>0</height>
+               <height>80</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -239,12 +239,11 @@
               <string notr="true"/>
              </property>
              <property name="text">
-              <string>gridslope</string>
+              <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>gridslope.png</normaloff>
-               <activeoff>gridslope_on.png</activeoff>gridslope.png</iconset>
+              <iconset resource="resources.qrc">
+               <normaloff>:/plugins/draw_points/gridslope.png</normaloff>:/plugins/draw_points/gridslope.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -259,7 +258,7 @@
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>0</height>
+               <height>80</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -275,12 +274,11 @@
               <string notr="true"/>
              </property>
              <property name="text">
-              <string>snow</string>
+              <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>snow.png</normaloff>
-               <activeoff>snow_on.png</activeoff>snow.png</iconset>
+              <iconset resource="resources.qrc">
+               <normaloff>:/plugins/draw_points/snow.png</normaloff>:/plugins/draw_points/snow.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -295,7 +293,7 @@
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>0</height>
+               <height>80</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -308,12 +306,11 @@
               <string notr="true"/>
              </property>
              <property name="text">
-              <string>snowadvanced</string>
+              <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>snowadvanced.png</normaloff>
-               <activeoff>snowadvanced_on.png</activeoff>snowadvanced.png</iconset>
+              <iconset resource="resources.qrc">
+               <normaloff>:/plugins/draw_points/snowadvanced.png</normaloff>:/plugins/draw_points/snowadvanced.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -1201,6 +1198,8 @@
    <header>qgsprojectionselectionwidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
