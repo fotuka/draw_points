@@ -234,7 +234,7 @@ class DrawPoints:
 
     def select_output_file(self):
         filename, _filter = QFileDialog.getSaveFileName(
-            self.dlg, "Select   output file ", "", '*.shp')
+            self.dlg, 'Select   output file ', '', '*.shp')
         self.dlg.save_in.setText(filename)
 
     def get_ports(self):
