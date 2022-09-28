@@ -10,9 +10,6 @@ class Coordinates:
         self.xy = np.array([])
         self.xy_data = np.array([])
 
-    def create(self):
-        pass
-
     def rotate(self, degree: float) -> np.ndarray:
         xy_rotated = np.ndarray(shape=np.shape(self.xy), dtype=float)
         for index in range(len(self.xy)):
