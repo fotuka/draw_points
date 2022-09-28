@@ -155,7 +155,7 @@ class DrawPoints:
         self.dlg.save_in.clear()
         self.dlg.port_show_button.hide()
         self.dlg.port_hide_button.hide()
-        if self.is_port_show == True:
+        if self.is_port_show:
             self.click_port_button()
 
     def grid_hide(self):
