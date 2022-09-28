@@ -238,7 +238,10 @@ class DrawPoints:
         self.dlg.save_in.setText(filename)
 
     def get_ports(self):
-        if self.figure.__class__.__name__ == 'Snow' or self.figure.__class__.__name__ == 'SnowAdvanced':
+        if self.dlg.port_table.rowCount() == 0:
+            pass
+
+        else:
             self.xy_ports = np.ndarray([self.dlg.port_table.rowCount(), 3], float)
             for row in range(self.dlg.port_table.rowCount()):
                 item = self.dlg.port_table.item(row, 0)
@@ -248,8 +251,6 @@ class DrawPoints:
                 item = self.dlg.port_table.item(row, 2)
                 self.xy_ports[row, 2] = float(item.text().replace(',', '.'))
             self.ports = Ports(self.xy_ports)
-        else:
-            pass
 
 
     def hide_all(self):
