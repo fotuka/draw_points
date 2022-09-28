@@ -42,13 +42,6 @@ class Ports(Coordinates):
         self.ports_amount = ports_amount
         self.xy_ports = xy_ports
 
-    # def concatenate(self, xy):
-    #     f = open('text.txt', 'w')
-    #     f.write(str(self.xy_ports))
-    #     f.write('____________________')
-    #     f.write(str(self.xy))
-    #     np.concatenate((self.xy_ports,xy), axis=0)
-
 
 class Rectangle(Coordinates):
     def __init__(self, length: float, height: float, xline_amount: int, yline_amount: int):
