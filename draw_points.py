@@ -46,7 +46,7 @@ def get_temp_dir(name: str, is_uri_encode=False) -> str:
     if platform == 'linux' or platform == 'linux2':
         path = os.path.join('/var', 'tmp', name)
     elif platform == 'win32':
-        if is_uri_encode == True:
+        if is_uri_encode:
             path = os.path.join('C:/', 'Users', urllib.parse.quote_plus(getpass.getuser()), 'Appdata', 'Local', 'Temp', name)
         else:
             path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
