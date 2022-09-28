@@ -27,7 +27,6 @@ TEMPORARY_FILE_NAME = 'temp_xy.csv'
 
 
 class Info:
-
     def __init__(self, path: str, delimiter: str,  crs_authid: str, xfield='field_2', yfield='field_3'):
         self.path = path
         self.delimiter = delimiter
