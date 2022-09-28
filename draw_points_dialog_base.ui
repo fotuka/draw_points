@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>819</width>
-    <height>654</height>
+    <height>604</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -323,12 +323,12 @@
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="layout_options" stretch="0,4,3,1,1,1">
+          <layout class="QVBoxLayout" name="layout_options" stretch="0,0,0,0,0,0">
            <property name="spacing">
             <number>0</number>
            </property>
            <property name="sizeConstraint">
-            <enum>QLayout::SetMaximumSize</enum>
+            <enum>QLayout::SetDefaultConstraint</enum>
            </property>
            <property name="topMargin">
             <number>0</number>
@@ -338,6 +338,12 @@
            </property>
            <item>
             <widget class="QWidget" name="port_widget" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>35</height>
+              </size>
+             </property>
              <layout class="QHBoxLayout" name="ports_vertical_layout">
               <property name="spacing">
                <number>10</number>
@@ -748,6 +754,12 @@
            </item>
            <item>
             <widget class="QWidget" name="rotate_widget" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>100</height>
+              </size>
+             </property>
              <layout class="QVBoxLayout" name="verticalLayout_18">
               <property name="spacing">
                <number>1</number>
@@ -950,9 +962,15 @@
            </item>
            <item>
             <widget class="QWidget" name="crs_widgets" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <layout class="QVBoxLayout" name="crs_widget">
               <property name="spacing">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="leftMargin">
                <number>10</number>

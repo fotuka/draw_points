@@ -185,8 +185,8 @@ class DrawPoints:
         self.dlg.top_widget.show()
         self.dlg.port_widget.show()
         self.dlg.bottom_widget.show()
+        self.dlg.rotate_widget.hide()
         self.dlg.coords_widget.hide()
-        self.dlg.rotate_widget.show()
         self.dlg.crs_widgets.show()
         self.dlg.coords_label.setText('Координаты центра')
 
@@ -327,11 +327,9 @@ class DrawPoints:
             for row in range(len(self.xy_ports)):
                 x = x + self.xy_ports[row, 1]
                 y = y + self.xy_ports[row, 2]
-            self.figure.xy = self.figure.move_x(x / lenght)
-            self.figure.xy = self.figure.move_y(y / lenght)
+            self.figure.xy = self.figure.move((x / lenght), (y / lenght))
         else:
-            self.figure.xy = self.figure.move_x(self.dlg.coords_x.value())
-            self.figure.xy = self.figure.move_y(self.dlg.coords_x.value())
+            self.figure.xy = self.figure.move(self.dlg.coords_x.value(), self.dlg.coords_y.value())
 
 
     def create_actual_configuration(self):

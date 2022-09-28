@@ -15,47 +15,19 @@ class Coordinates:
 
     def rotate(self, degree: float) -> np.ndarray:
         xy_rotated = np.ndarray(shape=np.shape(self.xy), dtype=float)
-
-        if self.__class__.__name__ == 'Snow' or self.__class__.__name__ == 'SnowAdvanced':
-            angle_that_make_no_sense = 360 / self.lines_amount
-            degree = (degree % angle_that_make_no_sense)
-
-            if degree < (angle_that_make_no_sense / 2):
-                for index in range(len(self.xy)):
-                    xy_rotated[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (
-                            self.xy[index, 1] * math.sin(math.radians(degree)))
-                    xy_rotated[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (
-                            self.xy[index, 1] * math.cos(math.radians(degree)))
-
-            if degree >= (angle_that_make_no_sense / 2):
-                degree = 0 - angle_that_make_no_sense + degree
-                for index in range(len(self.xy)):
-                    xy_rotated[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (
-                            self.xy[index, 1] * math.sin(math.radians(degree)))
-                    xy_rotated[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (
-                            self.xy[index, 1] * math.cos(math.radians(degree)))
-
-            return xy_rotated
-
-        else:
-            for index in range(len(self.xy)):
-                xy_rotated[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (
-                        self.xy[index, 1] * math.sin(math.radians(degree)))
-                xy_rotated[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (
-                        self.xy[index, 1] * math.cos(math.radians(degree)))
-            return xy_rotated
-
-    def move_x(self, x: float) -> np.ndarray:
-        xy_moved_x = self.xy
         for index in range(len(self.xy)):
-            xy_moved_x[index, 0] = self.xy[index, 0] + x
-        return xy_moved_x
+            xy_rotated[index, 0] = (self.xy[index, 0] * math.cos(math.radians(degree))) - (
+                    self.xy[index, 1] * math.sin(math.radians(degree)))
+            xy_rotated[index, 1] = (self.xy[index, 0] * math.sin(math.radians(degree))) + (
+                    self.xy[index, 1] * math.cos(math.radians(degree)))
+        return xy_rotated
 
-    def move_y(self, y: float) -> np.ndarray:
-        xy_moved_y = self.xy
+    def move(self, x: float, y: float) -> np.ndarray:
+        xy_moved = self.xy
         for index in range(len(self.xy)):
-            xy_moved_y[index, 1] = self.xy[index, 1] + y
-        return xy_moved_y
+            xy_moved[index, 0] = self.xy[index, 0] + x
+            xy_moved[index, 1] = self.xy[index, 1] + y
+        return xy_moved
 
     def concatenate(self):
         self.xy = np.concatenate((self.xy_data, self.xy), axis=1)
