@@ -248,7 +248,7 @@ class DrawPoints:
                 self.xy_ports[row, 1] = float(item.text().replace(',', '.'))
                 item = self.dlg.port_table.item(row, 2)
                 self.xy_ports[row, 2] = float(item.text().replace(',', '.'))
-            self.ports = Ports(self.dlg.port_table.rowCount(), self.xy_ports)
+            self.ports = Ports(self.xy_ports)
         else:
             pass
 

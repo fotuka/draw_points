@@ -34,9 +34,9 @@ class Coordinates:
 
 
 class Ports(Coordinates):
-    def __init__(self, ports_amount: int, xy_ports: np.ndarray):
+    def __init__(self, xy_ports: np.ndarray):
         super().__init__()
-        self.ports_amount = ports_amount
+        self.ports_amount = len(xy_ports)
         self.xy_ports = xy_ports
 
 
