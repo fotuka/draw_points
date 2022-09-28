@@ -349,7 +349,7 @@ class DrawPoints:
         self.get_ports()
         self.move_all()
         self.figure.concatenate()
-        if self.dlg.port_table.rowCount() != 0:
+        if self.dlg.port_table.rowCount():
             self.figure.xy = np.concatenate((self.ports.xy_ports,self.figure.xy), axis=0)
         try:
             self.figure.export(get_temp_dir(TEMPORARY_FILE_NAME))
