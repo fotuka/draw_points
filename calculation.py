@@ -31,14 +31,16 @@ class Coordinates:
 
     def export(self, path: str) -> None:
         np.savetxt(path, self.xy)
-
+    def port_amount(self):
+        port_amount = len(self.port_numbers)
+        return port_amount
 
 class Ports(Coordinates):
-    def __init__(self, xy_ports: np.ndarray):
+    def __init__(self, numbers: list, x: list, y: list):
         super().__init__()
-        self.ports_amount = len(xy_ports)
-        self.xy_ports = xy_ports
-
+        self.port_numbers = numbers
+        self.port_y = y
+        self.port_x = x
 
 class Rectangle(Coordinates):
     def __init__(self, length: float, height: float, xline_amount: int, yline_amount: int):
@@ -81,9 +83,9 @@ class GridSlope(Rectangle):
 
 
 class Circle(Coordinates):
-    def __init__(self, radius: float, dots_amount: int, lines_amount: int, ports_amount: int):
+    def __init__(self, radius: float, dots_amount: int, lines_amount: int):
         super().__init__()
-        self.ports_amount = ports_amount
+        self.ports_amount = self.port_amount()
         self.radius = radius
         self.dots_amount = dots_amount
         self.lines_amount = lines_amount
