@@ -4,7 +4,6 @@ import getpass
 import urllib.parse
 import numpy as np
 
-
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QFileDialog
@@ -27,7 +26,7 @@ TEMPORARY_FILE_NAME = 'temp_xy.csv'
 
 
 class Info:
-    def __init__(self, path: str, delimiter: str,  crs_authid: str, xfield='field_2', yfield='field_3'):
+    def __init__(self, path: str, delimiter: str, crs_authid: str, xfield='field_2', yfield='field_3'):
         self.path = path
         self.delimiter = delimiter
         self.crs = crs_authid
@@ -47,7 +46,8 @@ def get_temp_dir(name: str, is_uri_encode=False) -> str:
         path = os.path.join('/var', 'tmp', name)
     elif platform == 'win32':
         if is_uri_encode:
-            path = os.path.join('C:/', 'Users', urllib.parse.quote_plus(getpass.getuser()), 'Appdata', 'Local', 'Temp', name)
+            path = os.path.join('C:/', 'Users', urllib.parse.quote_plus(getpass.getuser()), 'Appdata', 'Local', 'Temp',
+                                name)
         else:
             path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
     else:
@@ -90,16 +90,16 @@ class DrawPoints:
         return QCoreApplication.translate('DrawPoints', message)
 
     def add_action(
-        self,
-        icon_path,
-        text,
-        callback,
-        enabled_flag=True,
-        add_to_menu=True,
-        add_to_toolbar=True,
-        status_tip=None,
-        whats_this=None,
-        parent=None):
+            self,
+            icon_path,
+            text,
+            callback,
+            enabled_flag=True,
+            add_to_menu=True,
+            add_to_toolbar=True,
+            status_tip=None,
+            whats_this=None,
+            parent=None):
         icon = QIcon(icon_path)
         action = QAction(icon, text, parent)
         action.triggered.connect(callback)
@@ -208,7 +208,6 @@ class DrawPoints:
         self.dlg.port_show_button.show()
         self.dlg.snow_lines_amount_label.setText('Количество линий')
 
-
     def click_choose_snowadvanced(self):
         self.snow_show()
         self.clear_all_types_input()
@@ -237,21 +236,21 @@ class DrawPoints:
             self.dlg, 'Select   output file ', '', '*.shp')
         self.dlg.save_in.setText(filename)
 
-    def get_ports(self):
-        if self.dlg.port_table.rowCount() == 0:
-            pass
-
-        else:
-            self.xy_ports = np.ndarray([self.dlg.port_table.rowCount(), 3], float)
+    def add_ports(self):
+        if self.dlg.port_table.rowCount() > 0:
+            numbers = []
+            x = []
+            y = []
             for row in range(self.dlg.port_table.rowCount()):
-                item = self.dlg.port_table.item(row, 0)
-                self.xy_ports[row, 0] = float(item.text())
-                item = self.dlg.port_table.item(row, 1)
-                self.xy_ports[row, 1] = float(item.text().replace(',', '.'))
-                item = self.dlg.port_table.item(row, 2)
-                self.xy_ports[row, 2] = float(item.text().replace(',', '.'))
-            self.ports = Ports(self.xy_ports)
-
+                if int(self.dlg.port_table.item(row, 0).text()) > 0:
+                    numbers.append(int(self.dlg.port_table.item(row, 0).text()))
+                    numbers.append(float(self.dlg.port_table.item(row, 1).text().replace(',', '.')))
+                    numbers.append(float(self.dlg.port_table.item(row, 2).text().replace(',', '.')))
+                else:
+                    pass
+            return Ports(numbers, x, y)
+        else:
+            pass
 
     def hide_all(self):
         self.grid_hide()
@@ -308,14 +307,14 @@ class DrawPoints:
         snow_dots_amount = self.dlg.snow_dots_amount.value()
         snow_lines_amount = self.dlg.snow_lines_amount.value()
         snow_radius = self.dlg.snow_radius.value()
-        self.figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount, self.dlg.port_table.rowCount())
+        self.figure = Snow(snow_radius, snow_dots_amount, snow_lines_amount)
         self.figure.create()
 
     def create_advanced_snow_configuration(self):
         snow_dots_amount = self.dlg.snow_dots_amount.value()
         snow_lines_amount = self.dlg.snow_lines_amount.value()
         snow_radius = self.dlg.snow_radius.value()
-        self.figure = SnowAdvanced(snow_radius, snow_dots_amount, snow_lines_amount, self.dlg.port_table.rowCount())
+        self.figure = SnowAdvanced(snow_radius, snow_dots_amount, snow_lines_amount)
         self.figure.create()
 
     def move_all(self):
@@ -331,7 +330,6 @@ class DrawPoints:
         else:
             self.figure.xy = self.figure.move(self.dlg.coords_x.value(), self.dlg.coords_y.value())
 
-
     def create_actual_configuration(self):
         if self.choose == SIMPLE_GRID_CONFIGURATION:
             self.create_simple_grid_configuration()
@@ -346,11 +344,11 @@ class DrawPoints:
 
     def create_figure_and_add_layer(self):
         self.create_actual_configuration()
-        self.get_ports()
+        self.add_ports()
         self.move_all()
         self.figure.concatenate()
         if self.dlg.port_table.rowCount():
-            self.figure.xy = np.concatenate((self.ports.xy_ports,self.figure.xy), axis=0)
+            self.figure.xy = np.concatenate((self.ports.xy_ports, self.figure.xy), axis=0)
         try:
             self.figure.export(get_temp_dir(TEMPORARY_FILE_NAME))
         except ValueError as err:
@@ -359,7 +357,7 @@ class DrawPoints:
             self.del_layer(self, DEFAULT_LAYER_NAME)
         try:
             self.add_temp_layer_from_csv(get_temp_dir(TEMPORARY_FILE_NAME, is_uri_encode=True),
-                                     self.dlg.system_of_coords.crs(), '%20')
+                                         self.dlg.system_of_coords.crs(), '%20')
         except ValueError as err:
             QMessageBox.information(None, "ERROR:", str(err))
 
@@ -375,11 +373,10 @@ class DrawPoints:
         if self.dlg.save_in.text():
             self.saving()
         self.iface.messageBar().pushMessage(
-             'succes',
+            'succes',
             level=Qgis.Success, duration=3)
 
     def run(self):
         self.dlg.show()
         self.clear_all_types_input()
         self.hide_all()
-        
