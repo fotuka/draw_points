@@ -1,6 +1,8 @@
 import os
 from sys import platform
 import getpass
+import urllib.parse
+import numpy as np
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
@@ -24,8 +26,7 @@ TEMPORARY_FILE_NAME = 'temp_xy.csv'
 
 
 class Info:
-
-    def __init__(self, path: str, delimiter: str,  crs_authid: str, xfield='field_1', yfield='field_2'):
+    def __init__(self, path: str, delimiter: str, crs_authid: str, xfield='field_2', yfield='field_3'):
         self.path = path
         self.delimiter = delimiter
         self.crs = crs_authid
@@ -40,11 +41,15 @@ class Info:
         return uri
 
 
-def get_temp_dir(name: str) -> str:
+def get_temp_dir(name: str, is_uri_encode=False) -> str:
     if platform == 'linux' or platform == 'linux2':
-        path = os.path.join('var', 'tmp', name)
-    elif platform == "win32":
-        path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
+        path = os.path.join('/var', 'tmp', name)
+    elif platform == 'win32':
+        if is_uri_encode:
+            path = os.path.join('C:/', 'Users', urllib.parse.quote_plus(getpass.getuser()), 'Appdata', 'Local', 'Temp',
+                                name)
+        else:
+            path = os.path.join('C:/', 'Users', getpass.getuser(), 'Appdata', 'Local', 'Temp', name)
     else:
         raise ValueError('Your platform is unsupported, try linux or windows')
     return path
@@ -76,21 +81,25 @@ class DrawPoints:
         self.dlg.choose_snowadvanced_button.clicked.connect(self.click_choose_snowadvanced)
         self.dlg.choose_path.clicked.connect(self.select_output_file)
         self.dlg.apply_button.clicked.connect(self.click_apply)
+        self.dlg.port_show_button.clicked.connect(self.click_port_button)
+        self.dlg.port_hide_button.clicked.connect(self.click_port_button)
+        self.dlg.port_spinbox.valueChanged.connect(self.watch_spinbox)
+        self.is_port_show = False
 
     def tr(self, message):
         return QCoreApplication.translate('DrawPoints', message)
 
     def add_action(
-        self,
-        icon_path,
-        text,
-        callback,
-        enabled_flag=True,
-        add_to_menu=True,
-        add_to_toolbar=True,
-        status_tip=None,
-        whats_this=None,
-        parent=None):
+            self,
+            icon_path,
+            text,
+            callback,
+            enabled_flag=True,
+            add_to_menu=True,
+            add_to_toolbar=True,
+            status_tip=None,
+            whats_this=None,
+            parent=None):
         icon = QIcon(icon_path)
         action = QAction(icon, text, parent)
         action.triggered.connect(callback)
@@ -129,6 +138,9 @@ class DrawPoints:
                 action)
             self.iface.removeToolBarIcon(action)
 
+    def watch_spinbox(self):
+        self.dlg.port_table.setRowCount(self.dlg.port_spinbox.value())
+
     def clear_all_types_input(self):
         self.dlg.snow_radius.setValue(0)
         self.dlg.snow_lines_amount.setValue(0)
@@ -141,6 +153,10 @@ class DrawPoints:
         self.dlg.coords_x.setValue(0)
         self.dlg.coords_y.setValue(0)
         self.dlg.save_in.clear()
+        self.dlg.port_show_button.hide()
+        self.dlg.port_hide_button.hide()
+        if self.is_port_show:
+            self.click_port_button()
 
     def grid_hide(self):
         self.dlg.grid_widget.hide()
@@ -151,7 +167,10 @@ class DrawPoints:
         self.dlg.grid_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
+        self.dlg.port_widget.show()
         self.dlg.bottom_widget.show()
+        self.dlg.rotate_widget.show()
+        self.dlg.crs_widgets.show()
         self.dlg.coords_label.setText('Координаты левого нижнего угла')
 
     def snow_hide(self):
@@ -163,40 +182,86 @@ class DrawPoints:
         self.dlg.snow_widget.show()
         self.dlg.coords_widget.show()
         self.dlg.top_widget.show()
+        self.dlg.port_widget.show()
         self.dlg.bottom_widget.show()
+        self.dlg.rotate_widget.hide()
+        self.dlg.coords_widget.hide()
+        self.dlg.crs_widgets.show()
         self.dlg.coords_label.setText('Координаты центра')
 
     def click_choose_grid(self):
         self.grid_show()
         self.clear_all_types_input()
         self.choose = SIMPLE_GRID_CONFIGURATION
+        self.dlg.port_show_button.show()
 
     def click_choose_gridslope(self):
         self.grid_show()
         self.clear_all_types_input()
         self.choose = SLOPE_GRID_CONFIGURATION
+        self.dlg.port_show_button.show()
 
     def click_choose_snow(self):
         self.snow_show()
         self.clear_all_types_input()
         self.choose = SIMPLE_SNOW_CONFIGURATION
+        self.dlg.port_show_button.show()
+        self.dlg.snow_lines_amount_label.setText('Количество линий')
 
     def click_choose_snowadvanced(self):
         self.snow_show()
         self.clear_all_types_input()
         self.choose = ADVANCED_SNOW_CONFIGURATION
+        self.dlg.port_show_button.show()
+        self.dlg.snow_lines_amount_label.setText('Количество линий (четное)')
+
+    def click_port_button(self):
+
+        if self.is_port_show == True:
+            self.dlg.resize((self.dlg.size().width() - 248), self.dlg.size().height())
+            self.dlg.port_show_button.show()
+            self.dlg.port_hide_button.hide()
+            self.dlg.port_table.hide()
+            self.is_port_show = False
+
+        else:
+            self.dlg.resize((self.dlg.size().width() + 248), self.dlg.size().height())
+            self.dlg.port_show_button.hide()
+            self.dlg.port_hide_button.show()
+            self.dlg.port_table.show()
+            self.is_port_show = True
 
     def select_output_file(self):
         filename, _filter = QFileDialog.getSaveFileName(
-            self.dlg, "Select   output file ", "", '*.shp')
+            self.dlg, 'Select   output file ', '', '*.shp')
         self.dlg.save_in.setText(filename)
+
+    def add_ports(self):
+        if self.dlg.port_table.rowCount() > 0:
+            numbers = []
+            x = []
+            y = []
+            for row in range(self.dlg.port_table.rowCount()):
+                if int(self.dlg.port_table.item(row, 0).text()) > 0:
+                    numbers.append(int(self.dlg.port_table.item(row, 0).text()))
+                    numbers.append(float(self.dlg.port_table.item(row, 1).text().replace(',', '.')))
+                    numbers.append(float(self.dlg.port_table.item(row, 2).text().replace(',', '.')))
+                else:
+                    pass
+            return Ports(numbers, x, y)
+        else:
+            pass
 
     def hide_all(self):
         self.grid_hide()
         self.snow_hide()
         self.dlg.coords_widget.hide()
         self.dlg.top_widget.hide()
+        self.dlg.port_widget.hide()
         self.dlg.bottom_widget.hide()
+        self.dlg.port_table.hide()
+        self.dlg.rotate_widget.hide()
+        self.dlg.crs_widgets.hide()
 
     @staticmethod
     def add_temp_layer_from_csv(path: str, crs: QgsCoordinateReferenceSystem, delimiter: str):
@@ -254,8 +319,7 @@ class DrawPoints:
 
     def move_all(self):
         self.figure.xy = self.figure.rotate(self.dlg.rotate.value())
-        self.figure.xy = self.figure.move_x(self.dlg.coords_x.value())
-        self.figure.xy = self.figure.move_y(self.dlg.coords_y.value())
+        self.figure.xy = self.figure.move(self.dlg.coords_x.value(), self.dlg.coords_y.value())
 
     def create_actual_configuration(self):
         if self.choose == SIMPLE_GRID_CONFIGURATION:
@@ -271,7 +335,11 @@ class DrawPoints:
 
     def create_figure_and_add_layer(self):
         self.create_actual_configuration()
+        self.add_ports()
         self.move_all()
+        self.figure.concatenate()
+        if self.dlg.port_table.rowCount():
+            self.figure.xy = np.concatenate((self.ports.xy_ports, self.figure.xy), axis=0)
         try:
             self.figure.export(get_temp_dir(TEMPORARY_FILE_NAME))
         except ValueError as err:
@@ -279,8 +347,8 @@ class DrawPoints:
         if self.is_layer_exist(DEFAULT_LAYER_NAME):
             self.del_layer(self, DEFAULT_LAYER_NAME)
         try:
-            self.add_temp_layer_from_csv(get_temp_dir(TEMPORARY_FILE_NAME),
-                                     self.dlg.system_of_coords.crs(), '%20')
+            self.add_temp_layer_from_csv(get_temp_dir(TEMPORARY_FILE_NAME, is_uri_encode=True),
+                                         self.dlg.system_of_coords.crs(), '%20')
         except ValueError as err:
             QMessageBox.information(None, "ERROR:", str(err))
 
@@ -296,7 +364,7 @@ class DrawPoints:
         if self.dlg.save_in.text():
             self.saving()
         self.iface.messageBar().pushMessage(
-            'Success',
+            'succes',
             level=Qgis.Success, duration=3)
 
     def run(self):

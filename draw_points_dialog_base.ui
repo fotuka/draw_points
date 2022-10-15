@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>886</width>
-    <height>611</height>
+    <width>819</width>
+    <height>604</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
       <number>0</number>
      </property>
      <property name="rightMargin">
-      <number>10</number>
+      <number>0</number>
      </property>
      <property name="bottomMargin">
       <number>0</number>
@@ -123,7 +123,7 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="layout_bottom" stretch="1,50,1,0">
+      <layout class="QVBoxLayout" name="layout_bottom" stretch="0,0,0,0">
        <property name="sizeConstraint">
         <enum>QLayout::SetMaximumSize</enum>
        </property>
@@ -146,7 +146,7 @@
        <item>
         <layout class="QHBoxLayout" name="layout_menu">
          <property name="spacing">
-          <number>20</number>
+          <number>6</number>
          </property>
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
@@ -179,7 +179,7 @@
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>0</height>
+               <height>80</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -210,9 +210,8 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>grid.png</normaloff>
-               <activeoff>grid_on.png</activeoff>grid.png</iconset>
+              <iconset resource="resources.qrc">
+               <normaloff>:/plugins/draw_points/grid.png</normaloff>:/plugins/draw_points/grid.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -227,7 +226,7 @@
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>0</height>
+               <height>80</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -243,9 +242,8 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>gridslope.png</normaloff>
-               <activeoff>gridslope_on.png</activeoff>gridslope.png</iconset>
+              <iconset resource="resources.qrc">
+               <normaloff>:/plugins/draw_points/gridslope.png</normaloff>:/plugins/draw_points/gridslope.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -260,7 +258,7 @@
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>0</height>
+               <height>80</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -279,9 +277,8 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>snow.png</normaloff>
-               <activeoff>snow_on.png</activeoff>snow.png</iconset>
+              <iconset resource="resources.qrc">
+               <normaloff>:/plugins/draw_points/snow.png</normaloff>:/plugins/draw_points/snow.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -296,7 +293,7 @@
              <property name="minimumSize">
               <size>
                <width>80</width>
-               <height>0</height>
+               <height>80</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -312,9 +309,8 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>snowadvanced.png</normaloff>
-               <activeoff>snowadvanced_on.png</activeoff>snowadvanced.png</iconset>
+              <iconset resource="resources.qrc">
+               <normaloff>:/plugins/draw_points/snowadvanced.png</normaloff>:/plugins/draw_points/snowadvanced.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -327,16 +323,79 @@
           </layout>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="layout_options" stretch="10,10,10">
+          <layout class="QVBoxLayout" name="layout_options" stretch="0,0,0,0,0,0">
            <property name="spacing">
             <number>0</number>
            </property>
            <property name="sizeConstraint">
-            <enum>QLayout::SetMaximumSize</enum>
+            <enum>QLayout::SetDefaultConstraint</enum>
            </property>
            <property name="topMargin">
             <number>0</number>
            </property>
+           <property name="rightMargin">
+            <number>5</number>
+           </property>
+           <item>
+            <widget class="QWidget" name="port_widget" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>35</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="ports_vertical_layout">
+              <property name="spacing">
+               <number>10</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <spacer name="horizontalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>10</width>
+                  <height>5</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="port_label">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>25</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Количество портов</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="port_spinbox">
+                <property name="maximumSize">
+                 <size>
+                  <width>50</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
            <item>
             <widget class="QWidget" name="grid_widget" native="true">
              <property name="sizePolicy">
@@ -694,13 +753,16 @@
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="coords_widget" native="true">
-             <layout class="QVBoxLayout" name="layout_coords">
+            <widget class="QWidget" name="rotate_widget" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>100</height>
+              </size>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_18">
               <property name="spacing">
                <number>1</number>
-              </property>
-              <property name="sizeConstraint">
-               <enum>QLayout::SetMaximumSize</enum>
               </property>
               <property name="leftMargin">
                <number>10</number>
@@ -764,6 +826,30 @@
                 </property>
                </widget>
               </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="coords_widget" native="true">
+             <layout class="QVBoxLayout" name="layout_coords">
+              <property name="spacing">
+               <number>1</number>
+              </property>
+              <property name="sizeConstraint">
+               <enum>QLayout::SetMaximumSize</enum>
+              </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
               <item>
                <widget class="QLabel" name="coords_label">
                 <property name="minimumSize">
@@ -871,6 +957,27 @@
                 </property>
                </widget>
               </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="crs_widgets" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <layout class="QVBoxLayout" name="crs_widget">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>1</number>
+              </property>
               <item>
                <widget class="QLabel" name="system_of_coords_label">
                 <property name="minimumSize">
@@ -911,6 +1018,88 @@
            </item>
           </layout>
          </item>
+         <item>
+          <widget class="QPushButton" name="port_show_button">
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="port_hide_button">
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>&lt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="port_layout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>6</number>
+           </property>
+           <property name="rightMargin">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QTableWidget" name="port_table">
+             <property name="maximumSize">
+              <size>
+               <width>242</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="inputMethodHints">
+              <set>Qt::ImhNone</set>
+             </property>
+             <property name="rowCount">
+              <number>0</number>
+             </property>
+             <property name="columnCount">
+              <number>3</number>
+             </property>
+             <attribute name="horizontalHeaderVisible">
+              <bool>true</bool>
+             </attribute>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>80</number>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <column>
+              <property name="text">
+               <string>номер</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>коорд. х</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>коорд. у</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+          </layout>
+         </item>
         </layout>
        </item>
        <item>
@@ -932,19 +1121,6 @@
           <property name="sizeConstraint">
            <enum>QLayout::SetDefaultConstraint</enum>
           </property>
-          <item row="1" column="0">
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
           <item row="1" column="2">
            <widget class="QPushButton" name="apply_button">
             <property name="minimumSize">
@@ -971,6 +1147,19 @@
              <string>Применить</string>
             </property>
            </widget>
+          </item>
+          <item row="1" column="0">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item row="1" column="1">
            <spacer name="horizontalSpacer_3">
@@ -1027,6 +1216,8 @@
    <header>qgsprojectionselectionwidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

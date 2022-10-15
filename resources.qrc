@@ -1,5 +1,9 @@
 <RCC>
-    <qresource prefix="/plugins/draw_points" >
-        <file>icon.png</file>
-    </qresource>
+  <qresource prefix="/plugins/draw_points">
+    <file>grid.png</file>
+    <file>gridslope.png</file>
+    <file>snowadvanced.png</file>
+    <file>snow.png</file>
+    <file>icon.png</file>
+  </qresource>
 </RCC>
