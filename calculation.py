@@ -1,7 +1,6 @@
 import math
 import numpy as np
 
-
 FULL_ANGLE = 360
 
 
@@ -31,16 +30,15 @@ class Coordinates:
 
     def export(self, path: str) -> None:
         np.savetxt(path, self.xy)
-    def port_amount(self):
-        port_amount = len(self.port_numbers)
-        return port_amount
 
 class Ports(Coordinates):
     def __init__(self, numbers: list, x: list, y: list):
         super().__init__()
+        self.port_amount = len(numbers)
         self.port_numbers = numbers
         self.port_y = y
         self.port_x = x
+
 
 class Rectangle(Coordinates):
     def __init__(self, length: float, height: float, xline_amount: int, yline_amount: int):
@@ -82,10 +80,9 @@ class GridSlope(Rectangle):
                 index += 1
 
 
-class Circle(Coordinates):
+class Circle(Coordinates, Ports):
     def __init__(self, radius: float, dots_amount: int, lines_amount: int):
         super().__init__()
-        self.ports_amount = self.port_amount()
         self.radius = radius
         self.dots_amount = dots_amount
         self.lines_amount = lines_amount
@@ -93,25 +90,32 @@ class Circle(Coordinates):
         self.xy_data = np.zeros([lines_amount * dots_amount, 1], int)
         self.gap = self.radius / self.dots_amount
         self.angle = FULL_ANGLE / self.lines_amount
-
+    def get_actual_center_for_ports(self):
+        x = 0
+        y = 0
+        lenght = self.port_amount
+        for row in range(lenght):
+            x = x + self.port_x[row]
+            y = y + self.port_x[row]
+        return x, y
 
 class Snow(Circle):
     def create(self):
         index = 0
         for line in range(self.lines_amount):
-            buffer = self.ports_amount + line + 1
+            buffer = self.port_amount + line + 1
             for value in np.arange(self.gap, self.radius + self.gap, self.gap):
                 self.xy[index, 1] = value * math.cos(math.radians(self.angle * line))
                 self.xy[index, 0] = value * math.sin(math.radians(self.angle * line))
                 self.xy_data[index, 0] = buffer
                 buffer += self.lines_amount
                 index += 1
-
+        self.xy = self.move(self, self.get_actual_center_for_ports())
 
 class SnowAdvanced(Circle):
     def create(self):
         index = 0
-        buffer = self.ports_amount + 1
+        buffer = self.port_amount + 1
         line = 0
         for value in np.arange(self.gap, self.radius + self.gap, self.gap / 2):
             for count in range(0, int(self.lines_amount/2), 1):
@@ -122,3 +126,4 @@ class SnowAdvanced(Circle):
                 line += 2
                 index += 1
             line -= 1
+        self.xy = self.move(self, self.get_actual_center_for_ports())

@@ -319,16 +319,7 @@ class DrawPoints:
 
     def move_all(self):
         self.figure.xy = self.figure.rotate(self.dlg.rotate.value())
-        if self.figure.__class__.__name__ == 'Snow' or self.figure.__class__.__name__ == 'SnowAdvanced':
-            x = 0
-            y = 0
-            lenght = self.dlg.port_table.rowCount()
-            for row in range(len(self.xy_ports)):
-                x = x + self.xy_ports[row, 1]
-                y = y + self.xy_ports[row, 2]
-            self.figure.xy = self.figure.move((x / lenght), (y / lenght))
-        else:
-            self.figure.xy = self.figure.move(self.dlg.coords_x.value(), self.dlg.coords_y.value())
+        self.figure.xy = self.figure.move(self.dlg.coords_x.value(), self.dlg.coords_y.value())
 
     def create_actual_configuration(self):
         if self.choose == SIMPLE_GRID_CONFIGURATION:
