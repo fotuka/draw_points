@@ -31,7 +31,8 @@ class Coordinates:
     def export(self, path: str) -> None:
         np.savetxt(path, self.xy)
 
-class Ports(Coordinates):
+
+class Ports:
     def __init__(self, numbers: list, x: list, y: list):
         super().__init__()
         self.port_amount = len(numbers)
@@ -90,14 +91,18 @@ class Circle(Coordinates, Ports):
         self.xy_data = np.zeros([lines_amount * dots_amount, 1], int)
         self.gap = self.radius / self.dots_amount
         self.angle = FULL_ANGLE / self.lines_amount
-    def get_actual_center_for_ports(self):
+
+    def get_actual_center_for_ports(self, dimension: str):
         x = 0
         y = 0
-        lenght = self.port_amount
-        for row in range(lenght):
+        length = self.port_amount
+        for row in range(length):
             x = x + self.port_x[row]
             y = y + self.port_x[row]
-        return x, y
+        if dimension == "x":
+            return x
+        if dimension == "y":
+            return y
 
 class Snow(Circle):
     def create(self):
@@ -110,7 +115,7 @@ class Snow(Circle):
                 self.xy_data[index, 0] = buffer
                 buffer += self.lines_amount
                 index += 1
-        self.xy = self.move(self, self.get_actual_center_for_ports())
+        self.xy = self.move(self.get_actual_center_for_ports("x"), self.get_actual_center_for_ports("y"))
 
 class SnowAdvanced(Circle):
     def create(self):
@@ -126,4 +131,4 @@ class SnowAdvanced(Circle):
                 line += 2
                 index += 1
             line -= 1
-        self.xy = self.move(self, self.get_actual_center_for_ports())
+        self.xy = self.move(self.get_actual_center_for_ports("x"), self.get_actual_center_for_ports("y"))
